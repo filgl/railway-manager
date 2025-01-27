@@ -1,0 +1,20 @@
+services:
+  railwaymanager-backend:
+    command: |
+      bash -c "
+        ./manage.py makemigrations &&
+        ./manage.py migrate &&
+        (./manage.py createsuperuser --noinput || true) &&
+        ./manage.py runserver 0.0.0.0:8000
+      "
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ./app:/app
+
+  db:
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres-data:
