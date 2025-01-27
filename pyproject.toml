@@ -1,0 +1,15 @@
+[tool.interrogate]
+fail-under = 100
+ignore-module = true
+ignore-init-module = true
+ignore-init-method = true
+ignore-nested-classes = true
+ignore-property-decorators = true
+ignore-magic = true
+style = "sphinx"
+badge-format = "svg"
+badge-style = "flat"
+generate-badge = "."
+omit-covered-files = true
+quiet = false
+verbose = 1
