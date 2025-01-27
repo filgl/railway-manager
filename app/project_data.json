@@ -1,0 +1,96 @@
+[
+  {
+    "model": "railway_assets.station",
+    "pk": 1,
+    "fields": {
+      "name": "Ancona",
+      "city": "Ancona",
+      "platforms": 10,
+      "opening_year": 1861,
+      "main_station": true,
+      "actual_state": "in_use"
+    }
+  },
+  {
+    "model": "railway_assets.station",
+    "pk": 2,
+    "fields": {
+      "name": "Lecce",
+      "city": "Lecce",
+      "platforms": 8,
+      "opening_year": 1866,
+      "main_station": true,
+      "actual_state": "in_use"
+    }
+  },
+  {
+    "model": "railway_assets.trainmodel",
+    "pk": 1,
+    "fields": {
+      "name": "ETR 500",
+      "type": "high_speed",
+      "nickname": null,
+      "max_speed": 360,
+      "seats": 574,
+      "length": 328.23,
+      "width": 3.0,
+      "height": 4.0,
+      "gauge": 1435,
+      "weight": 576,
+      "power_output": 11968,
+      "power_system": "electric"
+    }
+  },
+  {
+    "model": "railway_assets.trainmodel",
+    "pk": 2,
+    "fields": {
+      "name": "ETR 421",
+      "type": "regional",
+      "nickname": "Rock",
+      "max_speed": 160,
+      "seats": 466,
+      "length": 109.6,
+      "width": 2.8,
+      "height": 4.3,
+      "gauge": 1435,
+      "weight": 152,
+      "power_output": 4624,
+      "power_system": "electric"
+    }
+  },
+  {
+    "model": "railway_assets.route",
+    "pk": 1,
+    "fields": {
+      "start_station": 1,
+      "end_station": 2,
+      "nickname": "Adriatica",
+      "length": 591,
+      "max_speed": 200,
+      "type": "mixed",
+      "actual_state": "in_use",
+      "opening_year": 1872,
+      "latest_maintenance": "2023-11-09",
+      "gauge": 1435,
+      "electrified": "yes",
+      "electrification_voltage": 3000
+    }
+  },
+  {
+    "model": "railway_assets.train",
+    "pk": 1,
+    "fields": {
+      "model": 1,
+      "nickname": null,
+      "number": 46,
+      "actual_state": "in_use",
+      "construction_year": 2002,
+      "year_entered_service": 2005,
+      "kilometers_run": 10565798,
+      "latest_inspection": "2024-02-04",
+      "operator": "Trenitalia",
+      "associated_route": 1
+    }
+  }
+]
