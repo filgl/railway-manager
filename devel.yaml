@@ -4,6 +4,7 @@ services:
       bash -c "
         ./manage.py makemigrations &&
         ./manage.py migrate &&
+        ./manage.py loaddata project_data.json &&
         (./manage.py createsuperuser --noinput || true) &&
         ./manage.py runserver 0.0.0.0:8000
       "
