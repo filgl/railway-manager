@@ -1,0 +1,16 @@
+<div class="container" *ngIf="station">
+  <h1>Station details</h1>
+
+  <p>{{ station.name }} ({{ station.city }})</p>
+  <ul>
+        <li>{{ station.platforms }} platforms</li>
+        <li *ngIf="station.opening_year != null">Opened in {{ station.opening_year }}</li>
+
+        <li *ngIf="station.main_station">It's the main station</li>
+        <li *ngIf="!station.main_station">It's not the main station</li>
+
+        <li>Actual state: {{ station.actual_state.toString() }}</li>
+  </ul>
+
+  <a routerLink="/stations">Back to the list</a>
+</div>
