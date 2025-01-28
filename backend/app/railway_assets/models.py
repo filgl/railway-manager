@@ -38,8 +38,8 @@ ROUTE_TYPE_CHOICES = (
 )
 
 ELECTRIFICATION_CHOICES = (
-    ("yes", "Yes"),
-    ("no", "No"),
+    ("electrified", "Electrified"),
+    ("not_electrified", "Not Electrified"),
     ("electrification_in_progress", "Electrification In Progress"),
     ("partially", "Partially"),
 )

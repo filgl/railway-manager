@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>Trains</h1>
+  <button (click)="loadTrains()">Load trains</button>
+
+  <ul>
+    <li *ngFor="let train of trains">
+      {{ train.model.name }} number {{ train.number }}
+      <ul>
+        <li *ngIf="train.nickname != null">Aka {{ train.nickname }}</li>
+
+        <li>Actual state: {{ train.actual_state }}</li>
+        <li>Constructed in {{ train.construction_year }}</li>
+        <li>Entered service in {{ train.year_entered_service }}</li>
+        <li>Run {{ train.kilometers_run }} km until now</li>
+
+        <li *ngIf="train.latest_inspection != null">Latest inspection in {{ train.latest_inspection }}</li>
+
+        <li>Operated by {{ train.operator }}</li>
+        <li>Runs from {{ train.associated_route.start_station.name }} to {{ train.associated_route.end_station.name }}</li>
+      </ul>
+    </li>
+  </ul>
+</div>

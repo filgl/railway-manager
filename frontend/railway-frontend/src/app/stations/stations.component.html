@@ -1,0 +1,19 @@
+<div class="container">
+  <h1>Stations</h1>
+  <button (click)="loadStations()">Load stations</button>
+
+  <ul>
+    <li *ngFor="let station of stations">
+      {{ station.name }} ({{ station.city }})
+      <ul>
+        <li>{{ station.platforms }} platforms</li>
+        <li *ngIf="station.opening_year != null">Opened in {{ station.opening_year }}</li>
+
+        <li *ngIf="station.main_station">It's the main station</li>
+        <li *ngIf="!station.main_station">It's not the main station</li>
+
+        <li>Actual state: {{ station.actual_state.toString() }}</li>
+      </ul>
+    </li>
+  </ul>
+</div>
