@@ -74,9 +74,7 @@ target/
 
 ### Django ###
 *.log
-*.pot
 *.pyc
-__pycache__/
 local_settings.py
 
 ### Virtual Env ###
@@ -97,3 +95,24 @@ db.sqlite3
 *.png
 *.jpeg
 *.gif
+
+# IDEs and editors
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Node
+/node_modules
+package.json
+package-lock.json
+
+# Visual Studio Code
+.vscode/*
+.history/*
+
+# System files
+.DS_Store
+Thumbs.db
