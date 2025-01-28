@@ -94,7 +94,10 @@ class Route(models.Model):
     electrification_voltage: IntegerField = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.start_station} -> {self.end_station} ({self.nickname})"
+        if self.nickname:
+            return f"{self.start_station} -> {self.end_station} ({self.nickname})"
+        else:
+            return f"{self.start_station} -> {self.end_station}"
 
 
 class TrainModel(models.Model):

@@ -24,6 +24,80 @@
     }
   },
   {
+    "model": "railway_assets.station",
+    "pk": 3,
+    "fields": {
+      "name": "Verona Porta Nuova",
+      "city": "Verona",
+      "platforms": 12,
+      "opening_year": 1851,
+      "main_station": true,
+      "actual_state": "in_use"
+    }
+  },
+  {
+    "model": "railway_assets.station",
+    "pk": 4,
+    "fields": {
+      "name": "Modena",
+      "city": "Modena",
+      "platforms": 7,
+      "opening_year": 1859,
+      "main_station": true,
+      "actual_state": "in_use"
+    }
+  },
+  {
+    "model": "railway_assets.station",
+    "pk": 5,
+    "fields": {
+      "name": "Milano Centrale",
+      "city": "Milano",
+      "platforms": 24,
+      "opening_year": 1931,
+      "main_station": true,
+      "actual_state": "in_use"
+    }
+  },
+  {
+    "model": "railway_assets.station",
+    "pk": 6,
+    "fields": {
+      "name": "Bologna Centrale",
+      "city": "Bologna",
+      "platforms": 26,
+      "opening_year": 1859,
+      "main_station": true,
+      "actual_state": "in_use"
+    }
+  },
+  {
+    "model": "railway_assets.station",
+    "pk": 7,
+    "fields": {
+      "name": "Firenze Santa Maria Novella",
+      "city": "Firenze",
+      "platforms": 19,
+      "opening_year": 1848,
+      "main_station": true,
+      "actual_state": "in_use"
+    }
+  },
+  {
+    "model": "railway_assets.station",
+    "pk": 8,
+    "fields": {
+      "name": "Roma Termini",
+      "city": "Roma",
+      "platforms": 32,
+      "opening_year": 1863,
+      "main_station": true,
+      "actual_state": "in_use"
+    }
+  },
+
+
+  {
     "model": "railway_assets.trainmodel",
     "pk": 1,
     "fields": {
@@ -33,8 +107,8 @@
       "max_speed": 360,
       "seats": 574,
       "length": 328.23,
-      "width": 3.0,
-      "height": 4.0,
+      "width": 3.00,
+      "height": 4.00,
       "gauge": 1435,
       "weight": 576,
       "power_output": 11968,
@@ -50,9 +124,9 @@
       "nickname": "Rock",
       "max_speed": 160,
       "seats": 466,
-      "length": 109.6,
-      "width": 2.8,
-      "height": 4.3,
+      "length": 109.60,
+      "width": 3.50,
+      "height": 4.30,
       "gauge": 1435,
       "weight": 152,
       "power_output": 4624,
@@ -60,13 +134,105 @@
     }
   },
   {
+    "model": "railway_assets.trainmodel",
+    "pk": 3,
+    "fields": {
+      "name": "E 414",
+      "type": "intercity",
+      "nickname": null,
+      "max_speed": 200,
+      "seats": 0,
+      "length": 20.20,
+      "width": 3.02,
+      "height": 4.00,
+      "gauge": 1435,
+      "weight": 68,
+      "power_output": 5984,
+      "power_system": "electric"
+    }
+  },
+  {
+    "model": "railway_assets.trainmodel",
+    "pk": 4,
+    "fields": {
+      "name": "ETR 104",
+      "type": "regional",
+      "nickname": "Pop",
+      "max_speed": 160,
+      "seats": 321,
+      "length": 84.20,
+      "width": 3.09,
+      "height": 3.80,
+      "gauge": 1435,
+      "weight": 123,
+      "power_output": 2720,
+      "power_system": "electric"
+    }
+  },
+  {
+    "model": "railway_assets.trainmodel",
+    "pk": 5,
+    "fields": {
+      "name": "ETR 1000",
+      "type": "high_speed",
+      "nickname": "Frecciarossa 1000",
+      "max_speed": 400,
+      "seats": 457,
+      "length": 202.02,
+      "width": 2.92,
+      "height": 4.08,
+      "gauge": 1435,
+      "weight": 501,
+      "power_output": 13464,
+      "power_system": "electric"
+    }
+  },
+  {
+    "model": "railway_assets.trainmodel",
+    "pk": 6,
+    "fields": {
+      "name": "ETR 600",
+      "type": "high_speed",
+      "nickname": "New Pendolino",
+      "max_speed": 250,
+      "seats": 432,
+      "length": 187.40,
+      "width": 2.83,
+      "height": 4.10,
+      "gauge": 1435,
+      "weight": 400,
+      "power_output": 7480,
+      "power_system": "electric"
+    }
+  },
+  {
+    "model": "railway_assets.trainmodel",
+    "pk": 7,
+    "fields": {
+      "name": "E 464",
+      "type": "regional",
+      "nickname": null,
+      "max_speed": 160,
+      "seats": null,
+      "length": 15.70,
+      "width": 2.95,
+      "height": 4.10,
+      "gauge": 1435,
+      "weight": 72,
+      "power_output": 4760,
+      "power_system": "electric"
+    }
+  },
+
+
+  {
     "model": "railway_assets.route",
     "pk": 1,
     "fields": {
       "start_station": 1,
       "end_station": 2,
       "nickname": "Adriatica",
-      "length": 591,
+      "length": 591.00,
       "max_speed": 200,
       "type": "mixed",
       "actual_state": "in_use",
@@ -78,6 +244,80 @@
     }
   },
   {
+    "model": "railway_assets.route",
+    "pk": 2,
+    "fields": {
+      "start_station": 3,
+      "end_station": 4,
+      "nickname": null,
+      "length": 97.10,
+      "max_speed": 140,
+      "type": "mixed",
+      "actual_state": "in_use",
+      "opening_year": 1874,
+      "latest_maintenance": "2022-08-27",
+      "gauge": 1435,
+      "electrified": "yes",
+      "electrification_voltage": 3000
+    }
+  },
+  {
+    "model": "railway_assets.route",
+    "pk": 3,
+    "fields": {
+      "start_station": 5,
+      "end_station": 6,
+      "nickname": null,
+      "length": 205.00,
+      "max_speed": 300,
+      "type": "high_speed",
+      "actual_state": "in_use",
+      "opening_year": 2008,
+      "latest_maintenance": "2025-01-20",
+      "gauge": 1435,
+      "electrified": "yes",
+      "electrification_voltage": 25000
+    }
+  },
+  {
+    "model": "railway_assets.route",
+    "pk": 4,
+    "fields": {
+      "start_station": 7,
+      "end_station": 8,
+      "nickname": "Direttissima",
+      "length": 253.00,
+      "max_speed": 250,
+      "type": "mixed",
+      "actual_state": "in_use",
+      "opening_year": 1992,
+      "latest_maintenance": "2024-12-30",
+      "gauge": 1435,
+      "electrified": "yes",
+      "electrification_voltage": 3000
+    }
+  },
+  {
+    "model": "railway_assets.route",
+    "pk": 5,
+    "fields": {
+      "start_station": 6,
+      "end_station": 1,
+      "nickname": null,
+      "length": 204.00,
+      "max_speed": 200,
+      "type": "mixed",
+      "actual_state": "in_use",
+      "opening_year": 1861,
+      "latest_maintenance": "2025-01-10",
+      "gauge": 1435,
+      "electrified": "yes",
+      "electrification_voltage": 3000
+    }
+  },
+
+
+  {
     "model": "railway_assets.train",
     "pk": 1,
     "fields": {
@@ -87,8 +327,104 @@
       "actual_state": "in_use",
       "construction_year": 2002,
       "year_entered_service": 2005,
-      "kilometers_run": 10565798,
+      "kilometers_run": 30565798,
       "latest_inspection": "2024-02-04",
+      "operator": "Trenitalia",
+      "associated_route": 3
+    }
+  },
+  {
+    "model": "railway_assets.train",
+    "pk": 2,
+    "fields": {
+      "model": 2,
+      "nickname": null,
+      "number": 16,
+      "actual_state": "in_use",
+      "construction_year": 2017,
+      "year_entered_service": 2019,
+      "kilometers_run": 5489721,
+      "latest_inspection": "2024-11-13",
+      "operator": "Trenitalia Tper",
+      "associated_route": 2
+    }
+  },
+  {
+    "model": "railway_assets.train",
+    "pk": 3,
+    "fields": {
+      "model": 3,
+      "nickname": null,
+      "number": 150,
+      "actual_state": "in_use",
+      "construction_year": 1995,
+      "year_entered_service": 1997,
+      "kilometers_run": 26125463,
+      "latest_inspection": "2023-03-20",
+      "operator": "Trenitalia",
+      "associated_route": 5
+    }
+  },
+  {
+    "model": "railway_assets.train",
+    "pk": 4,
+    "fields": {
+      "model": 5,
+      "nickname": null,
+      "number": 25,
+      "actual_state": "in_use",
+      "construction_year": 2013,
+      "year_entered_service": 2016,
+      "kilometers_run": 13258974,
+      "latest_inspection": "2024-11-30",
+      "operator": "Trenitalia",
+      "associated_route": 4
+    }
+  },
+  {
+    "model": "railway_assets.train",
+    "pk": 5,
+    "fields": {
+      "model": 6,
+      "nickname": null,
+      "number": 10,
+      "actual_state": "in_use",
+      "construction_year": 2006,
+      "year_entered_service": 2008,
+      "kilometers_run": 31569784,
+      "latest_inspection": "2025-01-03",
+      "operator": "Trenitalia",
+      "associated_route": 1
+    }
+  },
+  {
+    "model": "railway_assets.train",
+    "pk": 6,
+    "fields": {
+      "model": 4,
+      "nickname": null,
+      "number": 38,
+      "actual_state": "in_use",
+      "construction_year": 2018,
+      "year_entered_service": 2019,
+      "kilometers_run": 4512379,
+      "latest_inspection": "2024-06-14",
+      "operator": "Trenitalia Tper",
+      "associated_route": 5
+    }
+  },
+  {
+    "model": "railway_assets.train",
+    "pk": 7,
+    "fields": {
+      "model": 7,
+      "nickname": null,
+      "number": 387,
+      "actual_state": "in_use",
+      "construction_year": 2009,
+      "year_entered_service": 2010,
+      "kilometers_run": 48796354,
+      "latest_inspection": "2022-10-13",
       "operator": "Trenitalia",
       "associated_route": 1
     }
