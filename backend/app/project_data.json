@@ -140,7 +140,7 @@
       "type": "intercity",
       "nickname": null,
       "max_speed": 200,
-      "seats": 0,
+      "seats": null,
       "length": 20.2,
       "width": 3.02,
       "height": 4.0,
