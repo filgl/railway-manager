@@ -1,11 +1,22 @@
-from railway_assets.models import Route, Station, Train, TrainModel, STATE_CHOICES, ROUTE_TYPE_CHOICES, \
-    ELECTRIFICATION_CHOICES, TRAIN_MODEL_CHOICES, POWER_SYSTEM_CHOICES, COMPOSITION_CHOICES
+from railway_assets.models import (COMPOSITION_CHOICES,
+                                   ELECTRIFICATION_CHOICES,
+                                   POWER_SYSTEM_CHOICES, ROUTE_TYPE_CHOICES,
+                                   STATE_CHOICES, TRAIN_MODEL_CHOICES, Route,
+                                   Station, Train, TrainModel)
 from rest_framework import serializers
 
 
 class ChoiceField(serializers.ChoiceField):
+    """
+    This class represents the choice field for the serializer.
+    """
+
     def to_representation(self, value):
-        if value == '' and self.allow_blank:
+        """
+        This method returns the choice value.
+        """
+
+        if value == "" and self.allow_blank:
             return value
         return self.choices.get(value)
 
@@ -69,7 +80,6 @@ class TrainModelSerializer(serializers.ModelSerializer):
     type = ChoiceField(choices=TRAIN_MODEL_CHOICES)
     power_system = ChoiceField(choices=POWER_SYSTEM_CHOICES)
     composition = ChoiceField(choices=COMPOSITION_CHOICES)
-
 
     class Meta:
         model = TrainModel

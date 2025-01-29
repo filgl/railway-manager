@@ -6,13 +6,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('railway_assets', '0001_initial'),
+        ("railway_assets", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='trainmodel',
-            name='composition',
-            field=models.CharField(choices=[('multiple_unit', 'Multiple Unit'), ('locomotive', 'Locomotive')], default='multiple_unit'),
+            model_name="trainmodel",
+            name="composition",
+            field=models.CharField(
+                choices=[
+                    ("multiple_unit", "Multiple Unit"),
+                    ("locomotive", "Locomotive"),
+                ],
+                default="multiple_unit",
+            ),
         ),
     ]

@@ -1,11 +1,9 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-train-model',
+  selector: "app-train-model",
   imports: [],
-  templateUrl: './train-model.component.html',
-  styleUrl: './train-model.component.css'
+  templateUrl: "./train-model.component.html",
+  styleUrl: "./train-model.component.css",
 })
-export class TrainModelComponent {
-
-}
+export class TrainModelComponent {}

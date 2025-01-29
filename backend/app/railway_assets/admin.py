@@ -1,6 +1,5 @@
-from railway_assets.models import Route, Station, Train, TrainModel
-
 from django.contrib import admin
+from railway_assets.models import Route, Station, Train, TrainModel
 
 admin.site.register(Station)
 admin.site.register(Route)

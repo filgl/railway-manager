@@ -1,9 +1,5 @@
-from railway_assets.views import (
-    RouteViewSet,
-    StationViewSet,
-    TrainModelViewSet,
-    TrainViewSet,
-)
+from railway_assets.views import (RouteViewSet, StationViewSet,
+                                  TrainModelViewSet, TrainViewSet)
 from rest_framework.routers import SimpleRouter
 
 app_name = "railway_assets"

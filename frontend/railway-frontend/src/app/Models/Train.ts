@@ -1,5 +1,5 @@
-import {TrainModel} from './TrainModel';
-import {Route} from './Route';
+import { TrainModel } from "./TrainModel";
+import { Route } from "./Route";
 
 export class Train {
   id!: number;

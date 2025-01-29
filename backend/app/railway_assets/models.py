@@ -1,12 +1,6 @@
 from django.db import models
-from django.db.models import (
-    BooleanField,
-    CharField,
-    DateField,
-    FloatField,
-    ForeignKey,
-    IntegerField,
-)
+from django.db.models import (BooleanField, CharField, DateField, FloatField,
+                              ForeignKey, IntegerField)
 
 STATE_CHOICES = (
     ("in_use", "In Use"),

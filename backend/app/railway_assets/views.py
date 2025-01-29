@@ -1,10 +1,6 @@
 from railway_assets.models import Route, Station, Train, TrainModel
-from railway_assets.serializers import (
-    RouteSerializer,
-    StationSerializer,
-    TrainModelSerializer,
-    TrainSerializer,
-)
+from railway_assets.serializers import (RouteSerializer, StationSerializer,
+                                        TrainModelSerializer, TrainSerializer)
 from rest_framework import viewsets
 
 

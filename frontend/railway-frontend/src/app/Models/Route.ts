@@ -1,4 +1,4 @@
-import {Station} from './Station';
+import { Station } from "./Station";
 
 export class Route {
   id!: number;

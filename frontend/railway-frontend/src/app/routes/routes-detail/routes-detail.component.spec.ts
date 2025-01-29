@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { RoutesDetailComponent } from './routes-detail.component';
+import { RoutesDetailComponent } from "./routes-detail.component";
 
-describe('RoutesDetailComponent', () => {
+describe("RoutesDetailComponent", () => {
   let component: RoutesDetailComponent;
   let fixture: ComponentFixture<RoutesDetailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RoutesDetailComponent]
-    })
-    .compileComponents();
+      imports: [RoutesDetailComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(RoutesDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
