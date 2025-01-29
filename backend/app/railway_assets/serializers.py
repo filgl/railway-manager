@@ -21,54 +21,45 @@ class ChoiceField(serializers.ChoiceField):
         return self.choices.get(value)
 
 
-class StationSerializer(serializers.ModelSerializer):
+class StationBriefSerializer(serializers.ModelSerializer):
     """
-    This class represents the Station model serializer.
+    This class represents the Station model brief serializer.
     """
-
-    actual_state = ChoiceField(choices=STATE_CHOICES)
 
     class Meta:
         model = Station
         fields = [
             "id",
             "name",
-            "city",
-            "platforms",
-            "opening_year",
-            "main_station",
-            "actual_state",
         ]
 
 
-class RouteSerializer(serializers.ModelSerializer):
+class TrainModelBriefSerializer(serializers.ModelSerializer):
     """
-    This class represents the Route model serializer.
+    This class represents the TrainModel model brief serializer.
     """
-
-    type = ChoiceField(choices=ROUTE_TYPE_CHOICES)
-    actual_state = ChoiceField(choices=STATE_CHOICES)
-    electrified = ChoiceField(choices=ELECTRIFICATION_CHOICES)
-
-    start_station = StationSerializer()
-    end_station = StationSerializer()
 
     class Meta:
-        model = Route
+        model = TrainModel
         fields = [
             "id",
-            "start_station",
-            "end_station",
-            "nickname",
-            "length",
-            "max_speed",
-            "type",
-            "actual_state",
-            "opening_year",
-            "latest_maintenance",
-            "gauge",
-            "electrified",
-            "electrification_voltage",
+            "name",
+        ]
+
+
+class TrainBriefSerializer(serializers.ModelSerializer):
+    """
+    This class represents the Train model brief serializer.
+    """
+
+    model = TrainModelBriefSerializer()
+
+    class Meta:
+        model = Train
+        fields = [
+            "id",
+            "model",
+            "number",
         ]
 
 
@@ -80,6 +71,8 @@ class TrainModelSerializer(serializers.ModelSerializer):
     type = ChoiceField(choices=TRAIN_MODEL_CHOICES)
     power_system = ChoiceField(choices=POWER_SYSTEM_CHOICES)
     composition = ChoiceField(choices=COMPOSITION_CHOICES)
+
+    trains = TrainBriefSerializer(many=True)
 
     class Meta:
         model = TrainModel
@@ -98,6 +91,83 @@ class TrainModelSerializer(serializers.ModelSerializer):
             "power_output",
             "power_system",
             "composition",
+            "trains",
+        ]
+
+
+class RouteBriefSerializer(serializers.ModelSerializer):
+    """
+    This class represents the Route model brief serializer.
+    """
+
+    start_station = StationBriefSerializer()
+    end_station = StationBriefSerializer()
+
+    class Meta:
+        model = Route
+        fields = [
+            "id",
+            "start_station",
+            "end_station",
+        ]
+
+
+class StationSerializer(serializers.ModelSerializer):
+    """
+    This class represents the Station model serializer.
+    """
+
+    actual_state = ChoiceField(choices=STATE_CHOICES)
+
+    start_routes = RouteBriefSerializer(many=True)
+    end_routes = RouteBriefSerializer(many=True)
+
+    class Meta:
+        model = Station
+        fields = [
+            "id",
+            "name",
+            "city",
+            "platforms",
+            "opening_year",
+            "main_station",
+            "actual_state",
+            "start_routes",
+            "end_routes",
+        ]
+
+
+class RouteSerializer(serializers.ModelSerializer):
+    """
+    This class represents the Route model serializer.
+    """
+
+    type = ChoiceField(choices=ROUTE_TYPE_CHOICES)
+    actual_state = ChoiceField(choices=STATE_CHOICES)
+    electrified = ChoiceField(choices=ELECTRIFICATION_CHOICES)
+
+    start_station = StationBriefSerializer()
+    end_station = StationBriefSerializer()
+
+    trains = TrainBriefSerializer(many=True)
+
+    class Meta:
+        model = Route
+        fields = [
+            "id",
+            "start_station",
+            "end_station",
+            "nickname",
+            "length",
+            "max_speed",
+            "type",
+            "actual_state",
+            "opening_year",
+            "latest_maintenance",
+            "gauge",
+            "electrified",
+            "electrification_voltage",
+            "trains",
         ]
 
 
@@ -108,8 +178,8 @@ class TrainSerializer(serializers.ModelSerializer):
 
     actual_state = ChoiceField(choices=STATE_CHOICES)
 
-    model = TrainModelSerializer()
-    associated_route = RouteSerializer()
+    model = TrainModelBriefSerializer()
+    associated_route = RouteBriefSerializer()
 
     class Meta:
         model = Train

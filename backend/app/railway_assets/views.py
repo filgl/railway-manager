@@ -9,7 +9,7 @@ class StationViewSet(viewsets.ModelViewSet):
     This class represents the Station model viewset.
     """
 
-    queryset = Station.objects.all()
+    queryset = Station.objects.prefetch_related("start_routes", "end_routes")
     serializer_class = StationSerializer
 
 
@@ -18,7 +18,7 @@ class RouteViewSet(viewsets.ModelViewSet):
     This class represents the Route model viewset.
     """
 
-    queryset = Route.objects.all()
+    queryset = Route.objects.prefetch_related("trains")
     serializer_class = RouteSerializer
 
 
@@ -27,7 +27,7 @@ class TrainModelViewSet(viewsets.ModelViewSet):
     This class represents the TrainModel model viewset.
     """
 
-    queryset = TrainModel.objects.all()
+    queryset = TrainModel.objects.prefetch_related("trains")
     serializer_class = TrainModelSerializer
 
 

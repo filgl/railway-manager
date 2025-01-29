@@ -1,18 +1,20 @@
 import { Component, OnInit } from "@angular/core";
 import { Station } from "../../Models/Station";
-import { StationsListService } from "../stations-list/stations-list.service";
 import { StationsDetailService } from "./stations-detail.service";
 import { ActivatedRoute, RouterLink } from "@angular/router";
-import { NgIf } from "@angular/common";
+import { NgForOf, NgIf } from "@angular/common";
+import { Route } from "../../Models/Route";
 
 @Component({
   selector: "app-stations-detail",
-  imports: [NgIf, RouterLink],
+  imports: [NgIf, RouterLink, NgForOf],
   templateUrl: "./stations-detail.component.html",
   styleUrl: "./stations-detail.component.css",
 })
 export class StationsDetailComponent implements OnInit {
   station!: Station;
+  startRoutes!: Route[];
+  endRoutes!: Route[];
 
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +29,8 @@ export class StationsDetailComponent implements OnInit {
   loadStation(id: string | null): void {
     this.stationsDetailService.getStation(id).subscribe((station) => {
       this.station = station;
+      this.startRoutes = station.start_routes;
+      this.endRoutes = station.end_routes;
     });
   }
 }

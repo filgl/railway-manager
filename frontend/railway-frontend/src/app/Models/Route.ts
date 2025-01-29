@@ -1,4 +1,5 @@
 import { Station } from "./Station";
+import { Train } from "./Train";
 
 export class Route {
   id!: number;
@@ -14,4 +15,5 @@ export class Route {
   gauge!: number;
   electrified!: string;
   electrification_voltage!: number;
+  trains!: Train[];
 }

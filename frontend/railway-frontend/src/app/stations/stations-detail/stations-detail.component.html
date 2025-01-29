@@ -12,5 +12,23 @@
         <li>Actual state: {{ station.actual_state }}</li>
   </ul>
 
+  <h4>Routes starting here</h4>
+  <ul>
+    <li *ngFor="let route of startRoutes">
+      <a [routerLink]="['/routes', route.id]">
+        {{ route.start_station.name }} - {{ route.end_station.name }}
+      </a>
+    </li>
+  </ul>
+
+  <h4>Routes ending here</h4>
+  <ul>
+    <li *ngFor="let route of endRoutes">
+      <a [routerLink]="['/routes', route.id]">
+        {{ route.start_station.name }} - {{ route.end_station.name }}
+      </a>
+    </li>
+  </ul>
+
   <a routerLink="/stations">Back to the list</a>
 </div>

@@ -1,3 +1,5 @@
+import { Train } from "./Train";
+
 export class TrainModel {
   id!: number;
   name!: string;
@@ -13,4 +15,5 @@ export class TrainModel {
   power_output!: number;
   power_system!: string;
   composition!: string;
+  trains!: Train[];
 }
