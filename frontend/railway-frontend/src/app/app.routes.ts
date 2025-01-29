@@ -7,8 +7,10 @@ import { TrainModelsListComponent } from "./train-models/train-models-list/train
 import { TrainModelsDetailComponent } from "./train-models/train-models-detail/train-models-detail.component";
 import { TrainsListComponent } from "./trains/trains-list/trains-list.component";
 import { TrainsDetailComponent } from "./trains/trains-detail/trains-detail.component";
+import { HomepageComponent } from "./homepage/homepage.component";
 
 export const routes: Routes = [
+  { path: "", component: HomepageComponent },
   { path: "stations", component: StationsListComponent },
   { path: "stations/:id", component: StationsDetailComponent },
   { path: "routes", component: RoutesListComponent },
