@@ -1,7 +1,9 @@
 <div class="container" *ngIf="train">
   <h1>Train details</h1>
 
-  <p>{{ train.model.name }} {{ train.number }}</p>
+  <p>
+    <a [routerLink]="['/train-models', train.model.id]">{{ train.model.name }}</a> {{ train.number }}
+  </p>
 
   <ul>
     <li *ngIf="train.nickname != null">Aka {{ train.nickname }}</li>
@@ -14,7 +16,12 @@
     <li *ngIf="train.latest_inspection != null">Latest inspection in {{ train.latest_inspection }}</li>
 
     <li>Operated by {{ train.operator }}</li>
-    <li>Runs from {{ train.associated_route.start_station.name }} to {{ train.associated_route.end_station.name }}</li>
+    <li>
+      Runs on the route
+      <a [routerLink]="['/routes', train.associated_route.id]">
+        {{ train.associated_route.start_station.name }} - {{ train.associated_route.end_station.name }}
+      </a>
+    </li>
   </ul>
 
   <a routerLink="/trains">Back to the list</a>

@@ -1,7 +1,11 @@
 <div class="container" *ngIf="route">
   <h1>Route details</h1>
 
-  <p>{{ route.start_station.name }} to {{ route.end_station.name }}</p>
+  <p>
+    <a [routerLink]="['/stations', route.start_station.id]">{{ route.start_station.name }}</a>
+    to
+    <a [routerLink]="['/stations', route.end_station.id]">{{ route.end_station.name }}</a>
+  </p>
 
   <ul>
     <li *ngIf="route.nickname != null">Aka {{ route.nickname }}</li>

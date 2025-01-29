@@ -12,4 +12,5 @@ export class TrainModel {
   weight!: number;
   power_output!: number;
   power_system!: string;
+  composition!: string;
 }
