@@ -110,7 +110,7 @@
       "height": 4.0,
       "gauge": 1435,
       "weight": 576,
-      "power_output": 11968,
+      "power_output": 8800,
       "power_system": "electric",
       "composition": "multiple_unit"
     }
@@ -129,7 +129,7 @@
       "height": 4.3,
       "gauge": 1435,
       "weight": 152,
-      "power_output": 4624,
+      "power_output": 3400,
       "power_system": "electric",
       "composition": "multiple_unit"
     }
@@ -148,7 +148,7 @@
       "height": 4.0,
       "gauge": 1435,
       "weight": 68,
-      "power_output": 5984,
+      "power_output": 4400,
       "power_system": "electric",
       "composition": "locomotive"
     }
@@ -167,7 +167,7 @@
       "height": 3.8,
       "gauge": 1435,
       "weight": 123,
-      "power_output": 2720,
+      "power_output": 2000,
       "power_system": "electric",
       "composition": "multiple_unit"
     }
@@ -186,7 +186,7 @@
       "height": 4.08,
       "gauge": 1435,
       "weight": 501,
-      "power_output": 13464,
+      "power_output": 9900,
       "power_system": "electric",
       "composition": "multiple_unit"
     }
@@ -205,7 +205,7 @@
       "height": 4.1,
       "gauge": 1435,
       "weight": 400,
-      "power_output": 7480,
+      "power_output": 5500,
       "power_system": "electric",
       "composition": "multiple_unit"
     }
@@ -224,7 +224,7 @@
       "height": 4.1,
       "gauge": 1435,
       "weight": 72,
-      "power_output": 4760,
+      "power_output": 3000,
       "power_system": "electric",
       "composition": "locomotive"
     }
