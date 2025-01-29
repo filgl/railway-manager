@@ -111,7 +111,8 @@
       "gauge": 1435,
       "weight": 576,
       "power_output": 11968,
-      "power_system": "electric"
+      "power_system": "electric",
+      "composition": "multiple_unit"
     }
   },
   {
@@ -129,7 +130,8 @@
       "gauge": 1435,
       "weight": 152,
       "power_output": 4624,
-      "power_system": "electric"
+      "power_system": "electric",
+      "composition": "multiple_unit"
     }
   },
   {
@@ -147,7 +149,8 @@
       "gauge": 1435,
       "weight": 68,
       "power_output": 5984,
-      "power_system": "electric"
+      "power_system": "electric",
+      "composition": "locomotive"
     }
   },
   {
@@ -165,7 +168,8 @@
       "gauge": 1435,
       "weight": 123,
       "power_output": 2720,
-      "power_system": "electric"
+      "power_system": "electric",
+      "composition": "multiple_unit"
     }
   },
   {
@@ -183,7 +187,8 @@
       "gauge": 1435,
       "weight": 501,
       "power_output": 13464,
-      "power_system": "electric"
+      "power_system": "electric",
+      "composition": "multiple_unit"
     }
   },
   {
@@ -201,7 +206,8 @@
       "gauge": 1435,
       "weight": 400,
       "power_output": 7480,
-      "power_system": "electric"
+      "power_system": "electric",
+      "composition": "multiple_unit"
     }
   },
   {
@@ -219,7 +225,8 @@
       "gauge": 1435,
       "weight": 72,
       "power_output": 4760,
-      "power_system": "electric"
+      "power_system": "electric",
+      "composition": "locomotive"
     }
   },
 

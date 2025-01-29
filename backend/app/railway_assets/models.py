@@ -44,6 +44,11 @@ ELECTRIFICATION_CHOICES = (
     ("partially", "Partially"),
 )
 
+COMPOSITION_CHOICES = (
+    ("multiple_unit", "Multiple Unit"),
+    ("locomotive", "Locomotive"),
+)
+
 
 class Station(models.Model):
     """
@@ -122,6 +127,9 @@ class TrainModel(models.Model):
     power_output: IntegerField = models.IntegerField()
     power_system: CharField = models.CharField(
         choices=POWER_SYSTEM_CHOICES, default=POWER_SYSTEM_CHOICES[0][0]
+    )
+    composition: CharField = models.CharField(
+        choices=COMPOSITION_CHOICES, default=COMPOSITION_CHOICES[0][0]
     )
 
     def __str__(self):

@@ -1,5 +1,5 @@
 from railway_assets.models import Route, Station, Train, TrainModel, STATE_CHOICES, ROUTE_TYPE_CHOICES, \
-    ELECTRIFICATION_CHOICES, TRAIN_MODEL_CHOICES, POWER_SYSTEM_CHOICES
+    ELECTRIFICATION_CHOICES, TRAIN_MODEL_CHOICES, POWER_SYSTEM_CHOICES, COMPOSITION_CHOICES
 from rest_framework import serializers
 
 
@@ -68,6 +68,8 @@ class TrainModelSerializer(serializers.ModelSerializer):
 
     type = ChoiceField(choices=TRAIN_MODEL_CHOICES)
     power_system = ChoiceField(choices=POWER_SYSTEM_CHOICES)
+    composition = ChoiceField(choices=COMPOSITION_CHOICES)
+
 
     class Meta:
         model = TrainModel
@@ -85,6 +87,7 @@ class TrainModelSerializer(serializers.ModelSerializer):
             "weight",
             "power_output",
             "power_system",
+            "composition",
         ]
 
 
