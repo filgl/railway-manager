@@ -1,0 +1,91 @@
+<form method="POST" (ngSubmit)="onSubmit()">
+  <div *ngIf="errors.non_field_errors" class="text-danger mt-2">
+    <p *ngFor="let err of errors.non_field_errors">{{ err }}</p>
+  </div>
+
+  <div>
+    <label for="startStation">Start station:</label>
+    <select id="startStation" name="start_station" required [(ngModel)]="route.start_station">
+      <option *ngFor="let station of stations" [value]="station.id">{{ station.name }}</option>
+    </select>
+    <div *ngIf="errors.start_station" class="text-danger mt-2">{{ errors.start_station.id }}</div>
+  </div>
+
+  <div>
+    <label for="endStation">End station:</label>
+    <select id="endStation" name="end_station" required [(ngModel)]="route.end_station">
+      <option *ngFor="let station of stations" [value]="station.id">{{ station.name }}</option>
+    </select>
+    <div *ngIf="errors.end_station" class="text-danger mt-2">{{ errors.end_station.id }}</div>
+  </div>
+
+  <div>
+    <label for="nickname">Nickname:</label>
+    <input id="nickname" name="nickname" type="text" [(ngModel)]="route.nickname"/>
+    <div *ngIf="errors.nickname" class="text-danger mt-2">{{ errors.nickname[0] }}</div>
+  </div>
+
+  <div>
+    <label for="length">Length (km):</label>
+    <input id="length" name="length" type="number" required min="1" [(ngModel)]="route.length"/>
+    <div *ngIf="errors.length" class="text-danger mt-2">{{ errors.length[0] }}</div>
+  </div>
+
+  <div>
+    <label for="maxSpeed">Maximum speed (km/h):</label>
+    <input id="maxSpeed" name="max_speed" type="number" required min="1" [(ngModel)]="route.max_speed"/>
+    <div *ngIf="errors.max_speed" class="text-danger mt-2">{{ errors.max_speed[0] }}</div>
+  </div>
+
+  <div>
+    <label for="routeType">Route type:</label>
+    <select id="routeType" name="route_type" required [(ngModel)]="route.type">
+      <option *ngFor="let type of route_type" [value]="type[0]">{{ type[1] }}</option>
+    </select>
+    <div *ngIf="errors.type" class="text-danger mt-2">{{ errors.type[0] }}</div>
+  </div>
+
+  <div>
+    <label for="actualState">Actual state:</label>
+    <select id="actualState" name="actual_state" required [(ngModel)]="route.actual_state">
+      <option *ngFor="let state of actual_state" [value]="state[0]">{{ state[1] }}</option>
+    </select>
+    <div *ngIf="errors.state" class="text-danger mt-2">{{ errors.state[0] }}</div>
+  </div>
+
+  <div>
+    <label for="openingYear">Opening year:</label>
+    <input id="openingYear" name="opening_year" type="number" min="0" [(ngModel)]="route.opening_year"/>
+    <div *ngIf="errors.opening_year" class="text-danger mt-2">{{ errors.opening_year[0] }}</div>
+  </div>
+
+  <div>
+    <label for="latestMaintenance">Latest maintenance:</label>
+    <input id="latestMaintenance" name="latest_maintenance" type="date" [(ngModel)]="route.latest_maintenance"/>
+    <div *ngIf="errors.latest_maintenance" class="text-danger mt-2">{{ errors.latest_maintenance[0] }}</div>
+  </div>
+
+  <div>
+    <label for="gauge">Gauge (mm):</label>
+    <input id="gauge" name="gauge" type="number" required min="1" [(ngModel)]="route.gauge"/>
+    <div *ngIf="errors.gauge" class="text-danger mt-2">{{ errors.gauge[0] }}</div>
+  </div>
+
+  <div>
+    <label for="electrified">Electrification state:</label>
+    <select id="electrified" name="electrified" required [(ngModel)]="route.electrified">
+      <option *ngFor="let state of electrification" [value]="state[0]">{{ state[1] }}</option>
+    </select>
+    <div *ngIf="errors.electrification" class="text-danger mt-2">{{ errors.electrification[0] }}</div>
+  </div>
+
+  <div>
+    <label for="electrificationVoltage">Electrification voltage (V):</label>
+    <input id="electrificationVoltage" name="electrification_voltage" type="number" required min="1" [(ngModel)]="route.electrification_voltage"/>
+    <div *ngIf="errors.electrification_voltage" class="text-danger mt-2">{{ errors.electrification_voltage[0] }}</div>
+  </div>
+
+  <div>
+    <button type="submit">Add route</button>
+  </div>
+</form>

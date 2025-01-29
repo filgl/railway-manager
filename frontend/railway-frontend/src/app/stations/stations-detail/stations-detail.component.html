@@ -14,7 +14,7 @@
 
   <h4>Routes starting here</h4>
   <ul>
-    <li *ngFor="let route of startRoutes">
+    <li *ngFor="let route of station.start_routes">
       <a [routerLink]="['/routes', route.id]">
         {{ route.start_station.name }} - {{ route.end_station.name }}
       </a>
@@ -23,7 +23,7 @@
 
   <h4>Routes ending here</h4>
   <ul>
-    <li *ngFor="let route of endRoutes">
+    <li *ngFor="let route of station.end_routes">
       <a [routerLink]="['/routes', route.id]">
         {{ route.start_station.name }} - {{ route.end_station.name }}
       </a>

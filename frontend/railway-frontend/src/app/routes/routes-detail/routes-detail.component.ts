@@ -4,6 +4,7 @@ import { Route } from "../../Models/Route";
 import { RoutesDetailService } from "./routes-detail.service";
 import { NgForOf, NgIf } from "@angular/common";
 import { Train } from "../../Models/Train";
+import { StationsDetailService } from "../../stations/stations-detail/stations-detail.service";
 
 @Component({
   selector: "app-routes-detail",
@@ -13,11 +14,11 @@ import { Train } from "../../Models/Train";
 })
 export class RoutesDetailComponent implements OnInit {
   route!: Route;
-  trains!: Train[];
 
   constructor(
     private pageRoute: ActivatedRoute,
     private routesDetailService: RoutesDetailService,
+    private stationsDetailService: StationsDetailService,
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +29,18 @@ export class RoutesDetailComponent implements OnInit {
   loadRoute(id: string | null): void {
     this.routesDetailService.getRoute(id).subscribe((route) => {
       this.route = route;
-      this.trains = route.trains;
+
+      this.stationsDetailService
+        .getStation(String(route.start_station))
+        .subscribe((startStation) => {
+          route.start_station_name = startStation.name;
+        });
+
+      this.stationsDetailService
+        .getStation(String(route.end_station))
+        .subscribe((endStation) => {
+          route.end_station_name = endStation.name;
+        });
     });
   }
 }

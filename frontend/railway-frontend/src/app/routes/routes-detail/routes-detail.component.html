@@ -2,9 +2,9 @@
   <h1>Route details</h1>
 
   <p>
-    <a [routerLink]="['/stations', route.start_station.id]">{{ route.start_station.name }}</a>
+    <a [routerLink]="['/stations', route.start_station]">{{ route.start_station_name }}</a>
     to
-    <a [routerLink]="['/stations', route.end_station.id]">{{ route.end_station.name }}</a>
+    <a [routerLink]="['/stations', route.end_station]">{{ route.end_station_name }}</a>
   </p>
 
   <ul>
@@ -22,7 +22,7 @@
 
   <h4>Trains on this route</h4>
   <ul>
-    <li *ngFor="let train of trains">
+    <li *ngFor="let train of route.trains">
       <a [routerLink]="['/trains', train.id]">
         {{ train.model.name }} {{ train.number }}
       </a>
