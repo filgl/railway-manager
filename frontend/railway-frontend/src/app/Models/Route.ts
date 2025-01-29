@@ -1,7 +1,9 @@
+import {Station} from './Station';
+
 export class Route {
   id!: number;
-  start_station!: number;
-  end_station!: number;
+  start_station!: Station;
+  end_station!: Station;
   nickname!: string;
   length!: number;
   max_speed!: number;

@@ -1,0 +1,8 @@
+<div class="container">
+  <h1>Train models</h1>
+  <ul>
+    <li *ngFor="let trainModel of trainModels">
+      <a [routerLink]="['/train-models', trainModel.id]">{{ trainModel.name }}</a>
+    </li>
+  </ul>
+</div>

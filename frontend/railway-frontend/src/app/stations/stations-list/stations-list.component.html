@@ -1,0 +1,8 @@
+<div class="container">
+  <h1>Stations</h1>
+  <ul>
+    <li *ngFor="let station of stations">
+      <a [routerLink]="['/stations', station.id]">{{ station.name }} ({{ station.city }})</a>
+    </li>
+  </ul>
+</div>

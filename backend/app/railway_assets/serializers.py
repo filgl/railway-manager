@@ -39,6 +39,9 @@ class RouteSerializer(serializers.ModelSerializer):
     actual_state = ChoiceField(choices=STATE_CHOICES)
     electrified = ChoiceField(choices=ELECTRIFICATION_CHOICES)
 
+    start_station = StationSerializer()
+    end_station = StationSerializer()
+
     class Meta:
         model = Route
         fields = [
@@ -91,6 +94,9 @@ class TrainSerializer(serializers.ModelSerializer):
     """
 
     actual_state = ChoiceField(choices=STATE_CHOICES)
+
+    model = TrainModelSerializer()
+    associated_route = RouteSerializer()
 
     class Meta:
         model = Train

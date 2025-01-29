@@ -1,0 +1,8 @@
+<div class="container">
+  <h1>Routes</h1>
+  <ul>
+    <li *ngFor="let route of routes">
+      <a [routerLink]="['/routes', route.id]">{{ route.start_station.name }} to {{ route.end_station.name }}</a>
+    </li>
+  </ul>
+</div>
