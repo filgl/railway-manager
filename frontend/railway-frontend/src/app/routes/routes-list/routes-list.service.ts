@@ -1,6 +1,12 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from "@angular/common/http";
 import { Route } from "../../Models/Route";
+import { catchError, Observable, throwError } from "rxjs";
+import { Station } from "../../Models/Station";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,5 +24,13 @@ export class RoutesListService {
 
   getRoutes() {
     return this.http.get<Route[]>(this.routesUrl, httpOptions);
+  }
+
+  addRoute(route: Route): Observable<Route> {
+    return this.http.post<Route>(this.routesUrl, route, httpOptions).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => error);
+      }),
+    );
   }
 }

@@ -4,7 +4,9 @@ import { Train } from "./Train";
 export class Route {
   id!: number;
   start_station!: Station;
+  start_station_name!: string;
   end_station!: Station;
+  end_station_name!: string;
   nickname!: string;
   length!: number;
   max_speed!: number;

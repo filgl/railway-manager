@@ -8,7 +8,7 @@
     [class]="showForm ? 'btn-danger' : 'btn-primary'"
   />
   <div *ngIf="showForm" class="col-12 col-md-3 mt-3 mt-lg-0">
-    <app-stations-add (addStationEvent)="addStation($event)"></app-stations-add>
+    <app-stations-add (addStationEvent)="addStation($event)" [errors]="errors"></app-stations-add>
   </div>
   <ul>
     <li *ngFor="let station of stations">

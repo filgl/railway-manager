@@ -13,8 +13,6 @@ import { Route } from "../../Models/Route";
 })
 export class StationsDetailComponent implements OnInit {
   station!: Station;
-  startRoutes!: Route[];
-  endRoutes!: Route[];
 
   constructor(
     private route: ActivatedRoute,
@@ -29,8 +27,6 @@ export class StationsDetailComponent implements OnInit {
   loadStation(id: string | null): void {
     this.stationsDetailService.getStation(id).subscribe((station) => {
       this.station = station;
-      this.startRoutes = station.start_routes;
-      this.endRoutes = station.end_routes;
     });
   }
 }

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from railway_assets.models import (COMPOSITION_CHOICES,
                                    ELECTRIFICATION_CHOICES,
                                    POWER_SYSTEM_CHOICES, ROUTE_TYPE_CHOICES,
@@ -119,8 +121,8 @@ class StationSerializer(serializers.ModelSerializer):
 
     actual_state = ChoiceField(choices=STATE_CHOICES)
 
-    start_routes = RouteBriefSerializer(many=True)
-    end_routes = RouteBriefSerializer(many=True)
+    start_routes = RouteBriefSerializer(many=True, read_only=True)
+    end_routes = RouteBriefSerializer(many=True, read_only=True)
 
     class Meta:
         model = Station
@@ -136,6 +138,23 @@ class StationSerializer(serializers.ModelSerializer):
             "end_routes",
         ]
 
+    def validate(self, data):
+        """
+        This function validates the Station data.
+        """
+
+        if data.get("platforms") < 1:
+            raise serializers.ValidationError(
+                {"platforms": "Number of platforms must be greater than 0"}
+            )
+
+        if data.get("opening_year") and data.get("opening_year") > datetime.now().year:
+            raise serializers.ValidationError(
+                {"opening_year": "Opening year cannot be set in the future"}
+            )
+
+        return data
+
 
 class RouteSerializer(serializers.ModelSerializer):
     """
@@ -146,10 +165,10 @@ class RouteSerializer(serializers.ModelSerializer):
     actual_state = ChoiceField(choices=STATE_CHOICES)
     electrified = ChoiceField(choices=ELECTRIFICATION_CHOICES)
 
-    start_station = StationBriefSerializer()
-    end_station = StationBriefSerializer()
+    start_station = serializers.PrimaryKeyRelatedField(queryset=Station.objects.all())
+    end_station = serializers.PrimaryKeyRelatedField(queryset=Station.objects.all())
 
-    trains = TrainBriefSerializer(many=True)
+    trains = TrainBriefSerializer(many=True, read_only=True)
 
     class Meta:
         model = Route
@@ -169,6 +188,107 @@ class RouteSerializer(serializers.ModelSerializer):
             "electrification_voltage",
             "trains",
         ]
+
+    def validate(self, data):
+        """
+        This function validates the Route data.
+        """
+
+        try:
+            if (
+                data.get("start_station")
+                and data.get("end_station")
+                and data.get("start_station") == data.get("end_station")
+            ):
+                raise serializers.ValidationError(
+                    "Start station and end station cannot be the same"
+                )
+        except Station.DoesNotExist:
+            raise serializers.ValidationError("Start and end stations must be set")
+
+        try:
+            if (
+                data.get("start_station")
+                and data.get("opening_year")
+                and data.get("start_station.opening_year")
+                and data.get("start_station.opening_year") > data.get("opening_year")
+            ):
+                raise serializers.ValidationError(
+                    f"Route cannot open before the opening of the start station ({data.get("start_station.opening_year")})"
+                )
+        except Station.DoesNotExist:
+            raise serializers.ValidationError("Start station must be set")
+
+        try:
+            if (
+                data.get("end_station")
+                and data.get("opening_year")
+                and data.get("end_station.opening_year")
+                and data.get("end_station.opening_year") > data.get("opening_year")
+            ):
+                raise serializers.ValidationError(
+                    f"Route cannot open before the opening of the end station ({data.get("end_station.opening_year")})"
+                )
+        except Station.DoesNotExist:
+            raise serializers.ValidationError("End station must be set")
+
+        if data.get("length") and data.get("length") < 1.0:
+            raise serializers.ValidationError(
+                {"length": "Route length must be greater than 1.0 km"}
+            )
+
+        if data.get("max_speed") and data.get("max_speed") < 1:
+            raise serializers.ValidationError(
+                {"max_speed": "Maximum speed must be at least 1 km/h"}
+            )
+
+        if data.get("opening_year") and data.get("opening_year") > datetime.now().year:
+            raise serializers.ValidationError(
+                {"opening_year": "Opening year cannot be set in the future"}
+            )
+
+        if (
+            data.get("latest_maintenance")
+            and data.get("latest_maintenance") > datetime.now().date()
+        ):
+            raise serializers.ValidationError(
+                {
+                    "latest_maintenance": "Latest maintenance date cannot be set in the future"
+                }
+            )
+
+        if (
+            data.get("opening_year")
+            and data.get("latest_maintenance")
+            and data.get("latest_maintenance.year") < data.get("opening_year")
+        ):
+            raise serializers.ValidationError(
+                f"Latest maintenance date cannot be set before route opening year ({data.get("opening_year")})"
+            )
+
+        if data.get("gauge") and data.get("gauge") < 1:
+            raise serializers.ValidationError({"gauge": "Gauge must be at least 1 mm"})
+
+        if data.get("electrified") in ["electrified", "partially"] and not data.get(
+            "electrification_voltage"
+        ):
+            raise serializers.ValidationError(
+                {
+                    "electrification_voltage": "Electrification voltage must be set if the route is electrified"
+                }
+            )
+
+        if (
+            data.get("electrification_voltage")
+            and data.get("electrification_voltage") < 1
+        ):
+            raise serializers.ValidationError(
+                {
+                    "electrification_voltage": "Electrification voltage must be at least 1 V"
+                }
+            )
+
+        return data
 
 
 class TrainSerializer(serializers.ModelSerializer):

@@ -14,6 +14,7 @@ import { StationsAddComponent } from "../stations-add/stations-add.component";
 export class StationsListComponent implements OnInit {
   stations!: Station[];
   showForm: boolean = false;
+  errors: any = {};
 
   constructor(private stationsListService: StationsListService) {}
 
@@ -32,8 +33,17 @@ export class StationsListComponent implements OnInit {
   }
 
   addStation(station: Station): void {
-    this.stationsListService
-      .addStation(station)
-      .subscribe(() => this.loadStations());
+    this.stationsListService.addStation(station).subscribe({
+      next: () => {
+        this.loadStations();
+      },
+      error: (error) => {
+        if (error.status === 400) {
+          this.errors = error.error;
+        } else {
+          console.error("Unexpected error:", error);
+        }
+      },
+    });
   }
 }

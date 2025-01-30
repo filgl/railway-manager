@@ -1,8 +1,18 @@
 <div class="container">
   <h1>Routes</h1>
+  <input
+    type="button"
+    (click)="toggleForm()"
+    [value]="showForm ? 'Cancel' : '+ New'"
+    class="btn"
+    [class]="showForm ? 'btn-danger' : 'btn-primary'"
+  />
+  <div *ngIf="showForm" class="col-12 col-md-3 mt-3 mt-lg-0">
+    <app-routes-add (addRouteEvent)="addRoute($event)" [errors]="errors"></app-routes-add>
+  </div>
   <ul>
     <li *ngFor="let route of routes">
-      <a [routerLink]="['/routes', route.id]">{{ route.start_station.name }} to {{ route.end_station.name }}</a>
+      <a [routerLink]="['/routes', route.id]">{{ route.start_station_name }} to {{ route.end_station_name }}</a>
     </li>
   </ul>
 </div>
