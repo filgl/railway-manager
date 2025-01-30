@@ -19,10 +19,7 @@ export class RoutesListComponent implements OnInit {
   showForm: boolean = false;
   errors: any = {};
 
-  constructor(
-    private routesListService: RoutesListService,
-    private stationsDetailService: StationsDetailService,
-  ) {}
+  constructor(private routesListService: RoutesListService) {}
 
   ngOnInit(): void {
     this.loadRoutes();
@@ -35,20 +32,6 @@ export class RoutesListComponent implements OnInit {
   loadRoutes(): void {
     this.routesListService.getRoutes().subscribe((routes) => {
       this.routes = routes;
-
-      this.routes.forEach((route) => {
-        this.stationsDetailService
-          .getStation(String(route.start_station))
-          .subscribe((startStation) => {
-            route.start_station_name = startStation.name;
-          });
-
-        this.stationsDetailService
-          .getStation(String(route.end_station))
-          .subscribe((endStation) => {
-            route.end_station_name = endStation.name;
-          });
-      });
     });
   }
 

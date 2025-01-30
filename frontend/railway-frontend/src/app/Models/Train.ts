@@ -4,6 +4,7 @@ import { Route } from "./Route";
 export class Train {
   id!: number;
   model!: TrainModel;
+  model_name!: string;
   nickname!: string;
   number!: number;
   actual_state!: string;

@@ -1,6 +1,11 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from "@angular/common/http";
 import { Train } from "../../Models/Train";
+import { catchError, Observable, throwError } from "rxjs";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,5 +23,13 @@ export class TrainsListService {
 
   getTrains() {
     return this.http.get<Train[]>(this.trainsUrl, httpOptions);
+  }
+
+  addTrain(train: Train): Observable<Train> {
+    return this.http.post<Train>(this.trainsUrl, train, httpOptions).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => error);
+      }),
+    );
   }
 }

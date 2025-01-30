@@ -55,7 +55,7 @@ class Station(models.Model):
 
     name: CharField = models.CharField(max_length=256, unique=True)
     city: CharField = models.CharField(max_length=256)
-    platforms: PositiveSmallIntegerField = models.PositiveSmallIntegerField(default=2)
+    platforms: PositiveSmallIntegerField = models.PositiveSmallIntegerField()
     opening_year: PositiveSmallIntegerField = models.PositiveSmallIntegerField(
         blank=True, null=True
     )
@@ -98,7 +98,7 @@ class Route(models.Model):
         max_length=256, unique=True, blank=True, null=True
     )
     length: FloatField = models.FloatField()
-    max_speed: PositiveSmallIntegerField = models.PositiveSmallIntegerField(default=160)
+    max_speed: PositiveSmallIntegerField = models.PositiveSmallIntegerField()
     type: CharField = models.CharField(
         choices=ROUTE_TYPE_CHOICES, default=ROUTE_TYPE_CHOICES[0][0]
     )
@@ -109,7 +109,7 @@ class Route(models.Model):
         blank=True, null=True
     )
     latest_maintenance: DateField = models.DateField(blank=True, null=True)
-    gauge: PositiveSmallIntegerField = models.PositiveSmallIntegerField(default=1435)
+    gauge: PositiveSmallIntegerField = models.PositiveSmallIntegerField()
     electrified: CharField = models.CharField(
         choices=ELECTRIFICATION_CHOICES, default=ELECTRIFICATION_CHOICES[0][0]
     )
@@ -142,7 +142,9 @@ class Route(models.Model):
                 and self.start_station.opening_year > self.opening_year
             ):
                 raise ValidationError(
-                    f"Route cannot open before the opening of the start station ({self.start_station.opening_year})"
+                    {
+                        "opening_year": f"Route cannot open before the opening of the start station ({self.start_station.opening_year})"
+                    }
                 )
         except Station.DoesNotExist:
             raise ValidationError("Start station must be set")
@@ -155,7 +157,9 @@ class Route(models.Model):
                 and self.end_station.opening_year > self.opening_year
             ):
                 raise ValidationError(
-                    f"Route cannot open before the opening of the end station ({self.end_station.opening_year})"
+                    {
+                        "opening_year": f"Route cannot open before the opening of the end station ({self.end_station.opening_year})"
+                    }
                 )
         except Station.DoesNotExist:
             raise ValidationError("End station must be set")
@@ -188,7 +192,9 @@ class Route(models.Model):
             and self.latest_maintenance.year < self.opening_year
         ):
             raise ValidationError(
-                f"Latest maintenance date cannot be set before route opening year ({self.opening_year})"
+                {
+                    "latest_maintenance": f"Latest maintenance date cannot be set before route opening year ({self.opening_year})"
+                }
             )
 
         if self.gauge and self.gauge < 1:
@@ -230,7 +236,7 @@ class TrainModel(models.Model):
     nickname: CharField = models.CharField(
         max_length=256, unique=True, blank=True, null=True
     )
-    max_speed: PositiveSmallIntegerField = models.PositiveSmallIntegerField(default=160)
+    max_speed: PositiveSmallIntegerField = models.PositiveSmallIntegerField()
     seats: PositiveSmallIntegerField = models.PositiveSmallIntegerField(
         blank=True, null=True
     )

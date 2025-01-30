@@ -2,7 +2,7 @@
   <h1>Train details</h1>
 
   <p>
-    <a [routerLink]="['/train-models', train.model.id]">{{ train.model.name }}</a> {{ train.number }}
+    <a [routerLink]="['/train-models', train.model]">{{ train.model_name }}</a> {{ train.number }}
   </p>
 
   <ul>
@@ -19,7 +19,7 @@
     <li>
       Runs on the route
       <a [routerLink]="['/routes', train.associated_route.id]">
-        {{ train.associated_route.start_station.name }} - {{ train.associated_route.end_station.name }}
+        {{ train.associated_route.start_station_name }} - {{ train.associated_route.end_station_name }}
       </a>
     </li>
   </ul>

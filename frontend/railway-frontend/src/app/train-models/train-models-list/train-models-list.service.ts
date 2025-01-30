@@ -1,6 +1,12 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from "@angular/common/http";
 import { TrainModel } from "../../Models/TrainModel";
+import { Station } from "../../Models/Station";
+import { catchError, Observable, throwError } from "rxjs";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,5 +24,15 @@ export class TrainModelsListService {
 
   getTrainModels() {
     return this.http.get<TrainModel[]>(this.trainModelsUrl, httpOptions);
+  }
+
+  addTrainModel(trainModel: TrainModel): Observable<TrainModel> {
+    return this.http
+      .post<TrainModel>(this.trainModelsUrl, trainModel, httpOptions)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return throwError(() => error);
+        }),
+      );
   }
 }

@@ -12,7 +12,7 @@
   </div>
   <ul>
     <li *ngFor="let route of routes">
-      <a [routerLink]="['/routes', route.id]">{{ route.start_station_name }} to {{ route.end_station_name }}</a>
+      <a [routerLink]="['/routes', route.id]">{{ route.start_station_name }} - {{ route.end_station_name }}</a>
     </li>
   </ul>
 </div>

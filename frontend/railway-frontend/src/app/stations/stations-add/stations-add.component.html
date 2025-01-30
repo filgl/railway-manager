@@ -1,3 +1,7 @@
+<div *ngIf="errors.non_field_errors" class="text-danger mt-2">
+  {{ errors.non_field_errors[0] }}
+</div>
+
 <form method="POST" (ngSubmit)="onSubmit()">
   <div>
     <label for="name">Name:</label>
@@ -41,7 +45,3 @@
     <button type="submit">Add station</button>
   </div>
 </form>
-
-<div *ngIf="errors.non_field_errors" class="text-danger mt-2">
-  {{ errors.non_field_errors[0] }}
-</div>

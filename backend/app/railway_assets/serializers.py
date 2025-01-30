@@ -74,7 +74,7 @@ class TrainModelSerializer(serializers.ModelSerializer):
     power_system = ChoiceField(choices=POWER_SYSTEM_CHOICES)
     composition = ChoiceField(choices=COMPOSITION_CHOICES)
 
-    trains = TrainBriefSerializer(many=True)
+    trains = TrainBriefSerializer(many=True, read_only=True)
 
     class Meta:
         model = TrainModel
@@ -95,6 +95,49 @@ class TrainModelSerializer(serializers.ModelSerializer):
             "composition",
             "trains",
         ]
+
+    def validate(self, data):
+        """
+        This function validates the TrainModel data.
+        """
+
+        if data.get("max_speed") < 1:
+            raise serializers.ValidationError(
+                {"max_speed": "Maximum speed must be at least 1 km/h"}
+            )
+
+        if data.get("seats") and data.get("seats") < 1:
+            raise serializers.ValidationError(
+                {"seats": "Number of seats must be greater than 0"}
+            )
+
+        if data.get("length") < 1.0:
+            raise serializers.ValidationError(
+                {"length": "Train length must be at least 1 m"}
+            )
+
+        if data.get("width") < 1.0:
+            raise serializers.ValidationError(
+                {"width": "Train width must be at least 1 m"}
+            )
+
+        if data.get("height") < 1.0:
+            raise serializers.ValidationError(
+                {"height": "Train height must be at least 1 m"}
+            )
+
+        if data.get("gauge") < 1:
+            raise serializers.ValidationError({"gauge": "Gauge must be at least 1 mm"})
+
+        if data.get("weight") < 1:
+            raise serializers.ValidationError({"weight": "Weight must be at least 1 t"})
+
+        if data.get("power_output") < 1:
+            raise serializers.ValidationError(
+                {"power_output": "Power output must be at least 1 kW"}
+            )
+
+        return data
 
 
 class RouteBriefSerializer(serializers.ModelSerializer):
@@ -170,12 +213,17 @@ class RouteSerializer(serializers.ModelSerializer):
 
     trains = TrainBriefSerializer(many=True, read_only=True)
 
+    start_station_name = serializers.SerializerMethodField()
+    end_station_name = serializers.SerializerMethodField()
+
     class Meta:
         model = Route
         fields = [
             "id",
             "start_station",
+            "start_station_name",
             "end_station",
+            "end_station_name",
             "nickname",
             "length",
             "max_speed",
@@ -189,55 +237,67 @@ class RouteSerializer(serializers.ModelSerializer):
             "trains",
         ]
 
+    def get_start_station_name(self, obj):
+        """
+        This function returns the start station name.
+        """
+
+        return f"{obj.start_station.name}"
+
+    def get_end_station_name(self, obj):
+        """
+        This function returns the end station name.
+        """
+
+        return f"{obj.end_station.name}"
+
     def validate(self, data):
         """
         This function validates the Route data.
         """
 
-        try:
-            if (
-                data.get("start_station")
-                and data.get("end_station")
-                and data.get("start_station") == data.get("end_station")
-            ):
-                raise serializers.ValidationError(
-                    "Start station and end station cannot be the same"
-                )
-        except Station.DoesNotExist:
-            raise serializers.ValidationError("Start and end stations must be set")
+        start_station = data.get("start_station")
+        end_station = data.get("end_station")
 
-        try:
-            if (
-                data.get("start_station")
-                and data.get("opening_year")
-                and data.get("start_station.opening_year")
-                and data.get("start_station.opening_year") > data.get("opening_year")
-            ):
-                raise serializers.ValidationError(
-                    f"Route cannot open before the opening of the start station ({data.get("start_station.opening_year")})"
-                )
-        except Station.DoesNotExist:
-            raise serializers.ValidationError("Start station must be set")
+        if isinstance(start_station, int):
+            start_station = Station.objects.get(id=start_station)
 
-        try:
-            if (
-                data.get("end_station")
-                and data.get("opening_year")
-                and data.get("end_station.opening_year")
-                and data.get("end_station.opening_year") > data.get("opening_year")
-            ):
-                raise serializers.ValidationError(
-                    f"Route cannot open before the opening of the end station ({data.get("end_station.opening_year")})"
-                )
-        except Station.DoesNotExist:
-            raise serializers.ValidationError("End station must be set")
+        if isinstance(end_station, int):
+            start_station = Station.objects.get(id=end_station)
 
-        if data.get("length") and data.get("length") < 1.0:
+        if start_station == end_station:
+            raise serializers.ValidationError(
+                "Start station and end station cannot be the same"
+            )
+
+        if (
+            start_station.opening_year
+            and data.get("opening_year")
+            and start_station.opening_year > data.get("opening_year")
+        ):
+            raise serializers.ValidationError(
+                {
+                    "opening_year": f"Route cannot open before the opening of the start station ({start_station.opening_year})"
+                }
+            )
+
+        if (
+            end_station.opening_year
+            and data.get("opening_year")
+            and end_station.opening_year > data.get("opening_year")
+        ):
+            raise serializers.ValidationError(
+                {
+                    "opening_year": f"Route cannot open before the opening of the end station ({end_station.opening_year})"
+                }
+            )
+
+        if data.get("length") < 1.0:
             raise serializers.ValidationError(
                 {"length": "Route length must be greater than 1.0 km"}
             )
 
-        if data.get("max_speed") and data.get("max_speed") < 1:
+        if data.get("max_speed") < 1:
             raise serializers.ValidationError(
                 {"max_speed": "Maximum speed must be at least 1 km/h"}
             )
@@ -258,15 +318,17 @@ class RouteSerializer(serializers.ModelSerializer):
             )
 
         if (
-            data.get("opening_year")
-            and data.get("latest_maintenance")
-            and data.get("latest_maintenance.year") < data.get("opening_year")
+            data.get("latest_maintenance")
+            and data.get("opening_year")
+            and data.get("latest_maintenance").year < data.get("opening_year")
         ):
             raise serializers.ValidationError(
-                f"Latest maintenance date cannot be set before route opening year ({data.get("opening_year")})"
+                {
+                    "latest_maintenance": f"Latest maintenance date cannot be set before route opening year ({data.get("opening_year")})"
+                }
             )
 
-        if data.get("gauge") and data.get("gauge") < 1:
+        if data.get("gauge") < 1:
             raise serializers.ValidationError({"gauge": "Gauge must be at least 1 mm"})
 
         if data.get("electrified") in ["electrified", "partially"] and not data.get(
@@ -298,8 +360,8 @@ class TrainSerializer(serializers.ModelSerializer):
 
     actual_state = ChoiceField(choices=STATE_CHOICES)
 
-    model = TrainModelBriefSerializer()
-    associated_route = RouteBriefSerializer()
+    model = serializers.PrimaryKeyRelatedField(queryset=TrainModel.objects.all())
+    associated_route = serializers.PrimaryKeyRelatedField(queryset=Route.objects.all())
 
     class Meta:
         model = Train
@@ -316,3 +378,86 @@ class TrainSerializer(serializers.ModelSerializer):
             "operator",
             "associated_route",
         ]
+
+    def validate(self, data):
+        """
+        This function validates the Train data.
+        """
+
+        if data.get("number") < 1:
+            raise serializers.ValidationError(
+                {"number": "Train number must be at least 1"}
+            )
+
+        existing_train = Train.objects.filter(
+            model=data.get("model"), number=data.get("number")
+        ).exclude(id=data.get("id"))
+        if existing_train.exists():
+            raise serializers.ValidationError(
+                {
+                    "number": f"A train of the same model with the same number already exists"
+                }
+            )
+
+        if data.get("construction_year") > datetime.now().year:
+            raise serializers.ValidationError(
+                {
+                    "construction_year": "Train construction year cannot be set in the future"
+                }
+            )
+
+        if data.get("year_entered_service") > datetime.now().year:
+            raise serializers.ValidationError(
+                {
+                    "year_entered_service": "Year in which the train entered service cannot be set in the future"
+                }
+            )
+
+        if data.get("construction_year") > data.get("year_entered_service"):
+            raise serializers.ValidationError(
+                {
+                    "year_entered_service": f"Train cannot enter service before being constructed ({data.get("construction_year")})"
+                }
+            )
+
+        if (
+            data.get("latest_inspection")
+            and data.get("latest_inspection") > datetime.now().date()
+        ):
+            raise serializers.ValidationError(
+                {
+                    "latest_inspection": "Latest inspection date cannot be set in the future"
+                }
+            )
+
+        if data.get("latest_inspection") and data.get(
+            "latest_inspection"
+        ).year < data.get("year_entered_service"):
+            raise serializers.ValidationError(
+                {
+                    "latest_inspection": f"Inspection cannot be done before the train enters service ({data.get("year_entered_service")})"
+                }
+            )
+
+        model = TrainModel.objects.get(id=data.get("model").id)
+        route = Route.objects.get(id=data.get("associated_route").id)
+
+        if model.gauge != route.gauge:
+            raise serializers.ValidationError(
+                f"Train gauge ({model.gauge}) must be the same as the route ({route.gauge})"
+            )
+
+        if model.type != "mixed" and route.type != model.type:
+            raise serializers.ValidationError(
+                f"Train type ({model.get_type_display()}) must be the same as the route ({route.get_type_display()})"
+            )
+
+        if (
+            route.electrified not in ["electrified", "partially"]
+            and model.power_system == "electric"
+        ):
+            raise serializers.ValidationError(
+                f"Train power system ({model.get_power_system_display()}) is not adequate for the selected route ({route.get_electrified_display()})"
+            )
+
+        return data

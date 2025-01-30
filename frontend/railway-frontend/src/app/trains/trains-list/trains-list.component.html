@@ -1,8 +1,18 @@
 <div class="container">
   <h1>Trains</h1>
+  <input
+    type="button"
+    (click)="toggleForm()"
+    [value]="showForm ? 'Cancel' : '+ New'"
+    class="btn"
+    [class]="showForm ? 'btn-danger' : 'btn-primary'"
+  />
+  <div *ngIf="showForm" class="col-12 col-md-3 mt-3 mt-lg-0">
+    <app-trains-add (addTrainEvent)="addTrain($event)" [errors]="errors"></app-trains-add>
+  </div>
   <ul>
     <li *ngFor="let train of trains">
-      <a [routerLink]="['/trains', train.id]">{{ train.model.name }} {{ train.number }}</a>
+      <a [routerLink]="['/trains', train.id]">{{ train.model_name }} {{ train.number }}</a>
     </li>
   </ul>
 </div>

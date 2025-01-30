@@ -1,14 +1,14 @@
-<form method="POST" (ngSubmit)="onSubmit()">
-  <div *ngIf="errors.non_field_errors" class="text-danger mt-2">
-    <p *ngFor="let err of errors.non_field_errors">{{ err }}</p>
-  </div>
+<div *ngIf="errors.non_field_errors" class="text-danger mt-2">
+  <p *ngFor="let err of errors.non_field_errors">{{ err }}</p>
+</div>
 
+<form method="POST" (ngSubmit)="onSubmit()">
   <div>
     <label for="startStation">Start station:</label>
     <select id="startStation" name="start_station" required [(ngModel)]="route.start_station">
       <option *ngFor="let station of stations" [value]="station.id">{{ station.name }}</option>
     </select>
-    <div *ngIf="errors.start_station" class="text-danger mt-2">{{ errors.start_station.id }}</div>
+    <div *ngIf="errors.start_station" class="text-danger mt-2">{{ errors.start_station[0] }}</div>
   </div>
 
   <div>
@@ -16,7 +16,7 @@
     <select id="endStation" name="end_station" required [(ngModel)]="route.end_station">
       <option *ngFor="let station of stations" [value]="station.id">{{ station.name }}</option>
     </select>
-    <div *ngIf="errors.end_station" class="text-danger mt-2">{{ errors.end_station.id }}</div>
+    <div *ngIf="errors.end_station" class="text-danger mt-2">{{ errors.end_station[0] }}</div>
   </div>
 
   <div>
@@ -50,7 +50,7 @@
     <select id="actualState" name="actual_state" required [(ngModel)]="route.actual_state">
       <option *ngFor="let state of actual_state" [value]="state[0]">{{ state[1] }}</option>
     </select>
-    <div *ngIf="errors.state" class="text-danger mt-2">{{ errors.state[0] }}</div>
+    <div *ngIf="errors.actual_state" class="text-danger mt-2">{{ errors.actual_state[0] }}</div>
   </div>
 
   <div>
@@ -76,7 +76,7 @@
     <select id="electrified" name="electrified" required [(ngModel)]="route.electrified">
       <option *ngFor="let state of electrification" [value]="state[0]">{{ state[1] }}</option>
     </select>
-    <div *ngIf="errors.electrification" class="text-danger mt-2">{{ errors.electrification[0] }}</div>
+    <div *ngIf="errors.electrified" class="text-danger mt-2">{{ errors.electrified[0] }}</div>
   </div>
 
   <div>

@@ -3,6 +3,8 @@ import { ActivatedRoute, RouterLink } from "@angular/router";
 import { Train } from "../../Models/Train";
 import { TrainsDetailService } from "./trains-detail.service";
 import { NgIf } from "@angular/common";
+import { TrainModelsDetailService } from "../../train-models/train-models-detail/train-models-detail.service";
+import { RoutesDetailService } from "../../routes/routes-detail/routes-detail.service";
 
 @Component({
   selector: "app-trains-detail",
@@ -16,6 +18,8 @@ export class TrainsDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private trainsDetailService: TrainsDetailService,
+    private trainModelsDetailService: TrainModelsDetailService,
+    private routesDetailService: RoutesDetailService,
   ) {}
 
   ngOnInit(): void {
@@ -26,6 +30,18 @@ export class TrainsDetailComponent implements OnInit {
   loadTrain(id: string | null): void {
     this.trainsDetailService.getTrain(id).subscribe((train) => {
       this.train = train;
+
+      this.trainModelsDetailService
+        .getTrainModel(String(train.model))
+        .subscribe((trainModel) => {
+          train.model_name = trainModel.name;
+        });
+
+      this.routesDetailService
+        .getRoute(String(train.associated_route))
+        .subscribe((associatedRoute) => {
+          train.associated_route = associatedRoute;
+        });
     });
   }
 }
