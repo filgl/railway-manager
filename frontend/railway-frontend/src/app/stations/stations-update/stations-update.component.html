@@ -1,0 +1,47 @@
+<div *ngIf="errors.non_field_errors" class="text-danger mt-2">
+  {{ errors.non_field_errors[0] }}
+</div>
+
+<form method="POST" (ngSubmit)="updateStation()">
+  <div>
+    <label for="name">Name:</label>
+    <input id="name" name="name" type="text" required [(ngModel)]="station.name"/>
+    <div *ngIf="errors.name" class="text-danger mt-2">{{ errors.name[0] }}</div>
+  </div>
+
+  <div>
+    <label for="city">City:</label>
+    <input id="city" name="city" type="text" required [(ngModel)]="station.city"/>
+    <div *ngIf="errors.city" class="text-danger mt-2">{{ errors.city[0] }}</div>
+  </div>
+
+  <div>
+    <label for="platforms">Platforms:</label>
+    <input id="platforms" name="platforms" type="number" required min="1" [(ngModel)]="station.platforms"/>
+    <div *ngIf="errors.platforms" class="text-danger mt-2">{{ errors.platforms[0] }}</div>
+  </div>
+
+  <div>
+    <label for="openingYear">Opening year:</label>
+    <input id="openingYear" name="opening_year" type="number" min="0" [(ngModel)]="station.opening_year"/>
+    <div *ngIf="errors.opening_year" class="text-danger mt-2">{{ errors.opening_year[0] }}</div>
+  </div>
+
+  <div>
+    <label for="mainStation">Is it the main station in town?</label>
+    <input id="mainStation" name="main_station" type="checkbox" required [(ngModel)]="station.main_station"/>
+    <div *ngIf="errors.main_station" class="text-danger mt-2">{{ errors.main_station[0] }}</div>
+  </div>
+
+  <div>
+    <label for="actualState">Actual state:</label>
+    <select id="actualState" name="actual_state" required [(ngModel)]="station.actual_state">
+      <option *ngFor="let state of actual_states" [value]="state[1]">{{ state[1] }}</option>
+    </select>
+    <div *ngIf="errors.actual_state" class="text-danger mt-2">{{ errors.actual_state[0] }}</div>
+  </div>
+
+  <div>
+    <button type="submit">Save changes</button>
+  </div>
+</form>

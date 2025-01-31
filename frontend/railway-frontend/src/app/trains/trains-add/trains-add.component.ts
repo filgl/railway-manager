@@ -48,13 +48,13 @@ export class TrainsAddComponent implements OnInit {
 
       this.routes.forEach((route) => {
         this.stationsDetailService
-          .getStation(String(route.start_station))
+          .getStation(route.start_station.id)
           .subscribe((startStation) => {
             route.start_station_name = startStation.name;
           });
 
         this.stationsDetailService
-          .getStation(String(route.end_station))
+          .getStation(route.end_station.id)
           .subscribe((endStation) => {
             route.end_station_name = endStation.name;
           });

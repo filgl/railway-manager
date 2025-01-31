@@ -16,7 +16,7 @@ export class StationsDetailService {
 
   constructor(private http: HttpClient) {}
 
-  getStation(id: string | null) {
+  getStation(id: number | null) {
     return this.http.get<Station>(`${this.stationDetailUrl}${id}`, httpOptions);
   }
 }

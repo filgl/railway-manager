@@ -1,6 +1,17 @@
 <div class="container" *ngIf="station">
   <h1>Station details</h1>
 
+  <input
+    type="button"
+    (click)="toggleForm()"
+    [value]="showForm ? 'Cancel' : '~ Edit'"
+    class="btn"
+    [class]="showForm ? 'btn-danger' : 'btn-primary'"
+  />
+  <div *ngIf="showForm" class="col-12 col-md-3 mt-3 mt-lg-0">
+    <app-stations-update [station]="station" (updatedStation)="station = $event"></app-stations-update>
+  </div>
+
   <p>{{ station.name }} ({{ station.city }})</p>
   <ul>
         <li>{{ station.platforms }} platforms</li>
