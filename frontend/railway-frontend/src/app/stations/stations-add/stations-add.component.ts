@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { NgForOf, NgIf } from "@angular/common";
 import { StationsAddService } from "./stations-add.service";
+import { Station } from "../../Models/Station";
 
 @Component({
   selector: "app-stations-add",
@@ -28,7 +29,10 @@ export class StationsAddComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const station = this.station;
-    this.addStationEvent.emit(station);
+    this.addStationEvent.emit(this.station);
+  }
+
+  resetForm(): void {
+    this.station = {};
   }
 }

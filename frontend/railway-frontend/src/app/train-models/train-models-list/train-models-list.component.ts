@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { StationsListService } from "../../stations/stations-list/stations-list.service";
 import { TrainModel } from "../../Models/TrainModel";
 import { TrainModelsListService } from "./train-models-list.service";
@@ -18,6 +18,8 @@ export class TrainModelsListComponent implements OnInit {
   trainModels!: TrainModel[];
   showForm: boolean = false;
   errors: any = {};
+  @ViewChild(TrainModelsAddComponent)
+  trainModelsAddComponent!: TrainModelsAddComponent;
 
   constructor(private trainModelsListService: TrainModelsListService) {}
 
@@ -39,6 +41,9 @@ export class TrainModelsListComponent implements OnInit {
     this.trainModelsListService.addTrainModel(trainModel).subscribe({
       next: () => {
         this.loadTrainModels();
+        this.errors = {};
+        this.trainModelsAddComponent.resetForm();
+        this.showForm = false;
       },
       error: (error) => {
         if (error.status === 400) {

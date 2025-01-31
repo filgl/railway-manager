@@ -1,12 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { RoutesListService } from "./routes-list.service";
 import { Route } from "../../Models/Route";
 import { NgForOf, NgIf } from "@angular/common";
 import { RouterLink } from "@angular/router";
-import { Station } from "../../Models/Station";
-import { StationsAddComponent } from "../../stations/stations-add/stations-add.component";
 import { RoutesAddComponent } from "../routes-add/routes-add.component";
-import { StationsDetailService } from "../../stations/stations-detail/stations-detail.service";
 
 @Component({
   selector: "app-routes-list",
@@ -18,6 +15,7 @@ export class RoutesListComponent implements OnInit {
   routes!: Route[];
   showForm: boolean = false;
   errors: any = {};
+  @ViewChild(RoutesAddComponent) routesAddComponent!: RoutesAddComponent;
 
   constructor(private routesListService: RoutesListService) {}
 
@@ -39,6 +37,9 @@ export class RoutesListComponent implements OnInit {
     this.routesListService.addRoute(route).subscribe({
       next: () => {
         this.loadRoutes();
+        this.errors = {};
+        this.routesAddComponent.resetForm();
+        this.showForm = false;
       },
       error: (error) => {
         if (error.status === 400) {

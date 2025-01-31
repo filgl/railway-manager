@@ -44,7 +44,10 @@ export class TrainModelsAddComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const trainModel = this.trainModel;
-    this.addTrainModelEvent.emit(trainModel);
+    this.addTrainModelEvent.emit(this.trainModel);
+  }
+
+  resetForm(): void {
+    this.trainModel = {};
   }
 }

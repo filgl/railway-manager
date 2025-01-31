@@ -58,7 +58,10 @@ export class RoutesAddComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const route = this.route;
-    this.addRouteEvent.emit(route);
+    this.addRouteEvent.emit(this.route);
+  }
+
+  resetForm(): void {
+    this.route = {};
   }
 }

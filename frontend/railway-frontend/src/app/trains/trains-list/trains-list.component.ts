@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Train } from "../../Models/Train";
 import { TrainsListService } from "./trains-list.service";
 import { NgForOf, NgIf } from "@angular/common";
@@ -8,6 +8,7 @@ import { RoutesDetailService } from "../../routes/routes-detail/routes-detail.se
 import { TrainsAddComponent } from "../trains-add/trains-add.component";
 import { Route } from "../../Models/Route";
 import { TrainModel } from "../../Models/TrainModel";
+import { TrainModelsAddComponent } from "../../train-models/train-models-add/train-models-add.component";
 
 @Component({
   selector: "app-trains-list",
@@ -19,6 +20,7 @@ export class TrainsListComponent implements OnInit {
   trains!: Train[];
   showForm: boolean = false;
   errors: any = {};
+  @ViewChild(TrainsAddComponent) trainsAddComponent!: TrainsAddComponent;
 
   constructor(
     private trainsListService: TrainsListService,
@@ -44,6 +46,9 @@ export class TrainsListComponent implements OnInit {
     this.trainsListService.addTrain(train).subscribe({
       next: () => {
         this.loadTrains();
+        this.errors = {};
+        this.trainsAddComponent.resetForm();
+        this.showForm = false;
       },
       error: (error) => {
         if (error.status === 400) {

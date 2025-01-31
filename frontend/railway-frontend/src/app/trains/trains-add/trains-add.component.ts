@@ -69,7 +69,10 @@ export class TrainsAddComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const train = this.train;
-    this.addTrainEvent.emit(train);
+    this.addTrainEvent.emit(this.train);
+  }
+
+  resetForm(): void {
+    this.train = {};
   }
 }
