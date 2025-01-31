@@ -340,6 +340,15 @@ class RouteSerializer(serializers.ModelSerializer):
                 }
             )
 
+        if data.get("electrified") not in ["electrified", "partially"] and data.get(
+            "electrification_voltage"
+        ):
+            raise serializers.ValidationError(
+                {
+                    "electrification_voltage": "Electrification voltage must be empty if the route is not electrified"
+                }
+            )
+
         if (
             data.get("electrification_voltage")
             and data.get("electrification_voltage") < 1
@@ -403,6 +412,8 @@ class TrainSerializer(serializers.ModelSerializer):
         This function validates the Train data.
         """
 
+        instance = self.instance
+
         if data.get("number") < 1:
             raise serializers.ValidationError(
                 {"number": "Train number must be at least 1"}
@@ -410,13 +421,21 @@ class TrainSerializer(serializers.ModelSerializer):
 
         existing_train = Train.objects.filter(
             model=data.get("model"), number=data.get("number")
-        ).exclude(id=data.get("id"))
-        if existing_train.exists():
-            raise serializers.ValidationError(
-                {
-                    "number": f"A train of the same model with the same number already exists"
-                }
-            )
+        )
+        if instance is None:
+            if existing_train.exists():
+                raise serializers.ValidationError(
+                    {
+                        "number": f"A train of the same model with the same number already exists"
+                    }
+                )
+        else:
+            if existing_train.exclude(id=instance.id).exists():
+                raise serializers.ValidationError(
+                    {
+                        "number": f"A train of the same model with the same number already exists"
+                    }
+                )
 
         if data.get("construction_year") > datetime.now().year:
             raise serializers.ValidationError(

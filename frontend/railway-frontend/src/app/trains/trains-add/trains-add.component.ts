@@ -45,20 +45,6 @@ export class TrainsAddComponent implements OnInit {
   loadRoutes() {
     this.routesListService.getRoutes().subscribe((routes) => {
       this.routes = routes;
-
-      this.routes.forEach((route) => {
-        this.stationsDetailService
-          .getStation(route.start_station.id)
-          .subscribe((startStation) => {
-            route.start_station_name = startStation.name;
-          });
-
-        this.stationsDetailService
-          .getStation(route.end_station.id)
-          .subscribe((endStation) => {
-            route.end_station_name = endStation.name;
-          });
-      });
     });
   }
 

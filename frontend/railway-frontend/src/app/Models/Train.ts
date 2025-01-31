@@ -13,6 +13,6 @@ export class Train {
   kilometers_run!: number;
   latest_inspection!: string;
   operator!: string;
-  associated_route!: Route;
+  associated_route!: number;
   associated_route_name!: string;
 }

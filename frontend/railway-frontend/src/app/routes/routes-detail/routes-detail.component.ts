@@ -3,30 +3,33 @@ import { ActivatedRoute, RouterLink } from "@angular/router";
 import { Route } from "../../Models/Route";
 import { RoutesDetailService } from "./routes-detail.service";
 import { NgForOf, NgIf } from "@angular/common";
-import { Train } from "../../Models/Train";
-import { StationsDetailService } from "../../stations/stations-detail/stations-detail.service";
+import { RoutesUpdateComponent } from "../routes-update/routes-update.component";
 
 @Component({
   selector: "app-routes-detail",
-  imports: [NgIf, RouterLink, NgForOf],
+  imports: [NgIf, RouterLink, NgForOf, RoutesUpdateComponent],
   templateUrl: "./routes-detail.component.html",
   styleUrl: "./routes-detail.component.css",
 })
 export class RoutesDetailComponent implements OnInit {
   route!: Route;
+  showForm: boolean = false;
 
   constructor(
     private pageRoute: ActivatedRoute,
     private routesDetailService: RoutesDetailService,
-    private stationsDetailService: StationsDetailService,
   ) {}
 
   ngOnInit(): void {
-    const id = this.pageRoute.snapshot.paramMap.get("id");
+    const id = parseInt(<string>this.pageRoute.snapshot.paramMap.get("id"));
     this.loadRoute(id);
   }
 
-  loadRoute(id: string | null): void {
+  toggleForm(): void {
+    this.showForm = !this.showForm;
+  }
+
+  loadRoute(id: number | null): void {
     this.routesDetailService.getRoute(id).subscribe((route) => {
       this.route = route;
     });

@@ -5,36 +5,42 @@ import { TrainsDetailService } from "./trains-detail.service";
 import { NgIf } from "@angular/common";
 import { TrainModelsDetailService } from "../../train-models/train-models-detail/train-models-detail.service";
 import { RoutesDetailService } from "../../routes/routes-detail/routes-detail.service";
+import { RoutesUpdateComponent } from "../../routes/routes-update/routes-update.component";
+import { TrainsUpdateComponent } from "../trains-update/trains-update.component";
 
 @Component({
   selector: "app-trains-detail",
-  imports: [NgIf, RouterLink],
+  imports: [NgIf, RouterLink, TrainsUpdateComponent],
   templateUrl: "./trains-detail.component.html",
   styleUrl: "./trains-detail.component.css",
 })
 export class TrainsDetailComponent implements OnInit {
   train!: Train;
+  showForm: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private trainsDetailService: TrainsDetailService,
-    private trainModelsDetailService: TrainModelsDetailService,
     private routesDetailService: RoutesDetailService,
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get("id");
+    const id = parseInt(<string>this.route.snapshot.paramMap.get("id"));
     this.loadTrain(id);
   }
 
-  loadTrain(id: string | null): void {
+  toggleForm(): void {
+    this.showForm = !this.showForm;
+  }
+
+  loadTrain(id: number | null): void {
     this.trainsDetailService.getTrain(id).subscribe((train) => {
       this.train = train;
 
       this.routesDetailService
-        .getRoute(String(train.associated_route))
+        .getRoute(train.associated_route)
         .subscribe((associatedRoute) => {
-          train.associated_route = associatedRoute;
+          train.associated_route = associatedRoute.id;
         });
     });
   }

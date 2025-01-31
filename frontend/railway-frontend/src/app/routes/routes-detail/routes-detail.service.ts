@@ -16,7 +16,7 @@ export class RoutesDetailService {
 
   constructor(private http: HttpClient) {}
 
-  getRoute(id: string | null) {
+  getRoute(id: number | null) {
     return this.http.get<Route>(`${this.routeDetailUrl}${id}`, httpOptions);
   }
 }

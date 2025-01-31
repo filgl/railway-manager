@@ -35,6 +35,8 @@ export class StationsUpdateComponent implements OnInit {
   }
 
   updateStation(): void {
+    const previousState = this.station.actual_state;
+
     this.station.actual_state = this.station.actual_state
       .toLowerCase()
       .replaceAll(" ", "_");
@@ -49,6 +51,7 @@ export class StationsUpdateComponent implements OnInit {
       error: (error) => {
         if (error.status === 400) {
           this.errors = error.error;
+          this.station.actual_state = previousState;
         } else {
           alert("An unexpected error occurred.");
         }

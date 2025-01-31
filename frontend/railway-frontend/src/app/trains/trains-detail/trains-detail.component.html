@@ -1,6 +1,17 @@
 <div class="container" *ngIf="train">
   <h1>Train details</h1>
 
+  <input
+    type="button"
+    (click)="toggleForm()"
+    [value]="showForm ? 'Cancel' : '~ Edit'"
+    class="btn"
+    [class]="showForm ? 'btn-danger' : 'btn-primary'"
+  />
+  <div *ngIf="showForm" class="col-12 col-md-3 mt-3 mt-lg-0">
+    <app-trains-update [train]="train" (updatedTrain)="train = $event"></app-trains-update>
+  </div>
+
   <p>
     <a [routerLink]="['/train-models', train.model]">{{ train.model_name }}</a> {{ train.number }}
   </p>
@@ -18,7 +29,7 @@
     <li>Operated by {{ train.operator }}</li>
     <li>
       Runs on the route
-      <a [routerLink]="['/routes', train.associated_route.id]">
+      <a [routerLink]="['/routes', train.associated_route]">
         {{ train.associated_route_name }}
       </a>
     </li>

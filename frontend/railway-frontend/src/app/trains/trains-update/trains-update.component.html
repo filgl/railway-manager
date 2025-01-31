@@ -1,0 +1,75 @@
+<div *ngIf="errors.non_field_errors" class="text-danger mt-2">
+  {{ errors.non_field_errors[0] }}
+</div>
+
+<form method="POST" (ngSubmit)="updateTrain()">
+  <div>
+    <label for="trainModel">Train model:</label>
+    <select id="trainModel" name="train_model" required [(ngModel)]="train.model">
+      <option *ngFor="let model of trainModels" [value]="model.id">{{ model.name }}</option>
+    </select>
+    <div *ngIf="errors.model" class="text-danger mt-2">{{ errors.model[0] }}</div>
+  </div>
+
+  <div>
+    <label for="nickname">Nickname:</label>
+    <input id="nickname" name="nickname" type="text" [(ngModel)]="train.nickname"/>
+    <div *ngIf="errors.nickname" class="text-danger mt-2">{{ errors.nickname[0] }}</div>
+  </div>
+
+  <div>
+    <label for="number">Train number:</label>
+    <input id="number" name="number" type="number" required min="1" [(ngModel)]="train.number"/>
+    <div *ngIf="errors.number" class="text-danger mt-2">{{ errors.number[0] }}</div>
+  </div>
+
+  <div>
+    <label for="actualState">Actual state:</label>
+    <select id="actualState" name="actual_state" required [(ngModel)]="train.actual_state">
+      <option *ngFor="let state of trainStates" [value]="state[1]">{{ state[1] }}</option>
+    </select>
+    <div *ngIf="errors.actual_state" class="text-danger mt-2">{{ errors.actual_state[0] }}</div>
+  </div>
+
+  <div>
+    <label for="constructionYear">Construction year:</label>
+    <input id="constructionYear" name="construction_year" type="number" required min="0" [(ngModel)]="train.construction_year"/>
+    <div *ngIf="errors.construction_year" class="text-danger mt-2">{{ errors.construction_year[0] }}</div>
+  </div>
+
+  <div>
+    <label for="yearEnteredService">Year entered service:</label>
+    <input id="yearEnteredService" name="year_entered_service" type="number" required min="0" [(ngModel)]="train.year_entered_service"/>
+    <div *ngIf="errors.year_entered_service" class="text-danger mt-2">{{ errors.year_entered_service[0] }}</div>
+  </div>
+
+  <div>
+    <label for="kilometersRun">Kilometers run (km):</label>
+    <input id="kilometersRun" name="kilometers_run" type="number" required min="0" [(ngModel)]="train.kilometers_run"/>
+    <div *ngIf="errors.kilometers_run" class="text-danger mt-2">{{ errors.kilometers_run[0] }}</div>
+  </div>
+
+  <div>
+    <label for="latestInspection">Latest inspection:</label>
+    <input id="latestInspection" name="latest_inspection" type="date" required [(ngModel)]="train.latest_inspection"/>
+    <div *ngIf="errors.latest_inspection" class="text-danger mt-2">{{ errors.latest_inspection[0] }}</div>
+  </div>
+
+  <div>
+    <label for="operator">Operator:</label>
+    <input id="operator" name="operator" type="text" required [(ngModel)]="train.operator"/>
+    <div *ngIf="errors.operator" class="text-danger mt-2">{{ errors.operator[0] }}</div>
+  </div>
+
+  <div>
+    <label for="associatedRoute">Associated route:</label>
+    <select id="associatedRoute" name="associated_route" required [(ngModel)]="train.associated_route">
+      <option *ngFor="let route of associatedRoutes" [value]="route.id">{{ route.start_station_name }} - {{ route.end_station_name }}</option>
+    </select>
+    <div *ngIf="errors.associated_route" class="text-danger mt-2">{{ errors.associated_route[0] }}</div>
+  </div>
+
+  <div>
+    <button type="submit">Save changes</button>
+  </div>
+</form>

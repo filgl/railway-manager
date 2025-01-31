@@ -210,6 +210,16 @@ class Route(models.Model):
                 }
             )
 
+        if (
+            self.electrified not in ["electrified", "partially"]
+            and self.electrification_voltage
+        ):
+            raise ValidationError(
+                {
+                    "electrification_voltage": "Electrification voltage must be empty if the route is not electrified"
+                }
+            )
+
         if self.electrification_voltage and self.electrification_voltage < 1:
             raise ValidationError(
                 {

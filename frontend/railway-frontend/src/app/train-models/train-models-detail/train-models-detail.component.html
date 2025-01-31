@@ -1,6 +1,17 @@
 <div class="container" *ngIf="trainModel">
   <h1>Train model details</h1>
 
+  <input
+    type="button"
+    (click)="toggleForm()"
+    [value]="showForm ? 'Cancel' : '~ Edit'"
+    class="btn"
+    [class]="showForm ? 'btn-danger' : 'btn-primary'"
+  />
+  <div *ngIf="showForm" class="col-12 col-md-3 mt-3 mt-lg-0">
+    <app-train-models-update [trainModel]="trainModel" (updatedTrainModel)="trainModel = $event"></app-train-models-update>
+  </div>
+
   <p>{{ trainModel.name }} ({{ trainModel.type }})</p>
 
   <ul>
