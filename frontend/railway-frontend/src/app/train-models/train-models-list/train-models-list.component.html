@@ -12,7 +12,8 @@
   </div>
   <ul>
     <li *ngFor="let trainModel of trainModels">
-      <a [routerLink]="['/train-models', trainModel.id]">{{ trainModel.name }}</a>
+      <a [routerLink]="['/train-models', trainModel.id]">{{ trainModel.name }}</a>&nbsp;
+      <span *ngIf="trainModel.trains.length === 0" (click)="deleteTrainModel(trainModel)" role="button" class="fa-solid fa-trash"></span>
     </li>
   </ul>
 </div>

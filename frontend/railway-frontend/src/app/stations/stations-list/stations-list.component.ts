@@ -46,4 +46,19 @@ export class StationsListComponent implements OnInit {
       },
     });
   }
+
+  deleteStation(station: Station) {
+    this.stationsListService.deleteStation(station.id).subscribe({
+      next: () => {
+        this.loadStations();
+      },
+      error: (err) => {
+        if (err.status === 400) {
+          alert(err.error.error);
+        } else {
+          alert("An unexpected error occurred.");
+        }
+      },
+    });
+  }
 }

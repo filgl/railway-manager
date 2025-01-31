@@ -6,6 +6,7 @@ import {
 } from "@angular/common/http";
 import { Train } from "../../Models/Train";
 import { catchError, Observable, throwError } from "rxjs";
+import { TrainModel } from "../../Models/TrainModel";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -31,5 +32,9 @@ export class TrainsListService {
         return throwError(() => error);
       }),
     );
+  }
+
+  deleteTrain(id: number): Observable<Train> {
+    return this.http.delete<Train>(`${this.trainsUrl}${id}/`, httpOptions);
   }
 }

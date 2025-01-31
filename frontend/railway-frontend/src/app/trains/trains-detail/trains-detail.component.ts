@@ -31,12 +31,6 @@ export class TrainsDetailComponent implements OnInit {
     this.trainsDetailService.getTrain(id).subscribe((train) => {
       this.train = train;
 
-      this.trainModelsDetailService
-        .getTrainModel(String(train.model))
-        .subscribe((trainModel) => {
-          train.model_name = trainModel.name;
-        });
-
       this.routesDetailService
         .getRoute(String(train.associated_route))
         .subscribe((associatedRoute) => {

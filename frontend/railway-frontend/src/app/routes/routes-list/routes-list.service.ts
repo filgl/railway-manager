@@ -33,4 +33,8 @@ export class RoutesListService {
       }),
     );
   }
+
+  deleteRoute(id: number): Observable<Route> {
+    return this.http.delete<Route>(`${this.routesUrl}${id}/`, httpOptions);
+  }
 }

@@ -49,4 +49,19 @@ export class TrainModelsListComponent implements OnInit {
       },
     });
   }
+
+  deleteTrainModel(trainModel: TrainModel) {
+    this.trainModelsListService.deleteTrainModel(trainModel.id).subscribe({
+      next: () => {
+        this.loadTrainModels();
+      },
+      error: (err) => {
+        if (err.status === 400) {
+          alert(err.error.error);
+        } else {
+          alert("An unexpected error occurred.");
+        }
+      },
+    });
+  }
 }

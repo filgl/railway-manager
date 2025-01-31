@@ -363,11 +363,15 @@ class TrainSerializer(serializers.ModelSerializer):
     model = serializers.PrimaryKeyRelatedField(queryset=TrainModel.objects.all())
     associated_route = serializers.PrimaryKeyRelatedField(queryset=Route.objects.all())
 
+    model_name = serializers.SerializerMethodField()
+    associated_route_name = serializers.SerializerMethodField()
+
     class Meta:
         model = Train
         fields = [
             "id",
             "model",
+            "model_name",
             "nickname",
             "number",
             "actual_state",
@@ -377,7 +381,22 @@ class TrainSerializer(serializers.ModelSerializer):
             "latest_inspection",
             "operator",
             "associated_route",
+            "associated_route_name",
         ]
+
+    def get_model_name(self, obj):
+        """
+        This function returns the model name.
+        """
+
+        return f"{obj.model.name}"
+
+    def get_associated_route_name(self, obj):
+        """
+        This function returns the associated route name.
+        """
+
+        return f"{obj.associated_route.start_station.name} - {obj.associated_route.end_station.name}"
 
     def validate(self, data):
         """
@@ -447,7 +466,7 @@ class TrainSerializer(serializers.ModelSerializer):
                 f"Train gauge ({model.gauge}) must be the same as the route ({route.gauge})"
             )
 
-        if model.type != "mixed" and route.type != model.type:
+        if route.type != "mixed" and route.type != model.type:
             raise serializers.ValidationError(
                 f"Train type ({model.get_type_display()}) must be the same as the route ({route.get_type_display()})"
             )

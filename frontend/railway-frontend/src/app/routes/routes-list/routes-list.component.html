@@ -12,7 +12,8 @@
   </div>
   <ul>
     <li *ngFor="let route of routes">
-      <a [routerLink]="['/routes', route.id]">{{ route.start_station_name }} - {{ route.end_station_name }}</a>
+      <a [routerLink]="['/routes', route.id]">{{ route.start_station_name }} - {{ route.end_station_name }}</a>&nbsp;
+      <span *ngIf="route.trains.length === 0" (click)="deleteRoute(route)" role="button" class="fa-solid fa-trash"></span>
     </li>
   </ul>
 </div>

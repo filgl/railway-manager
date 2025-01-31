@@ -14,4 +14,5 @@ export class Train {
   latest_inspection!: string;
   operator!: string;
   associated_route!: Route;
+  associated_route_name!: string;
 }

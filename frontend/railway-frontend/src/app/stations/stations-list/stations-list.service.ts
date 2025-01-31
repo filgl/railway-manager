@@ -32,4 +32,8 @@ export class StationsListService {
       }),
     );
   }
+
+  deleteStation(id: number): Observable<Station> {
+    return this.http.delete<Station>(`${this.stationsUrl}${id}/`, httpOptions);
+  }
 }

@@ -7,6 +7,7 @@ import { TrainModelsDetailService } from "../../train-models/train-models-detail
 import { RoutesDetailService } from "../../routes/routes-detail/routes-detail.service";
 import { TrainsAddComponent } from "../trains-add/trains-add.component";
 import { Route } from "../../Models/Route";
+import { TrainModel } from "../../Models/TrainModel";
 
 @Component({
   selector: "app-trains-list",
@@ -36,14 +37,6 @@ export class TrainsListComponent implements OnInit {
   loadTrains(): void {
     this.trainsListService.getTrains().subscribe((trains) => {
       this.trains = trains;
-
-      this.trains.forEach((train) => {
-        this.trainModelsDetailService
-          .getTrainModel(String(train.model))
-          .subscribe((trainModel) => {
-            train.model_name = trainModel.name;
-          });
-      });
     });
   }
 
@@ -57,6 +50,21 @@ export class TrainsListComponent implements OnInit {
           this.errors = error.error;
         } else {
           console.error("Unexpected error:", error);
+        }
+      },
+    });
+  }
+
+  deleteTrain(train: Train) {
+    this.trainsListService.deleteTrain(train.id).subscribe({
+      next: () => {
+        this.loadTrains();
+      },
+      error: (err) => {
+        if (err.status === 400) {
+          alert(err.error.error);
+        } else {
+          alert("An unexpected error occurred.");
         }
       },
     });
