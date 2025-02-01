@@ -1,11 +1,13 @@
+import re
+
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
 
-class RegisterSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     """
-    Serializer for registering a new user.
+    This class represents the User model serializer.
     """
 
     class Meta:
@@ -28,13 +30,37 @@ class RegisterSerializer(serializers.ModelSerializer):
         if not data.get("email"):
             raise serializers.ValidationError({"email": "Email is required"})
 
+        user_id = self.instance.id if self.instance else None
         if (
             data.get("email")
             and User.objects.filter(email=data.get("email"))
-            .exclude(id=data.get("id"))
+            .exclude(id=user_id)
             .exists()
         ):
             raise serializers.ValidationError({"email": "Email is already in use"})
+
+        password = data.get("password")
+        if password:
+            if len(password) < 8:
+                raise serializers.ValidationError(
+                    {"password": "Password must be at least 8 characters long"}
+                )
+            if not re.search(r"[A-Z]", password):
+                raise serializers.ValidationError(
+                    {"password": "Password must contain at least one uppercase letter"}
+                )
+            if not re.search(r"[a-z]", password):
+                raise serializers.ValidationError(
+                    {"password": "Password must contain at least one lowercase letter"}
+                )
+            if not re.search(r"\d", password):
+                raise serializers.ValidationError(
+                    {"password": "Password must contain at least one digit"}
+                )
+            if not re.search(r"[£/=€_ç°§+!@#$%^&*(),.?\":{}|<>]", password):
+                raise serializers.ValidationError(
+                    {"password": "Password must contain at least one special character"}
+                )
 
         return data
 

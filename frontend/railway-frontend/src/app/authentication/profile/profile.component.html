@@ -1,10 +1,18 @@
 <div class="container mt-5">
   <h2>Profile Details</h2>
-  <div *ngIf="error" class="alert alert-danger">
-    {{ error }}
+
+  <input
+    type="button"
+    (click)="toggleForm()"
+    [value]="showForm ? 'Cancel' : '~ Edit'"
+    class="btn"
+    [class]="showForm ? 'btn-danger' : 'btn-primary'"
+  />
+  <div *ngIf="showForm" class="col-12 col-md-3 mt-3 mt-lg-0">
+    <app-user-update [user]="user" (updatedUser)="user = $event"></app-user-update>
   </div>
 
-  <div *ngIf="!error && user">
+  <div *ngIf="user">
     <p>Username: {{ user.username }}</p>
     <p *ngIf="user.first_name.length !== 0">First name: {{ user.first_name }}</p>
     <p *ngIf="user.last_name.length !== 0">Last name: {{ user.last_name }}</p>

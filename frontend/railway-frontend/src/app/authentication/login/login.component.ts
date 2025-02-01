@@ -28,8 +28,12 @@ export class LoginComponent {
         this.authService.login(res.token, res.username);
         this.router.navigate(["/"]);
       },
-      error: () => {
-        this.error = "Invalid login credentials";
+      error: (err) => {
+        if (err.status === 400) {
+          this.error = err.error.error;
+        } else {
+          alert("An unexpected error occurred.");
+        }
       },
     });
   }

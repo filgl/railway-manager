@@ -8,7 +8,6 @@ import { Observable } from "rxjs";
 })
 export class ProfileService {
   profileUrl = "http://localhost:8000/auth/profile/";
-  deleteUrl = "http://localhost:8000/auth/delete/";
 
   constructor(private http: HttpClient) {}
 
@@ -31,6 +30,6 @@ export class ProfileService {
       }),
     };
 
-    return this.http.delete<User>(this.deleteUrl, httpOptions);
+    return this.http.delete<User>(this.profileUrl, httpOptions);
   }
 }

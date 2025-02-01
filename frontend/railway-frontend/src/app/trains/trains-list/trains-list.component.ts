@@ -61,17 +61,23 @@ export class TrainsListComponent implements OnInit {
   }
 
   deleteTrain(train: Train) {
-    this.trainsListService.deleteTrain(train.id).subscribe({
-      next: () => {
-        this.loadTrains();
-      },
-      error: (err) => {
-        if (err.status === 400) {
-          alert(err.error.error);
-        } else {
-          alert("An unexpected error occurred.");
-        }
-      },
-    });
+    if (
+      confirm(
+        "Are you sure you want to delete your account? This action cannot be undone.",
+      )
+    ) {
+      this.trainsListService.deleteTrain(train.id).subscribe({
+        next: () => {
+          this.loadTrains();
+        },
+        error: (err) => {
+          if (err.status === 400) {
+            alert(err.error.error);
+          } else {
+            alert("An unexpected error occurred.");
+          }
+        },
+      });
+    }
   }
 }

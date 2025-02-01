@@ -57,17 +57,23 @@ export class StationsListComponent implements OnInit {
   }
 
   deleteStation(station: Station) {
-    this.stationsListService.deleteStation(station.id).subscribe({
-      next: () => {
-        this.loadStations();
-      },
-      error: (err) => {
-        if (err.status === 400) {
-          alert(err.error.error);
-        } else {
-          alert("An unexpected error occurred.");
-        }
-      },
-    });
+    if (
+      confirm(
+        "Are you sure you want to delete this station? This action cannot be undone.",
+      )
+    ) {
+      this.stationsListService.deleteStation(station.id).subscribe({
+        next: () => {
+          this.loadStations();
+        },
+        error: (err) => {
+          if (err.status === 400) {
+            alert(err.error.error);
+          } else {
+            alert("An unexpected error occurred.");
+          }
+        },
+      });
+    }
   }
 }

@@ -1,0 +1,33 @@
+<div *ngIf="errors.non_field_errors" class="text-danger mt-2">
+  <p>{{ errors.non_field_errors[0] }}</p>
+</div>
+
+<form method="POST" (submit)="updateUser()">
+  <div>
+    <label for="username">Username*:</label>
+    <input id="username" name="username" type="text" [(ngModel)]="user.username" required />
+    <div *ngIf="errors.username" class="text-danger mt-2">{{ errors.username[0] }}</div>
+  </div>
+
+  <div>
+    <label for="firstName">First name:</label>
+    <input id="firstName" name="first_name" type="text" [(ngModel)]="user.first_name" />
+    <div *ngIf="errors.first_name" class="text-danger mt-2">{{ errors.first_name[0] }}</div>
+  </div>
+
+  <div>
+    <label for="lastName">Last name:</label>
+    <input id="lastName" name="last_name" type="text" [(ngModel)]="user.last_name" />
+    <div *ngIf="errors.last_name" class="text-danger mt-2">{{ errors.last_name[0] }}</div>
+  </div>
+
+  <div>
+    <label for="email">Email address*:</label>
+    <input id="email" name="email" type="text" [(ngModel)]="user.email" required />
+    <div *ngIf="errors.email" class="text-danger mt-2">{{ errors.email[0] }}</div>
+  </div>
+
+  <div>
+    <button type="submit">Update profile</button>
+  </div>
+</form>

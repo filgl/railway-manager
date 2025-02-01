@@ -56,17 +56,23 @@ export class RoutesListComponent implements OnInit {
   }
 
   deleteRoute(route: Route) {
-    this.routesListService.deleteRoute(route.id).subscribe({
-      next: () => {
-        this.loadRoutes();
-      },
-      error: (err) => {
-        if (err.status === 400) {
-          alert(err.error.error);
-        } else {
-          alert("An unexpected error occurred.");
-        }
-      },
-    });
+    if (
+      confirm(
+        "Are you sure you want to delete your account? This action cannot be undone.",
+      )
+    ) {
+      this.routesListService.deleteRoute(route.id).subscribe({
+        next: () => {
+          this.loadRoutes();
+        },
+        error: (err) => {
+          if (err.status === 400) {
+            alert(err.error.error);
+          } else {
+            alert("An unexpected error occurred.");
+          }
+        },
+      });
+    }
   }
 }

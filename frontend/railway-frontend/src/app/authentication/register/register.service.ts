@@ -17,7 +17,6 @@ const httpOptions = {
 })
 export class RegisterService {
   registerUrl = "http://localhost:8000/auth/register/";
-  error!: string;
 
   constructor(private http: HttpClient) {}
 
@@ -42,7 +41,7 @@ export class RegisterService {
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          return throwError(() => error.error);
+          return throwError(() => error);
         }),
       );
   }

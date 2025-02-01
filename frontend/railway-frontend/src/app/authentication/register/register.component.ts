@@ -52,7 +52,11 @@ export class RegisterComponent {
           this.router.navigate(["/profile"]);
         },
         error: (err) => {
-          this.errors = err;
+          if (err.status === 400) {
+            this.errors = err.error;
+          } else {
+            alert("An unexpected error occurred.");
+          }
         },
       });
   }

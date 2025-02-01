@@ -1,7 +1,7 @@
 <h2>Login</h2>
 
 <div *ngIf="error" class="text-danger mt-2">
-  <p>{{ error }}</p>
+  {{ error }}
 </div>
 
 <form method="POST" (ngSubmit)="login()">

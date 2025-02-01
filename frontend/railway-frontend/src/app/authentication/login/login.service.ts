@@ -13,7 +13,6 @@ const httpOptions = {
 })
 export class LoginService {
   loginUrl = "http://localhost:8000/auth/login/";
-  error!: string;
 
   constructor(private http: HttpClient) {}
 

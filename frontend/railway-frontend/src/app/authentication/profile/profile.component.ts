@@ -4,16 +4,17 @@ import { ProfileService } from "./profile.service";
 import { NgIf } from "@angular/common";
 import { AuthService } from "../../auth.service";
 import { Router } from "@angular/router";
+import { UserUpdateComponent } from "../user-update/user-update.component";
 
 @Component({
   selector: "app-profile",
-  imports: [NgIf],
+  imports: [NgIf, UserUpdateComponent],
   templateUrl: "./profile.component.html",
   styleUrl: "./profile.component.css",
 })
 export class ProfileComponent implements OnInit {
   user!: User;
-  error!: string;
+  showForm!: boolean;
 
   constructor(
     private profileService: ProfileService,
@@ -25,9 +26,13 @@ export class ProfileComponent implements OnInit {
     this.loadUser();
   }
 
+  toggleForm(): void {
+    this.showForm = !this.showForm;
+  }
+
   loadUser(): void {
-    this.profileService.getProfile().subscribe((data) => {
-      this.user = data;
+    this.profileService.getProfile().subscribe((user) => {
+      this.user = user;
     });
   }
 
@@ -42,8 +47,12 @@ export class ProfileComponent implements OnInit {
           this.authService.logout();
           this.route.navigate(["/"]);
         },
-        error: () => {
-          this.error = "Failed to delete user";
+        error: (err) => {
+          if (err.status === 400) {
+            alert(err.error.error);
+          } else {
+            alert("An unexpected error occurred.");
+          }
         },
       });
     }

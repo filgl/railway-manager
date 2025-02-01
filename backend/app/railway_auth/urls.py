@@ -1,10 +1,8 @@
 from django.urls import path
-from railway_auth.views import (DeleteUserView, LoginView, RegisterView,
-                                UserDetailView)
+from railway_auth.views import LoginView, RegisterView, UserProfileView
 
 urlpatterns = [
     path("register/", RegisterView.as_view(), name="register"),
     path("login/", LoginView.as_view(), name="login"),
-    path("profile/", UserDetailView.as_view(), name="profile"),
-    path("delete/", DeleteUserView.as_view(), name="delete"),
+    path("profile/", UserProfileView.as_view(), name="profile"),
 ]
