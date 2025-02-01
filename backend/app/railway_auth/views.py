@@ -90,3 +90,22 @@ class UserDetailView(APIView):
         }
 
         return Response(data, status=status.HTTP_200_OK)
+
+
+class DeleteUserView(APIView):
+    """
+    This view is used to delete a user's account.
+    """
+
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request):
+        """
+        This method is used to delete a user's account.
+        """
+
+        user = request.user
+        user.delete()
+        return Response(
+            {"message": "User deleted successfully"}, status=status.HTTP_200_OK
+        )

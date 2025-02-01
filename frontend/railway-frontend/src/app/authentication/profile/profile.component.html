@@ -15,4 +15,6 @@
     <p *ngIf="!user.is_active">Your account is not active</p>
     <p>Account created on {{ user.date_joined }}</p>
   </div>
+
+  <button class="btn btn-danger mt-3" (click)="deleteUser()">Delete account</button>
 </div>
