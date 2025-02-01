@@ -1,6 +1,8 @@
 <div class="container">
   <h1>Train models</h1>
+
   <input
+    *ngIf="authService.isAuthenticated()"
     type="button"
     (click)="toggleForm()"
     [value]="showForm ? 'Cancel' : '+ New'"
@@ -10,10 +12,11 @@
   <div *ngIf="showForm" class="col-12 col-md-3 mt-3 mt-lg-0">
     <app-train-models-add (addTrainModelEvent)="addTrainModel($event)" [errors]="errors"></app-train-models-add>
   </div>
+
   <ul>
     <li *ngFor="let trainModel of trainModels">
       <a [routerLink]="['/train-models', trainModel.id]">{{ trainModel.name }}</a>&nbsp;
-      <span *ngIf="trainModel.trains.length === 0" (click)="deleteTrainModel(trainModel)" role="button" class="fa-solid fa-trash"></span>
+      <span *ngIf="trainModel.trains.length === 0 && authService.isAuthenticated()" (click)="deleteTrainModel(trainModel)" role="button" class="fa-solid fa-trash"></span>
     </li>
   </ul>
 </div>

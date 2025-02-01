@@ -7,6 +7,7 @@ import { TrainModelsDetailService } from "../../train-models/train-models-detail
 import { RoutesDetailService } from "../../routes/routes-detail/routes-detail.service";
 import { RoutesUpdateComponent } from "../../routes/routes-update/routes-update.component";
 import { TrainsUpdateComponent } from "../trains-update/trains-update.component";
+import { AuthService } from "../../auth.service";
 
 @Component({
   selector: "app-trains-detail",
@@ -22,6 +23,7 @@ export class TrainsDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private trainsDetailService: TrainsDetailService,
     private routesDetailService: RoutesDetailService,
+    protected authService: AuthService,
   ) {}
 
   ngOnInit(): void {

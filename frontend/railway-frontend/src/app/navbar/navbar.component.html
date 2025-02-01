@@ -1,10 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand fa-solid fa-train" routerLink="/"></a>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
             aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -20,6 +22,20 @@
           <a routerLink="/trains" routerLinkActive="active" class="nav-link" aria-current="page">Trains</a>
         </li>
       </ul>
+
+      <div class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <a *ngIf="!authService.isAuthenticated()" routerLinkActive="active" class="nav-link" aria-current="page" routerLink="/login">Login</a>
+
+        <div *ngIf="authService.isAuthenticated()" class="dropdown">
+          <button class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ authService.getUsername() }}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" href="#" routerLink="/stations">Profilo</a></li>
+            <li><a class="dropdown-item" href="#" (click)="authService.logout()">Logout</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </nav>

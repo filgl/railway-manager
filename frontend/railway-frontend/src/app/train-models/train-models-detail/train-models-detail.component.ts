@@ -6,6 +6,7 @@ import { NgForOf, NgIf } from "@angular/common";
 import { Train } from "../../Models/Train";
 import { RoutesUpdateComponent } from "../../routes/routes-update/routes-update.component";
 import { TrainModelsUpdateComponent } from "../train-models-update/train-models-update.component";
+import { AuthService } from "../../auth.service";
 
 @Component({
   selector: "app-train-models-detail",
@@ -21,6 +22,7 @@ export class TrainModelsDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private trainModelsDetailService: TrainModelsDetailService,
+    protected authService: AuthService,
   ) {}
 
   ngOnInit(): void {

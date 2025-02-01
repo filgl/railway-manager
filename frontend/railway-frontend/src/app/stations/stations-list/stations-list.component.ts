@@ -5,6 +5,7 @@ import { NgForOf, NgIf } from "@angular/common";
 import { RouterLink } from "@angular/router";
 import { StationsAddComponent } from "../stations-add/stations-add.component";
 import { RoutesAddComponent } from "../../routes/routes-add/routes-add.component";
+import { AuthService } from "../../auth.service";
 
 @Component({
   selector: "app-stations-list",
@@ -18,7 +19,10 @@ export class StationsListComponent implements OnInit {
   errors: any = {};
   @ViewChild(StationsAddComponent) stationsAddComponent!: StationsAddComponent;
 
-  constructor(private stationsListService: StationsListService) {}
+  constructor(
+    private stationsListService: StationsListService,
+    protected authService: AuthService,
+  ) {}
 
   ngOnInit(): void {
     this.loadStations();

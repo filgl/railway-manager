@@ -4,6 +4,7 @@ import { Route } from "../../Models/Route";
 import { RoutesDetailService } from "./routes-detail.service";
 import { NgForOf, NgIf } from "@angular/common";
 import { RoutesUpdateComponent } from "../routes-update/routes-update.component";
+import { AuthService } from "../../auth.service";
 
 @Component({
   selector: "app-routes-detail",
@@ -18,6 +19,7 @@ export class RoutesDetailComponent implements OnInit {
   constructor(
     private pageRoute: ActivatedRoute,
     private routesDetailService: RoutesDetailService,
+    protected authService: AuthService,
   ) {}
 
   ngOnInit(): void {

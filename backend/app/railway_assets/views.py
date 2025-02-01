@@ -6,7 +6,9 @@ from railway_assets.models import (COMPOSITION_CHOICES,
 from railway_assets.serializers import (RouteSerializer, StationSerializer,
                                         TrainModelSerializer, TrainSerializer)
 from rest_framework import status, viewsets
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 
 class StationViewSet(viewsets.ModelViewSet):
@@ -16,6 +18,7 @@ class StationViewSet(viewsets.ModelViewSet):
 
     queryset = Station.objects.prefetch_related("start_routes", "end_routes")
     serializer_class = StationSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def destroy(self, request, *args, **kwargs):
         """
@@ -45,6 +48,7 @@ class RouteViewSet(viewsets.ModelViewSet):
 
     queryset = Route.objects.prefetch_related("trains")
     serializer_class = RouteSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def destroy(self, request, *args, **kwargs):
         """
@@ -71,6 +75,7 @@ class TrainModelViewSet(viewsets.ModelViewSet):
 
     queryset = TrainModel.objects.prefetch_related("trains")
     serializer_class = TrainModelSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def destroy(self, request, *args, **kwargs):
         """
@@ -97,14 +102,15 @@ class TrainViewSet(viewsets.ModelViewSet):
 
     queryset = Train.objects.all()
     serializer_class = TrainSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-class StateChoicesViewSet(viewsets.ReadOnlyModelViewSet):
+class StateChoicesView(APIView):
     """
-    This class represents the State choices viewset.
+    This class represents the State choices view.
     """
 
-    def list(self, request, *args, **kwargs):
+    def get(self, request):
         """
         This method lists all the available state choices.
         """
@@ -112,12 +118,12 @@ class StateChoicesViewSet(viewsets.ReadOnlyModelViewSet):
         return Response({"state_choices": STATE_CHOICES})
 
 
-class TrainModelChoicesViewSet(viewsets.ReadOnlyModelViewSet):
+class TrainModelChoicesView(APIView):
     """
-    This class represents the Train Model choices viewset.
+    This class represents the Train Model choices view.
     """
 
-    def list(self, request, *args, **kwargs):
+    def get(self, request):
         """
         This method lists all the available train model choices.
         """
@@ -125,12 +131,12 @@ class TrainModelChoicesViewSet(viewsets.ReadOnlyModelViewSet):
         return Response({"train_model_choices": TRAIN_MODEL_CHOICES})
 
 
-class PowerSystemChoicesViewSet(viewsets.ReadOnlyModelViewSet):
+class PowerSystemChoicesView(APIView):
     """
-    This class represents the Power System choices viewset.
+    This class represents the Power System choices view.
     """
 
-    def list(self, request, *args, **kwargs):
+    def get(self, request):
         """
         This method lists all the available power system choices.
         """
@@ -138,12 +144,12 @@ class PowerSystemChoicesViewSet(viewsets.ReadOnlyModelViewSet):
         return Response({"power_system_choices": POWER_SYSTEM_CHOICES})
 
 
-class RouteTypeChoicesViewSet(viewsets.ReadOnlyModelViewSet):
+class RouteTypeChoicesView(APIView):
     """
-    This class represents the Route Type choices viewset.
+    This class represents the Route Type choices view.
     """
 
-    def list(self, request, *args, **kwargs):
+    def get(self, request):
         """
         This method lists all the available route type choices.
         """
@@ -151,12 +157,12 @@ class RouteTypeChoicesViewSet(viewsets.ReadOnlyModelViewSet):
         return Response({"route_type_choices": ROUTE_TYPE_CHOICES})
 
 
-class ElectrificationChoicesViewSet(viewsets.ReadOnlyModelViewSet):
+class ElectrificationChoicesView(APIView):
     """
-    This class represents the Electrification choices viewset.
+    This class represents the Electrification choices view.
     """
 
-    def list(self, request, *args, **kwargs):
+    def get(self, request):
         """
         This method lists all the available electrification choices.
         """
@@ -164,12 +170,12 @@ class ElectrificationChoicesViewSet(viewsets.ReadOnlyModelViewSet):
         return Response({"electrification_choices": ELECTRIFICATION_CHOICES})
 
 
-class CompositionChoicesViewSet(viewsets.ReadOnlyModelViewSet):
+class CompositionChoicesView(APIView):
     """
-    This class represents the Composition choices viewset.
+    This class represents the Composition choices view.
     """
 
-    def list(self, request, *args, **kwargs):
+    def get(self, request):
         """
         This method lists all the available composition choices.
         """

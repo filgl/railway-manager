@@ -9,6 +9,7 @@ import { TrainsAddComponent } from "../trains-add/trains-add.component";
 import { Route } from "../../Models/Route";
 import { TrainModel } from "../../Models/TrainModel";
 import { TrainModelsAddComponent } from "../../train-models/train-models-add/train-models-add.component";
+import { AuthService } from "../../auth.service";
 
 @Component({
   selector: "app-trains-list",
@@ -24,8 +25,7 @@ export class TrainsListComponent implements OnInit {
 
   constructor(
     private trainsListService: TrainsListService,
-    private trainModelsDetailService: TrainModelsDetailService,
-    private routesDetailService: RoutesDetailService,
+    protected authService: AuthService,
   ) {}
 
   ngOnInit(): void {

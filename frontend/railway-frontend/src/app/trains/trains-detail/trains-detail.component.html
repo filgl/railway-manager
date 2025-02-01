@@ -2,6 +2,7 @@
   <h1>Train details</h1>
 
   <input
+    *ngIf="authService.isAuthenticated()"
     type="button"
     (click)="toggleForm()"
     [value]="showForm ? 'Cancel' : '~ Edit'"

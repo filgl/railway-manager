@@ -4,6 +4,7 @@ import { Route } from "../../Models/Route";
 import { NgForOf, NgIf } from "@angular/common";
 import { RouterLink } from "@angular/router";
 import { RoutesAddComponent } from "../routes-add/routes-add.component";
+import { AuthService } from "../../auth.service";
 
 @Component({
   selector: "app-routes-list",
@@ -17,7 +18,10 @@ export class RoutesListComponent implements OnInit {
   errors: any = {};
   @ViewChild(RoutesAddComponent) routesAddComponent!: RoutesAddComponent;
 
-  constructor(private routesListService: RoutesListService) {}
+  constructor(
+    private routesListService: RoutesListService,
+    protected authService: AuthService,
+  ) {}
 
   ngOnInit(): void {
     this.loadRoutes();

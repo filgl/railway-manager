@@ -4,6 +4,7 @@ import { StationsDetailService } from "./stations-detail.service";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { NgForOf, NgIf } from "@angular/common";
 import { StationsUpdateComponent } from "../stations-update/stations-update.component";
+import { AuthService } from "../../auth.service";
 
 @Component({
   selector: "app-stations-detail",
@@ -18,6 +19,7 @@ export class StationsDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private stationsDetailService: StationsDetailService,
+    protected authService: AuthService,
   ) {}
 
   ngOnInit(): void {

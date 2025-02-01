@@ -7,6 +7,7 @@ import { RouterLink } from "@angular/router";
 import { Station } from "../../Models/Station";
 import { StationsAddComponent } from "../../stations/stations-add/stations-add.component";
 import { TrainModelsAddComponent } from "../train-models-add/train-models-add.component";
+import { AuthService } from "../../auth.service";
 
 @Component({
   selector: "app-train-models-list",
@@ -21,7 +22,10 @@ export class TrainModelsListComponent implements OnInit {
   @ViewChild(TrainModelsAddComponent)
   trainModelsAddComponent!: TrainModelsAddComponent;
 
-  constructor(private trainModelsListService: TrainModelsListService) {}
+  constructor(
+    private trainModelsListService: TrainModelsListService,
+    protected authService: AuthService,
+  ) {}
 
   ngOnInit(): void {
     this.loadTrainModels();

@@ -1,10 +1,10 @@
-from railway_assets.views import (CompositionChoicesViewSet,
-                                  ElectrificationChoicesViewSet,
-                                  PowerSystemChoicesViewSet,
-                                  RouteTypeChoicesViewSet, RouteViewSet,
-                                  StateChoicesViewSet, StationViewSet,
-                                  TrainModelChoicesViewSet, TrainModelViewSet,
-                                  TrainViewSet)
+from django.urls import path
+from railway_assets.views import (CompositionChoicesView,
+                                  ElectrificationChoicesView,
+                                  PowerSystemChoicesView, RouteTypeChoicesView,
+                                  RouteViewSet, StateChoicesView,
+                                  StationViewSet, TrainModelChoicesView,
+                                  TrainModelViewSet, TrainViewSet)
 from rest_framework.routers import SimpleRouter
 
 app_name = "railway_assets"
@@ -14,23 +14,30 @@ router.register("stations", StationViewSet, basename="stations")
 router.register("routes", RouteViewSet, basename="routes")
 router.register("train-models", TrainModelViewSet, basename="train-models")
 router.register("trains", TrainViewSet, basename="trains")
-router.register("state-choices", StateChoicesViewSet, basename="state-choices")
-router.register(
-    "train-model-choices", TrainModelChoicesViewSet, basename="train-model-choices"
-)
-router.register(
-    "power-system-choices", PowerSystemChoicesViewSet, basename="power-system-choices"
-)
-router.register(
-    "route-type-choices", RouteTypeChoicesViewSet, basename="route-type-choices"
-)
-router.register(
-    "electrification-choices",
-    ElectrificationChoicesViewSet,
-    basename="electrification-choices",
-)
-router.register(
-    "composition-choices", CompositionChoicesViewSet, basename="composition-choices"
-)
 
-urlpatterns = router.urls
+urlpatterns = router.urls + [
+    path("state-choices/", StateChoicesView.as_view(), name="state-choices"),
+    path(
+        "train-model-choices/",
+        TrainModelChoicesView.as_view(),
+        name="train-model-choices",
+    ),
+    path(
+        "power-system-choices/",
+        PowerSystemChoicesView.as_view(),
+        name="power-system-choices",
+    ),
+    path(
+        "route-type-choices/", RouteTypeChoicesView.as_view(), name="route-type-choices"
+    ),
+    path(
+        "electrification-choices/",
+        ElectrificationChoicesView.as_view(),
+        name="electrification-choices",
+    ),
+    path(
+        "composition-choices/",
+        CompositionChoicesView.as_view(),
+        name="composition-choices",
+    ),
+]

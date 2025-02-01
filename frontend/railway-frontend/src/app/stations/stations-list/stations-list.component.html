@@ -1,6 +1,8 @@
 <div class="container">
   <h1>Stations</h1>
+
   <input
+    *ngIf="authService.isAuthenticated()"
     type="button"
     (click)="toggleForm()"
     [value]="showForm ? 'Cancel' : '+ New'"
@@ -10,10 +12,11 @@
   <div *ngIf="showForm" class="col-12 col-md-3 mt-3 mt-lg-0">
     <app-stations-add (addStationEvent)="addStation($event)" [errors]="errors"></app-stations-add>
   </div>
+
   <ul>
     <li *ngFor="let station of stations">
       <a [routerLink]="['/stations', station.id]">{{ station.name }} ({{ station.city }})</a>&nbsp;
-      <span *ngIf="station.start_routes.length === 0 && station.end_routes.length === 0" (click)="deleteStation(station)" role="button" class="fa-solid fa-trash"></span>
+      <span *ngIf="station.start_routes.length === 0 && station.end_routes.length === 0 && authService.isAuthenticated()" (click)="deleteStation(station)" role="button" class="fa-solid fa-trash"></span>
     </li>
   </ul>
 </div>

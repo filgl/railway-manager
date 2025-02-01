@@ -1,6 +1,8 @@
 <div class="container">
   <h1>Routes</h1>
+
   <input
+    *ngIf="authService.isAuthenticated()"
     type="button"
     (click)="toggleForm()"
     [value]="showForm ? 'Cancel' : '+ New'"
@@ -10,10 +12,11 @@
   <div *ngIf="showForm" class="col-12 col-md-3 mt-3 mt-lg-0">
     <app-routes-add (addRouteEvent)="addRoute($event)" [errors]="errors"></app-routes-add>
   </div>
+
   <ul>
     <li *ngFor="let route of routes">
       <a [routerLink]="['/routes', route.id]">{{ route.start_station_name }} - {{ route.end_station_name }}</a>&nbsp;
-      <span *ngIf="route.trains.length === 0" (click)="deleteRoute(route)" role="button" class="fa-solid fa-trash"></span>
+      <span *ngIf="route.trains.length === 0 && authService.isAuthenticated()" (click)="deleteRoute(route)" role="button" class="fa-solid fa-trash"></span>
     </li>
   </ul>
 </div>
