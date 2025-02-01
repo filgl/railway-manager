@@ -9,6 +9,8 @@ import { TrainsListComponent } from "./trains/trains-list/trains-list.component"
 import { TrainsDetailComponent } from "./trains/trains-detail/trains-detail.component";
 import { HomepageComponent } from "./homepage/homepage.component";
 import { LoginComponent } from "./login/login.component";
+import { ProfileComponent } from "./profile/profile.component";
+import { AuthGuard } from "./auth.guard";
 
 export const routes: Routes = [
   { path: "", component: HomepageComponent },
@@ -21,4 +23,5 @@ export const routes: Routes = [
   { path: "trains", component: TrainsListComponent },
   { path: "trains/:id", component: TrainsDetailComponent },
   { path: "login", component: LoginComponent },
+  { path: "profile", component: ProfileComponent, canActivate: [AuthGuard] },
 ];

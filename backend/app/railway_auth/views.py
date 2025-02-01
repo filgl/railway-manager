@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from railway_auth.serializers import RegisterSerializer
 from rest_framework import generics, permissions, status
 from rest_framework.authtoken.models import Token
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -29,7 +30,6 @@ class LoginView(APIView):
         This method is used to log in a user.
         """
 
-        print("siiiiiis: ", request.data)
         username = request.data.get("username")
         password = request.data.get("password")
 
@@ -47,3 +47,31 @@ class LoginView(APIView):
 
         token, created = Token.objects.get_or_create(user=user)
         return Response({"token": token.key, "username": user.username})
+
+
+class UserDetailView(APIView):
+    """
+    This view is used to retrieve a user's data.
+    """
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        """
+        This method is used to retrieve a user's data.
+        """
+
+        user = request.user
+
+        data = {
+            "username": user.username,
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+            "email": user.email,
+            "is_staff": user.is_staff,
+            "is_superuser": user.is_superuser,
+            "is_active": user.is_active,
+            "date_joined": user.date_joined,
+        }
+
+        return Response(data, status=status.HTTP_200_OK)

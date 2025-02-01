@@ -1,0 +1,18 @@
+<div class="container mt-5">
+  <h2>Profile Details</h2>
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!error && user">
+    <p>Username: {{ user.username }}</p>
+    <p *ngIf="user.first_name.length !== 0">First name: {{ user.first_name }}</p>
+    <p *ngIf="user.last_name.length !== 0">Last name: {{ user.last_name }}</p>
+    <p>Email address: {{ user.email }}</p>
+    <p *ngIf="user.is_staff">You are a staff user</p>
+    <p *ngIf="user.is_superuser">You are a superuser</p>
+    <p *ngIf="user.is_active">Your account is active</p>
+    <p *ngIf="!user.is_active">Your account is not active</p>
+    <p>Account created on {{ user.date_joined }}</p>
+  </div>
+</div>

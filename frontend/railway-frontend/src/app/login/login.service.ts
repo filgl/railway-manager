@@ -18,18 +18,10 @@ export class LoginService {
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string) {
-    console.log("Sending login...");
-    return this.http
-      .post<{
-        token: string;
-        username: string;
-      }>(this.loginUrl, { username, password }, httpOptions)
-      .pipe(
-        tap((response) => console.log("Login response:", response)),
-        catchError((error) => {
-          console.error("Login error: ", error);
-          return throwError(error);
-        }),
-      );
+    return this.http.post<{ token: string; username: string }>(
+      this.loginUrl,
+      { username, password },
+      httpOptions,
+    );
   }
 }

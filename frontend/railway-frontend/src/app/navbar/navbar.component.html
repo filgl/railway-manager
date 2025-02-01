@@ -8,7 +8,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarContent">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item">
           <a routerLink="/stations" routerLinkActive="active" class="nav-link active" aria-current="page">Stations</a>
         </li>
@@ -31,7 +31,7 @@
             {{ authService.getUsername() }}
           </button>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
-            <li><a class="dropdown-item" href="#" routerLink="/stations">Profilo</a></li>
+            <li><a class="dropdown-item" href="#" routerLink="/profile">Profile</a></li>
             <li><a class="dropdown-item" href="#" (click)="authService.logout()">Logout</a></li>
           </ul>
         </div>
