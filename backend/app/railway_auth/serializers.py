@@ -15,10 +15,28 @@ class RegisterSerializer(serializers.ModelSerializer):
             "username",
             "first_name",
             "last_name",
-            "email_address",
+            "email",
             "password",
         ]
         extra_kwargs = {"password": {"write_only": True}}
+
+    def validate(self, data):
+        """
+        This function validates the data.
+        """
+
+        if not data.get("email"):
+            raise serializers.ValidationError({"email": "Email is required"})
+
+        if (
+            data.get("email")
+            and User.objects.filter(email=data.get("email"))
+            .exclude(id=data.get("id"))
+            .exists()
+        ):
+            raise serializers.ValidationError({"email": "Email is already in use"})
+
+        return data
 
     def create(self, validated_data):
         """
@@ -27,3 +45,4 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         user = User.objects.create_user(**validated_data)
         Token.objects.create(user=user)
+        return user

@@ -8,9 +8,10 @@ import { TrainModelsDetailComponent } from "./train-models/train-models-detail/t
 import { TrainsListComponent } from "./trains/trains-list/trains-list.component";
 import { TrainsDetailComponent } from "./trains/trains-detail/trains-detail.component";
 import { HomepageComponent } from "./homepage/homepage.component";
-import { LoginComponent } from "./login/login.component";
-import { ProfileComponent } from "./profile/profile.component";
+import { LoginComponent } from "./authentication/login/login.component";
+import { ProfileComponent } from "./authentication/profile/profile.component";
 import { AuthGuard } from "./auth.guard";
+import { RegisterComponent } from "./authentication/register/register.component";
 
 export const routes: Routes = [
   { path: "", component: HomepageComponent },
@@ -22,6 +23,7 @@ export const routes: Routes = [
   { path: "train-models/:id", component: TrainModelsDetailComponent },
   { path: "trains", component: TrainsListComponent },
   { path: "trains/:id", component: TrainsDetailComponent },
-  { path: "login", component: LoginComponent },
+  { path: "login", component: LoginComponent, canActivate: [AuthGuard] },
+  { path: "register", component: RegisterComponent, canActivate: [AuthGuard] },
   { path: "profile", component: ProfileComponent, canActivate: [AuthGuard] },
 ];

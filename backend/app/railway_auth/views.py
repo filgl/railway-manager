@@ -17,6 +17,21 @@ class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
     permission_classes = [permissions.AllowAny]
 
+    def create(self, request, *args, **kwargs):
+        """
+        This method is used to register a new user.
+        """
+
+        super().create(request, *args, **kwargs)
+        user = authenticate(
+            username=request.data.get("username"), password=request.data.get("password")
+        )
+        token, created = Token.objects.get_or_create(user=user)
+        return Response(
+            {"token": token.key, "username": user.username},
+            status=status.HTTP_201_CREATED,
+        )
+
 
 class LoginView(APIView):
     """
@@ -37,7 +52,7 @@ class LoginView(APIView):
 
         if user is None:
             return Response(
-                {"error": "Invalid login credentialssss"},
+                {"error": "Invalid login credentials"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
         if user is not None and not user.is_active:

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { User } from "../Models/User";
+import { User } from "../../Models/User";
 import { ProfileService } from "./profile.service";
 import { NgIf } from "@angular/common";
 
