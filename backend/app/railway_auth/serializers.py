@@ -1,5 +1,6 @@
 import re
 
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
@@ -71,4 +72,39 @@ class UserSerializer(serializers.ModelSerializer):
 
         user = User.objects.create_user(**validated_data)
         Token.objects.create(user=user)
+        return user
+
+
+class PasswordResetSerializer(serializers.Serializer):
+    """
+    This class represents the Password reset serializer.
+    """
+
+    username = serializers.CharField()
+    old_password = serializers.CharField(write_only=True)
+    new_password = serializers.CharField(write_only=True)
+
+    def validate(self, data):
+        """
+        This function validates the data.
+        """
+
+        user = data.get("username")
+        old_password = data.get("old_password")
+
+        user = authenticate(username=user, password=old_password)
+        if not user:
+            raise serializers.ValidationError({"old_password": "Invalid credentials"})
+
+        return data
+
+    def save(self, **kwargs):
+        """
+        This function saves the new password.
+        """
+
+        user = User.objects.get(username=self.validated_data.get("username"))
+        user.set_password(self.validated_data.get("new_password"))
+        user.save()
+
         return user

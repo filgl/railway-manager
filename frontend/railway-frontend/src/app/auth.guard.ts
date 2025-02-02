@@ -32,6 +32,11 @@ export class AuthGuard implements CanActivate {
       return false;
     }
 
+    if (isAuthenticated && state.url === "/password-reset") {
+      this.router.navigate(["/profile"]);
+      return false;
+    }
+
     if (!this.authService.isAuthenticated() && state.url === "/profile") {
       this.router.navigate(["/login"]);
       return false;

@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-from railway_auth.serializers import UserSerializer
+from railway_auth.serializers import PasswordResetSerializer, UserSerializer
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.generics import CreateAPIView
@@ -114,3 +114,26 @@ class UserProfileView(APIView):
         return Response(
             {"message": "User delete successfully"}, status=status.HTTP_204_NO_CONTENT
         )
+
+
+class PasswordResetView(APIView):
+    """
+    This view is used to reset a password.
+    """
+
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        """
+        This method is used to reset a password.
+        """
+
+        serializer = PasswordResetSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                {"message": "Password update successfully"}, status=status.HTTP_200_OK
+            )
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
