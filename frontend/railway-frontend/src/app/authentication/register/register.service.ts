@@ -4,7 +4,7 @@ import {
   HttpErrorResponse,
   HttpHeaders,
 } from "@angular/common/http";
-import { catchError, throwError } from "rxjs";
+import { catchError, Observable, throwError } from "rxjs";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,7 +16,7 @@ const httpOptions = {
   providedIn: "root",
 })
 export class RegisterService {
-  registerUrl = "http://localhost:8000/auth/register/";
+  registerUrl: string = "http://localhost:8000/auth/register/";
 
   constructor(private http: HttpClient) {}
 
@@ -26,7 +26,7 @@ export class RegisterService {
     lastName: string,
     email: string,
     password: string,
-  ) {
+  ): Observable<{ token: string; username: string }> {
     return this.http
       .post<{ token: string; username: string }>(
         this.registerUrl,
@@ -40,8 +40,8 @@ export class RegisterService {
         httpOptions,
       )
       .pipe(
-        catchError((error: HttpErrorResponse) => {
-          return throwError(() => error);
+        catchError((error: HttpErrorResponse): Observable<never> => {
+          return throwError((): HttpErrorResponse => error);
         }),
       );
   }

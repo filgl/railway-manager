@@ -6,7 +6,6 @@ import {
 } from "@angular/common/http";
 import { Train } from "../../Models/Train";
 import { catchError, Observable, throwError } from "rxjs";
-import { TrainModel } from "../../Models/TrainModel";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,18 +17,18 @@ const httpOptions = {
   providedIn: "root",
 })
 export class TrainsListService {
-  trainsUrl = "http://localhost:8000/api/trains/";
+  trainsUrl: string = "http://localhost:8000/api/trains/";
 
   constructor(private http: HttpClient) {}
 
-  getTrains() {
+  getTrains(): Observable<Train[]> {
     return this.http.get<Train[]>(this.trainsUrl, httpOptions);
   }
 
   addTrain(train: Train): Observable<Train> {
     return this.http.post<Train>(this.trainsUrl, train, httpOptions).pipe(
-      catchError((error: HttpErrorResponse) => {
-        return throwError(() => error);
+      catchError((error: HttpErrorResponse): Observable<never> => {
+        return throwError((): HttpErrorResponse => error);
       }),
     );
   }

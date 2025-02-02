@@ -17,8 +17,8 @@ const httpOptions = {
   providedIn: "root",
 })
 export class StationsUpdateService {
-  stationsUrl = "http://localhost:8000/api/stations/";
-  stateChoicesUrl = "http://localhost:8000/api/state-choices/";
+  stationsUrl: string = "http://localhost:8000/api/stations/";
+  stateChoicesUrl: string = "http://localhost:8000/api/state-choices/";
 
   constructor(private http: HttpClient) {}
 
@@ -26,13 +26,13 @@ export class StationsUpdateService {
     return this.http
       .put<Station>(`${this.stationsUrl}${station.id}/`, station, httpOptions)
       .pipe(
-        catchError((error: HttpErrorResponse) => {
-          return throwError(() => error);
+        catchError((error: HttpErrorResponse): Observable<never> => {
+          return throwError((): HttpErrorResponse => error);
         }),
       );
   }
 
-  getStateChoices() {
+  getStateChoices(): Observable<{ state_choices: any[] }> {
     return this.http.get<{ state_choices: any[] }>(
       this.stateChoicesUrl,
       httpOptions,

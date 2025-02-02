@@ -3,7 +3,7 @@ import { LoginService } from "./login.service";
 import { AuthService } from "../../auth.service";
 import { Router, RouterLink } from "@angular/router";
 import { FormsModule } from "@angular/forms";
-import { NgForOf, NgIf } from "@angular/common";
+import { NgIf } from "@angular/common";
 
 @Component({
   selector: "app-login",
@@ -22,13 +22,13 @@ export class LoginComponent {
     private router: Router,
   ) {}
 
-  login() {
+  login(): void {
     this.loginService.login(this.username, this.password).subscribe({
-      next: (res) => {
+      next: (res: { token: string; username: string }): void => {
         this.authService.login(res.token, res.username);
         this.router.navigate(["/"]);
       },
-      error: (err) => {
+      error: (err: any): void => {
         if (err.status === 400) {
           this.error = err.error.error;
         } else {

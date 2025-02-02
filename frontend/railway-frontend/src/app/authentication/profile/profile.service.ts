@@ -7,12 +7,12 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export class ProfileService {
-  profileUrl = "http://localhost:8000/auth/profile/";
+  profileUrl: string = "http://localhost:8000/auth/profile/";
 
   constructor(private http: HttpClient) {}
 
   getProfile(): Observable<User> {
-    const token = localStorage.getItem("token");
+    const token: string | null = localStorage.getItem("token");
     const httpOptions = {
       headers: new HttpHeaders({
         Authorization: `Token ${token}`,
@@ -23,7 +23,7 @@ export class ProfileService {
   }
 
   deleteUser(): Observable<User> {
-    const token = localStorage.getItem("token");
+    const token: string | null = localStorage.getItem("token");
     const httpOptions = {
       headers: new HttpHeaders({
         Authorization: `Token ${token}`,

@@ -25,7 +25,10 @@ class UserSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         """
-        This function validates the data.
+        This function validates the User model data.
+
+        :param data: The data to validate.
+        :return: The validated data.
         """
 
         if not data.get("email"):
@@ -67,7 +70,10 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """
-        Creates a new user instance and a token for the user.
+        This function creates a new user instance and a token for the user.
+
+        :param validated_data: The validated data.
+        :return: The created user instance.
         """
 
         user = User.objects.create_user(**validated_data)
@@ -86,7 +92,10 @@ class PasswordResetSerializer(serializers.Serializer):
 
     def validate(self, data):
         """
-        This function validates the data.
+        This function validates the PasswordReset data.
+
+        :param data: The data to validate.
+        :return: The validated data.
         """
 
         user = data.get("username")
@@ -101,6 +110,8 @@ class PasswordResetSerializer(serializers.Serializer):
     def save(self, **kwargs):
         """
         This function saves the new password.
+
+        :return: The user with the new password.
         """
 
         user = User.objects.get(username=self.validated_data.get("username"))

@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Train } from "../../Models/Train";
+import { Observable } from "rxjs";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -12,11 +13,11 @@ const httpOptions = {
   providedIn: "root",
 })
 export class TrainsDetailService {
-  trainDetailUrl = `http://localhost:8000/api/trains/`;
+  trainDetailUrl: string = `http://localhost:8000/api/trains/`;
 
   constructor(private http: HttpClient) {}
 
-  getTrain(id: number | null) {
+  getTrain(id: number | null): Observable<Train> {
     return this.http.get<Train>(`${this.trainDetailUrl}${id}`, httpOptions);
   }
 }

@@ -1,11 +1,8 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { StationsListService } from "../../stations/stations-list/stations-list.service";
 import { TrainModel } from "../../Models/TrainModel";
 import { TrainModelsListService } from "./train-models-list.service";
 import { NgForOf, NgIf } from "@angular/common";
 import { RouterLink } from "@angular/router";
-import { Station } from "../../Models/Station";
-import { StationsAddComponent } from "../../stations/stations-add/stations-add.component";
 import { TrainModelsAddComponent } from "../train-models-add/train-models-add.component";
 import { AuthService } from "../../auth.service";
 
@@ -36,40 +33,42 @@ export class TrainModelsListComponent implements OnInit {
   }
 
   loadTrainModels(): void {
-    this.trainModelsListService.getTrainModels().subscribe((trainModels) => {
-      this.trainModels = trainModels;
-    });
+    this.trainModelsListService
+      .getTrainModels()
+      .subscribe((trainModels: TrainModel[]): void => {
+        this.trainModels = trainModels;
+      });
   }
 
   addTrainModel(trainModel: TrainModel): void {
     this.trainModelsListService.addTrainModel(trainModel).subscribe({
-      next: () => {
+      next: (): void => {
         this.loadTrainModels();
         this.errors = {};
         this.trainModelsAddComponent.resetForm();
         this.showForm = false;
       },
-      error: (error) => {
+      error: (error: any): void => {
         if (error.status === 400) {
           this.errors = error.error;
         } else {
-          console.error("Unexpected error:", error);
+          alert("An unexpected error occurred.");
         }
       },
     });
   }
 
-  deleteTrainModel(trainModel: TrainModel) {
+  deleteTrainModel(trainModel: TrainModel): void {
     if (
       confirm(
-        "Are you sure you want to delete your account? This action cannot be undone.",
+        "Are you sure you want to delete this train model? This action cannot be undone.",
       )
     ) {
       this.trainModelsListService.deleteTrainModel(trainModel.id).subscribe({
-        next: () => {
+        next: (): void => {
           this.loadTrainModels();
         },
-        error: (err) => {
+        error: (err: any): void => {
           if (err.status === 400) {
             alert(err.error.error);
           } else {

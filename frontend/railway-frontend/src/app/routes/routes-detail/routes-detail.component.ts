@@ -23,7 +23,9 @@ export class RoutesDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = parseInt(<string>this.pageRoute.snapshot.paramMap.get("id"));
+    const id: number = parseInt(
+      <string>this.pageRoute.snapshot.paramMap.get("id"),
+    );
     this.loadRoute(id);
   }
 
@@ -32,7 +34,7 @@ export class RoutesDetailComponent implements OnInit {
   }
 
   loadRoute(id: number | null): void {
-    this.routesDetailService.getRoute(id).subscribe((route) => {
+    this.routesDetailService.getRoute(id).subscribe((route: Route): void => {
       this.route = route;
     });
   }

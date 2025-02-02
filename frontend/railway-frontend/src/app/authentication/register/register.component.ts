@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { User } from "../../Models/User";
+import { Component } from "@angular/core";
 import { RegisterService } from "./register.service";
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../../auth.service";
@@ -28,9 +27,10 @@ export class RegisterComponent {
     private router: Router,
   ) {}
 
-  register() {
+  register(): void {
     if (this.password !== this.confirmPassword) {
       this.error = "Passwords do not match";
+      this.errors = {};
       return;
     } else {
       this.error = "";
@@ -47,13 +47,14 @@ export class RegisterComponent {
         this.password,
       )
       .subscribe({
-        next: (res) => {
+        next: (res: { token: string; username: string }): void => {
           this.authService.login(res.token, res.username);
           this.router.navigate(["/profile"]);
         },
-        error: (err) => {
+        error: (err: any): void => {
           if (err.status === 400) {
             this.errors = err.error;
+            this.error = "";
           } else {
             alert("An unexpected error occurred.");
           }

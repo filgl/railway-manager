@@ -3,12 +3,7 @@ import { Train } from "../../Models/Train";
 import { TrainsListService } from "./trains-list.service";
 import { NgForOf, NgIf } from "@angular/common";
 import { RouterLink } from "@angular/router";
-import { TrainModelsDetailService } from "../../train-models/train-models-detail/train-models-detail.service";
-import { RoutesDetailService } from "../../routes/routes-detail/routes-detail.service";
 import { TrainsAddComponent } from "../trains-add/trains-add.component";
-import { Route } from "../../Models/Route";
-import { TrainModel } from "../../Models/TrainModel";
-import { TrainModelsAddComponent } from "../../train-models/train-models-add/train-models-add.component";
 import { AuthService } from "../../auth.service";
 
 @Component({
@@ -37,40 +32,40 @@ export class TrainsListComponent implements OnInit {
   }
 
   loadTrains(): void {
-    this.trainsListService.getTrains().subscribe((trains) => {
+    this.trainsListService.getTrains().subscribe((trains: Train[]): void => {
       this.trains = trains;
     });
   }
 
   addTrain(train: Train): void {
     this.trainsListService.addTrain(train).subscribe({
-      next: () => {
+      next: (): void => {
         this.loadTrains();
         this.errors = {};
         this.trainsAddComponent.resetForm();
         this.showForm = false;
       },
-      error: (error) => {
+      error: (error: any): void => {
         if (error.status === 400) {
           this.errors = error.error;
         } else {
-          console.error("Unexpected error:", error);
+          alert("An unexpected error occurred.");
         }
       },
     });
   }
 
-  deleteTrain(train: Train) {
+  deleteTrain(train: Train): void {
     if (
       confirm(
-        "Are you sure you want to delete your account? This action cannot be undone.",
+        "Are you sure you want to delete this train? This action cannot be undone.",
       )
     ) {
       this.trainsListService.deleteTrain(train.id).subscribe({
-        next: () => {
+        next: (): void => {
           this.loadTrains();
         },
-        error: (err) => {
+        error: (err: any): void => {
           if (err.status === 400) {
             alert(err.error.error);
           } else {

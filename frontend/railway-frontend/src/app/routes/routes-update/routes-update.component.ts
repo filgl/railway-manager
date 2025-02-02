@@ -15,7 +15,7 @@ import { StationsListService } from "../../stations/stations-list/stations-list.
 })
 export class RoutesUpdateComponent implements OnInit {
   @Input() route!: Route;
-  @Output() updatedRoute = new EventEmitter<Route>();
+  @Output() updatedRoute: EventEmitter<Route> = new EventEmitter<Route>();
   stations!: Station[];
   route_types!: any[];
   route_states!: any[];
@@ -28,7 +28,7 @@ export class RoutesUpdateComponent implements OnInit {
     private stationsListService: StationsListService,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadStations();
     this.loadRouteTypes();
     this.loadRouteStates();
@@ -36,36 +36,42 @@ export class RoutesUpdateComponent implements OnInit {
     this.route = structuredClone(this.route);
   }
 
-  loadStations() {
-    this.stationsListService.getStations().subscribe((stations) => {
-      this.stations = stations;
-    });
+  loadStations(): void {
+    this.stationsListService
+      .getStations()
+      .subscribe((stations: Station[]): void => {
+        this.stations = stations;
+      });
   }
 
-  loadRouteTypes() {
-    this.routesUpdateService.getTypeChoices().subscribe((response) => {
-      this.route_types = response.route_type_choices;
-    });
+  loadRouteTypes(): void {
+    this.routesUpdateService
+      .getTypeChoices()
+      .subscribe((response: { route_type_choices: any[] }): void => {
+        this.route_types = response.route_type_choices;
+      });
   }
 
-  loadRouteStates() {
-    this.routesUpdateService.getStateChoices().subscribe((response) => {
-      this.route_states = response.state_choices;
-    });
+  loadRouteStates(): void {
+    this.routesUpdateService
+      .getStateChoices()
+      .subscribe((response: { state_choices: any[] }): void => {
+        this.route_states = response.state_choices;
+      });
   }
 
-  loadElectrificationTypes() {
+  loadElectrificationTypes(): void {
     this.routesUpdateService
       .getElectrificationChoices()
-      .subscribe((response) => {
+      .subscribe((response: { electrification_choices: any[] }) => {
         this.electrification_types = response.electrification_choices;
       });
   }
 
   updateRoute(): void {
-    const previousRouteType = this.route.type;
-    const previousRouteState = this.route.actual_state;
-    const previousRouteElectrification = this.route.electrified;
+    const previousRouteType: string = this.route.type;
+    const previousRouteState: string = this.route.actual_state;
+    const previousRouteElectrification: string = this.route.electrified;
 
     this.route.type = this.route.type.toLowerCase().replaceAll(" ", "_");
 
@@ -78,13 +84,13 @@ export class RoutesUpdateComponent implements OnInit {
       .replaceAll(" ", "_");
 
     this.routesUpdateService.updateRoute(this.route).subscribe({
-      next: (updatedRoute: Route) => {
+      next: (updatedRoute: Route): void => {
         this.route = updatedRoute;
         this.errors = {};
         this.routesDetailComponent.toggleForm();
         this.routesDetailComponent.loadRoute(this.route.id);
       },
-      error: (error) => {
+      error: (error: any): void => {
         if (error.status === 400) {
           this.errors = error.error;
           this.route.type = previousRouteType;

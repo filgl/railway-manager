@@ -17,7 +17,7 @@ const httpOptions = {
   providedIn: "root",
 })
 export class PasswordResetService {
-  resetUrl = "http://localhost:8000/auth/password-reset/";
+  resetUrl: string = "http://localhost:8000/auth/password-reset/";
 
   constructor(private http: HttpClient) {}
 
@@ -37,8 +37,8 @@ export class PasswordResetService {
         httpOptions,
       )
       .pipe(
-        catchError((error: HttpErrorResponse) => {
-          return throwError(() => error);
+        catchError((error: HttpErrorResponse): Observable<never> => {
+          return throwError((): HttpErrorResponse => error);
         }),
       );
   }

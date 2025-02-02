@@ -11,7 +11,7 @@ from rest_framework.views import APIView
 
 class RegisterView(CreateAPIView):
     """
-    This view is used to register a new user.
+    This class represents the Register view.
     """
 
     queryset = User.objects.all()
@@ -20,7 +20,10 @@ class RegisterView(CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         """
-        This method is used to register a new user.
+        This function registers a new user.
+
+        :param request: The request data.
+        :return: The outgoing response.
         """
 
         super().create(request, *args, **kwargs)
@@ -38,14 +41,17 @@ class RegisterView(CreateAPIView):
 
 class LoginView(APIView):
     """
-    This view is used to log in a user.
+    This class represents the Login view.
     """
 
     permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
         """
-        This method is used to log in a user.
+        This function logs in a user.
+
+        :param request: The request data.
+        :return: The outgoing response.
         """
 
         user = authenticate(
@@ -64,14 +70,17 @@ class LoginView(APIView):
 
 class UserProfileView(APIView):
     """
-    This view handles get, put and delete for the user account.
+    This class represents the UserProfile view.
     """
 
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
         """
-        This method is used to get user profile data.
+        This function gets the user profile data.
+
+        :param request: The request data.
+        :return: The outgoing response.
         """
 
         user = request.user
@@ -91,7 +100,10 @@ class UserProfileView(APIView):
 
     def put(self, request):
         """
-        This method is used to update  user profile data.
+        This function updates the user profile data.
+
+        :param request: The request data.
+        :return: The outgoing response.
         """
 
         user = request.user
@@ -105,7 +117,10 @@ class UserProfileView(APIView):
 
     def delete(self, request):
         """
-        This method is used to delete the user profile.
+        This function deletes the user profile.
+
+        :param request: The request data.
+        :return: The outgoing response.
         """
 
         user = request.user
@@ -118,14 +133,17 @@ class UserProfileView(APIView):
 
 class PasswordResetView(APIView):
     """
-    This view is used to reset a password.
+    This class represents the PasswordReset view.
     """
 
     permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
         """
-        This method is used to reset a password.
+        This function sets a new password.
+
+        :param request: The request data.
+        :return: The outgoing response.
         """
 
         serializer = PasswordResetSerializer(data=request.data)

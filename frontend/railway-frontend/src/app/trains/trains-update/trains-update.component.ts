@@ -17,7 +17,7 @@ import { NgForOf, NgIf } from "@angular/common";
 })
 export class TrainsUpdateComponent implements OnInit {
   @Input() train!: Train;
-  @Output() updatedTrain = new EventEmitter<Train>();
+  @Output() updatedTrain: EventEmitter<Train> = new EventEmitter<Train>();
   trainModels!: TrainModel[];
   associatedRoutes!: Route[];
   trainStates!: any[];
@@ -30,46 +30,50 @@ export class TrainsUpdateComponent implements OnInit {
     private trainsDetailComponent: TrainsDetailComponent,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadTrainModels();
     this.loadAssociatedRoutes();
     this.loadTrainStates();
     this.train = structuredClone(this.train);
   }
 
-  loadTrainModels() {
-    this.trainModelsListService.getTrainModels().subscribe((trainModels) => {
-      this.trainModels = trainModels;
-    });
+  loadTrainModels(): void {
+    this.trainModelsListService
+      .getTrainModels()
+      .subscribe((trainModels: TrainModel[]): void => {
+        this.trainModels = trainModels;
+      });
   }
 
-  loadAssociatedRoutes() {
-    this.routesListService.getRoutes().subscribe((routes) => {
+  loadAssociatedRoutes(): void {
+    this.routesListService.getRoutes().subscribe((routes: Route[]): void => {
       this.associatedRoutes = routes;
     });
   }
 
-  loadTrainStates() {
-    this.trainsUpdateService.getStateChoices().subscribe((response) => {
-      this.trainStates = response.state_choices;
-    });
+  loadTrainStates(): void {
+    this.trainsUpdateService
+      .getStateChoices()
+      .subscribe((response: { state_choices: any[] }): void => {
+        this.trainStates = response.state_choices;
+      });
   }
 
   updateTrain(): void {
-    const previousTrainState = this.train.actual_state;
+    const previousTrainState: string = this.train.actual_state;
 
     this.train.actual_state = this.train.actual_state
       .toLowerCase()
       .replaceAll(" ", "_");
 
     this.trainsUpdateService.updateTrain(this.train).subscribe({
-      next: (updatedTrain: Train) => {
+      next: (updatedTrain: Train): void => {
         this.train = updatedTrain;
         this.errors = {};
         this.trainsDetailComponent.toggleForm();
         this.trainsDetailComponent.loadTrain(this.train.id);
       },
-      error: (error) => {
+      error: (error: any): void => {
         if (error.status === 400) {
           this.errors = error.error;
           this.train.actual_state = previousTrainState;

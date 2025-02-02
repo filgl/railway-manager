@@ -19,28 +19,34 @@ export class TrainModelsAddComponent implements OnInit {
 
   constructor(private trainModelsAddService: TrainModelsAddService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadTrainModels();
     this.loadPowerSystems();
     this.loadCompositions();
   }
 
-  loadTrainModels() {
-    this.trainModelsAddService.getTrainModelChoices().subscribe((response) => {
-      this.train_model = response.train_model_choices;
-    });
+  loadTrainModels(): void {
+    this.trainModelsAddService
+      .getTrainModelChoices()
+      .subscribe((response: { train_model_choices: any[] }): void => {
+        this.train_model = response.train_model_choices;
+      });
   }
 
-  loadPowerSystems() {
-    this.trainModelsAddService.getPowerSystemChoices().subscribe((response) => {
-      this.power_system = response.power_system_choices;
-    });
+  loadPowerSystems(): void {
+    this.trainModelsAddService
+      .getPowerSystemChoices()
+      .subscribe((response: { power_system_choices: any[] }): void => {
+        this.power_system = response.power_system_choices;
+      });
   }
 
-  loadCompositions() {
-    this.trainModelsAddService.getCompositionChoices().subscribe((response) => {
-      this.composition = response.composition_choices;
-    });
+  loadCompositions(): void {
+    this.trainModelsAddService
+      .getCompositionChoices()
+      .subscribe((response: { composition_choices: any[] }): void => {
+        this.composition = response.composition_choices;
+      });
   }
 
   onSubmit(): void {

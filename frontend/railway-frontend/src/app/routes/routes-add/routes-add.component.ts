@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { RoutesAddService } from "./routes-add.service";
 import { FormsModule } from "@angular/forms";
 import { NgForOf, NgIf } from "@angular/common";
-import { Route } from "../../Models/Route";
 import { Station } from "../../Models/Station";
 import { StationsListService } from "../../stations/stations-list/stations-list.service";
 
@@ -26,35 +25,43 @@ export class RoutesAddComponent implements OnInit {
     private stationsListService: StationsListService,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadStations();
     this.loadRouteTypes();
     this.loadActualStates();
     this.loadElectrification();
   }
 
-  loadStations() {
-    this.stationsListService.getStations().subscribe((stations) => {
-      this.stations = stations;
-    });
+  loadStations(): void {
+    this.stationsListService
+      .getStations()
+      .subscribe((stations: Station[]): void => {
+        this.stations = stations;
+      });
   }
 
-  loadRouteTypes() {
-    this.routesAddService.getRouteTypeChoices().subscribe((response) => {
-      this.route_type = response.route_type_choices;
-    });
+  loadRouteTypes(): void {
+    this.routesAddService
+      .getRouteTypeChoices()
+      .subscribe((response: { route_type_choices: any[] }): void => {
+        this.route_type = response.route_type_choices;
+      });
   }
 
   loadActualStates() {
-    this.routesAddService.getActualStateChoices().subscribe((response) => {
-      this.actual_state = response.state_choices;
-    });
+    this.routesAddService
+      .getActualStateChoices()
+      .subscribe((response: { state_choices: any[] }): void => {
+        this.actual_state = response.state_choices;
+      });
   }
 
   loadElectrification() {
-    this.routesAddService.getElectrificationChoices().subscribe((response) => {
-      this.electrification = response.electrification_choices;
-    });
+    this.routesAddService
+      .getElectrificationChoices()
+      .subscribe((response: { electrification_choices: any[] }): void => {
+        this.electrification = response.electrification_choices;
+      });
   }
 
   onSubmit(): void {

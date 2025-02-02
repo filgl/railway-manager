@@ -35,10 +35,10 @@ export class PasswordResetComponent {
     this.passwordResetService
       .resetPassword(this.username, this.oldPassword, this.newPassword)
       .subscribe({
-        next: () => {
+        next: (): void => {
           this.router.navigate(["/login"]);
         },
-        error: (err) => {
+        error: (err: any): void => {
           if (err.status === 400) {
             this.errors = err.error;
             this.error = "";

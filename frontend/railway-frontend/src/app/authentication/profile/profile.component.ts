@@ -43,11 +43,11 @@ export class ProfileComponent implements OnInit {
       )
     ) {
       this.profileService.deleteUser().subscribe({
-        next: () => {
+        next: (): void => {
           this.authService.logout();
           this.route.navigate(["/"]);
         },
-        error: (err) => {
+        error: (err: any): void => {
           if (err.status === 400) {
             alert(err.error.error);
           } else {

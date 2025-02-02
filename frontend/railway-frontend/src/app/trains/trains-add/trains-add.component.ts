@@ -6,7 +6,6 @@ import { RoutesListService } from "../../routes/routes-list/routes-list.service"
 import { Route } from "../../Models/Route";
 import { NgForOf, NgIf } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { RoutesDetailService } from "../../routes/routes-detail/routes-detail.service";
 import { StationsDetailService } from "../../stations/stations-detail/stations-detail.service";
 
 @Component({
@@ -27,31 +26,34 @@ export class TrainsAddComponent implements OnInit {
     private trainsAddService: TrainsAddService,
     private trainModelsListService: TrainModelsListService,
     private routesListService: RoutesListService,
-    private stationsDetailService: StationsDetailService,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadTrainModels();
     this.loadRoutes();
     this.loadActualStates();
   }
 
-  loadTrainModels() {
-    this.trainModelsListService.getTrainModels().subscribe((trainModels) => {
-      this.trainModels = trainModels;
-    });
+  loadTrainModels(): void {
+    this.trainModelsListService
+      .getTrainModels()
+      .subscribe((trainModels: TrainModel[]): void => {
+        this.trainModels = trainModels;
+      });
   }
 
-  loadRoutes() {
-    this.routesListService.getRoutes().subscribe((routes) => {
+  loadRoutes(): void {
+    this.routesListService.getRoutes().subscribe((routes: Route[]): void => {
       this.routes = routes;
     });
   }
 
-  loadActualStates() {
-    this.trainsAddService.getActualStateChoices().subscribe((response) => {
-      this.actual_state = response.state_choices;
-    });
+  loadActualStates(): void {
+    this.trainsAddService
+      .getActualStateChoices()
+      .subscribe((response: { state_choices: any[] }): void => {
+        this.actual_state = response.state_choices;
+      });
   }
 
   onSubmit(): void {

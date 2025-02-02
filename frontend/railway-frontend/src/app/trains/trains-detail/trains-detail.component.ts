@@ -1,11 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, RouterLink } from "@angular/router";
+import { ActivatedRoute, Route, RouterLink } from "@angular/router";
 import { Train } from "../../Models/Train";
 import { TrainsDetailService } from "./trains-detail.service";
 import { NgIf } from "@angular/common";
-import { TrainModelsDetailService } from "../../train-models/train-models-detail/train-models-detail.service";
 import { RoutesDetailService } from "../../routes/routes-detail/routes-detail.service";
-import { RoutesUpdateComponent } from "../../routes/routes-update/routes-update.component";
 import { TrainsUpdateComponent } from "../trains-update/trains-update.component";
 import { AuthService } from "../../auth.service";
 
@@ -27,7 +25,7 @@ export class TrainsDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = parseInt(<string>this.route.snapshot.paramMap.get("id"));
+    const id: number = parseInt(<string>this.route.snapshot.paramMap.get("id"));
     this.loadTrain(id);
   }
 
@@ -36,12 +34,12 @@ export class TrainsDetailComponent implements OnInit {
   }
 
   loadTrain(id: number | null): void {
-    this.trainsDetailService.getTrain(id).subscribe((train) => {
+    this.trainsDetailService.getTrain(id).subscribe((train: Train): void => {
       this.train = train;
 
       this.routesDetailService
         .getRoute(train.associated_route)
-        .subscribe((associatedRoute) => {
+        .subscribe((associatedRoute): void => {
           train.associated_route = associatedRoute.id;
         });
     });

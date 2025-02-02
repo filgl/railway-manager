@@ -23,7 +23,7 @@ export class StationsDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = parseInt(<string>this.route.snapshot.paramMap.get("id"));
+    const id: number = parseInt(<string>this.route.snapshot.paramMap.get("id"));
     this.loadStation(id);
   }
 
@@ -32,8 +32,10 @@ export class StationsDetailComponent implements OnInit {
   }
 
   loadStation(id: number | null): void {
-    this.stationsDetailService.getStation(id).subscribe((station) => {
-      this.station = station;
-    });
+    this.stationsDetailService
+      .getStation(id)
+      .subscribe((station: Station): void => {
+        this.station = station;
+      });
   }
 }

@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { NgForOf, NgIf } from "@angular/common";
 import { StationsAddService } from "./stations-add.service";
-import { Station } from "../../Models/Station";
 
 @Component({
   selector: "app-stations-add",
@@ -22,10 +21,12 @@ export class StationsAddComponent implements OnInit {
     this.loadActualStates();
   }
 
-  loadActualStates() {
-    this.stationsAddService.getStateChoices().subscribe((response) => {
-      this.actual_states = response.state_choices;
-    });
+  loadActualStates(): void {
+    this.stationsAddService
+      .getStateChoices()
+      .subscribe((response: { state_choices: any[] }): void => {
+        this.actual_states = response.state_choices;
+      });
   }
 
   onSubmit(): void {

@@ -3,8 +3,6 @@ import { UserUpdateService } from "./user-update.service";
 import { User } from "../../Models/User";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgIf } from "@angular/common";
-import { RouterLink } from "@angular/router";
-import { Route } from "../../Models/Route";
 import { ProfileComponent } from "../profile/profile.component";
 
 @Component({
@@ -15,7 +13,7 @@ import { ProfileComponent } from "../profile/profile.component";
 })
 export class UserUpdateComponent implements OnInit {
   @Input() user!: User;
-  @Output() updatedUser = new EventEmitter<User>();
+  @Output() updatedUser: EventEmitter<User> = new EventEmitter<User>();
   errors: any = {};
 
   constructor(
@@ -23,19 +21,19 @@ export class UserUpdateComponent implements OnInit {
     private userProfileComponent: ProfileComponent,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.user = structuredClone(this.user);
   }
 
   updateUser(): void {
     this.userUpdateService.updateProfile(this.user).subscribe({
-      next: (updatedUser: User) => {
+      next: (updatedUser: User): void => {
         this.user = updatedUser;
         this.errors = {};
         this.userProfileComponent.toggleForm();
         this.userProfileComponent.loadUser();
       },
-      error: (error) => {
+      error: (error: any): void => {
         if (error.status === 400) {
           this.errors = error.error;
         } else {

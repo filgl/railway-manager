@@ -23,6 +23,9 @@ class StationViewSet(viewsets.ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         """
         This method deletes the Station object from the database if it is not linked to existing routes.
+
+        :param request: The incoming request.
+        :return: The outgoing response.
         """
 
         station = self.get_object()
@@ -53,6 +56,9 @@ class RouteViewSet(viewsets.ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         """
         This method deletes the Route object from the database if it is not linked to existing stations.
+
+        :param request: The incoming request.
+        :return: The outgoing response.
         """
 
         route = self.get_object()
@@ -80,6 +86,9 @@ class TrainModelViewSet(viewsets.ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         """
         This method deletes the TrainModel from the database if it is not linked to existing trains.
+
+        :param request: The incoming request.
+        :return: The outgoing response.
         """
 
         train_model = self.get_object()
@@ -113,6 +122,9 @@ class StateChoicesView(APIView):
     def get(self, request):
         """
         This method lists all the available state choices.
+
+        :param request: The incoming request.
+        :return: The outgoing response.
         """
 
         return Response({"state_choices": STATE_CHOICES})
@@ -126,6 +138,9 @@ class TrainModelChoicesView(APIView):
     def get(self, request):
         """
         This method lists all the available train model choices.
+
+        :param request: The incoming request.
+        :return: The outgoing response.
         """
 
         return Response({"train_model_choices": TRAIN_MODEL_CHOICES})
@@ -139,6 +154,9 @@ class PowerSystemChoicesView(APIView):
     def get(self, request):
         """
         This method lists all the available power system choices.
+
+        :param request: The incoming request.
+        :return: The outgoing response.
         """
 
         return Response({"power_system_choices": POWER_SYSTEM_CHOICES})
@@ -152,6 +170,9 @@ class RouteTypeChoicesView(APIView):
     def get(self, request):
         """
         This method lists all the available route type choices.
+
+        :param request: The incoming request.
+        :return: The outgoing response.
         """
 
         return Response({"route_type_choices": ROUTE_TYPE_CHOICES})
@@ -165,6 +186,9 @@ class ElectrificationChoicesView(APIView):
     def get(self, request):
         """
         This method lists all the available electrification choices.
+
+        :param request: The incoming request.
+        :return: The outgoing response.
         """
 
         return Response({"electrification_choices": ELECTRIFICATION_CHOICES})
@@ -178,6 +202,9 @@ class CompositionChoicesView(APIView):
     def get(self, request):
         """
         This method lists all the available composition choices.
+
+        :param request: The incoming request.
+        :return: The outgoing response.
         """
 
         return Response({"composition_choices": COMPOSITION_CHOICES})

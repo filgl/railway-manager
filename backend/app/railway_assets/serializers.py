@@ -15,7 +15,10 @@ class ChoiceField(serializers.ChoiceField):
 
     def to_representation(self, value):
         """
-        This method returns the choice value.
+        This method converts the choice field to a string.
+
+        :param value: The choice field to convert.
+        :return: The string representation of the choice field.
         """
 
         if value == "" and self.allow_blank:
@@ -98,7 +101,10 @@ class TrainModelSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         """
-        This function validates the TrainModel data.
+        This function validates the TrainModel model data.
+
+        :param data: The data to validate.
+        :return: The validated data.
         """
 
         if data.get("max_speed") < 1:
@@ -183,7 +189,10 @@ class StationSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         """
-        This function validates the Station data.
+        This function validates the Station model data.
+
+        :param data: The data to validate.
+        :return: The validated data.
         """
 
         if data.get("platforms") < 1:
@@ -240,6 +249,9 @@ class RouteSerializer(serializers.ModelSerializer):
     def get_start_station_name(self, obj):
         """
         This function returns the start station name.
+
+        :param obj: The object to get the start station name from.
+        :return: The start station name.
         """
 
         return f"{obj.start_station.name}"
@@ -247,13 +259,19 @@ class RouteSerializer(serializers.ModelSerializer):
     def get_end_station_name(self, obj):
         """
         This function returns the end station name.
+
+        :param obj: The object to get the end station name from.
+        :return: The end station name.
         """
 
         return f"{obj.end_station.name}"
 
     def validate(self, data):
         """
-        This function validates the Route data.
+        This function validates the Route model data.
+
+        :param data: The data to validate.
+        :return: The validated data.
         """
 
         start_station = data.get("start_station")
@@ -395,21 +413,30 @@ class TrainSerializer(serializers.ModelSerializer):
 
     def get_model_name(self, obj):
         """
-        This function returns the model name.
+        This function returns the model name associated with the given object.
+
+        :param obj: The object to get the model name from.
+        :return: The model name associated with the given object.
         """
 
         return f"{obj.model.name}"
 
     def get_associated_route_name(self, obj):
         """
-        This function returns the associated route name.
+        This function returns the route name associated with the given object.
+
+        :param obj: The object to get the route name from.
+        :return: The route name associated with the given object.
         """
 
         return f"{obj.associated_route.start_station.name} - {obj.associated_route.end_station.name}"
 
     def validate(self, data):
         """
-        This function validates the Train data.
+        This function validates the Train model data.
+
+        :param data: The data to validate.
+        :return: The validated data.
         """
 
         instance = self.instance

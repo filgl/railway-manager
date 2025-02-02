@@ -17,18 +17,18 @@ const httpOptions = {
   providedIn: "root",
 })
 export class StationsListService {
-  stationsUrl = "http://localhost:8000/api/stations/";
+  stationsUrl: string = "http://localhost:8000/api/stations/";
 
   constructor(private http: HttpClient) {}
 
-  getStations() {
+  getStations(): Observable<Station[]> {
     return this.http.get<Station[]>(this.stationsUrl, httpOptions);
   }
 
   addStation(station: Station): Observable<Station> {
     return this.http.post<Station>(this.stationsUrl, station, httpOptions).pipe(
-      catchError((error: HttpErrorResponse) => {
-        return throwError(() => error);
+      catchError((error: HttpErrorResponse): Observable<never> => {
+        return throwError((): HttpErrorResponse => error);
       }),
     );
   }

@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import {
-  ActivatedRoute,
   ActivatedRouteSnapshot,
   CanActivate,
   Router,
@@ -22,7 +21,7 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ): Observable<boolean> | Promise<boolean> | boolean {
-    const isAuthenticated = this.authService.isAuthenticated();
+    const isAuthenticated: boolean = this.authService.isAuthenticated();
 
     if (
       isAuthenticated &&
