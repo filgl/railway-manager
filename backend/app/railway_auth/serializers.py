@@ -45,26 +45,7 @@ class UserSerializer(serializers.ModelSerializer):
 
         password = data.get("password")
         if password:
-            if len(password) < 8:
-                raise serializers.ValidationError(
-                    {"password": "Password must be at least 8 characters long"}
-                )
-            if not re.search(r"[A-Z]", password):
-                raise serializers.ValidationError(
-                    {"password": "Password must contain at least one uppercase letter"}
-                )
-            if not re.search(r"[a-z]", password):
-                raise serializers.ValidationError(
-                    {"password": "Password must contain at least one lowercase letter"}
-                )
-            if not re.search(r"\d", password):
-                raise serializers.ValidationError(
-                    {"password": "Password must contain at least one digit"}
-                )
-            if not re.search(r"[£/=€_ç°§+!@#$%^&*(),.?\":{}|<>]", password):
-                raise serializers.ValidationError(
-                    {"password": "Password must contain at least one special character"}
-                )
+            validate_password(password, "password")
 
         return data
 
@@ -105,6 +86,10 @@ class PasswordResetSerializer(serializers.Serializer):
         if not user:
             raise serializers.ValidationError({"old_password": "Invalid credentials"})
 
+        new_password = data.get("new_password")
+        if new_password:
+            validate_password(new_password, "new_password")
+
         return data
 
     def save(self, **kwargs):
@@ -119,3 +104,33 @@ class PasswordResetSerializer(serializers.Serializer):
         user.save()
 
         return user
+
+
+def validate_password(password, password_field):
+    """
+    This function validates the password.
+
+    :param password: The password to validate.
+    :param password_field: The name of the password field if an error occurs.
+    """
+
+    if len(password) < 8:
+        raise serializers.ValidationError(
+            {password_field: "Password must be at least 8 characters long"}
+        )
+    if not re.search(r"[A-Z]", password):
+        raise serializers.ValidationError(
+            {password_field: "Password must contain at least one uppercase letter"}
+        )
+    if not re.search(r"[a-z]", password):
+        raise serializers.ValidationError(
+            {password_field: "Password must contain at least one lowercase letter"}
+        )
+    if not re.search(r"\d", password):
+        raise serializers.ValidationError(
+            {password_field: "Password must contain at least one digit"}
+        )
+    if not re.search(r"[£/=€_ç°§+!@#$%^&*(),.?\":{}|<>]", password):
+        raise serializers.ValidationError(
+            {password_field: "Password must contain at least one special character"}
+        )
