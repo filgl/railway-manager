@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+.body-background {
+  background-color: #212121;
+}
+
+.form-background {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  appearance: none;
+  background-color: #303030;
+  background-clip: padding-box;
+  border: 1px solid #ececec;
+  border-radius: 4px;
+  color: #ececec;
+}
+
+.form-background:focus {
+  color: #ececec;
+}
+
+.title-color {
+  color: #ececec;
+}
+
+.label-color {
+  color: #b4b4b4;
+}
