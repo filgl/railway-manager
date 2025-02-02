@@ -1,52 +1,52 @@
-<h2>Register</h2>
+<div class="container mt-5">
+  <h2 class="title-color"><span class="fa-solid fa-id-badge me-3"></span>Register</h2>
 
-<div *ngIf="errors.non_field_errors" class="text-danger mt-2">
-  {{ errors.non_field_errors[0] }}
+  <div *ngIf="errors.non_field_errors" class="text-danger mt-2">
+    {{ errors.non_field_errors[0] }}
+  </div>
+
+  <div *ngIf="error" class="text-danger mt-2">
+    <p>{{ error }}</p>
+  </div>
+
+  <form method="POST" (submit)="register()">
+    <div class="mb-3">
+      <label for="username" class="form-label label-color">Username*</label>
+      <input id="username" name="username" type="text" class="form-background" [(ngModel)]="username" required />
+      <div *ngIf="errors.username" class="text-danger mt-2">{{ errors.username[0] }}</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="firstName" class="form-label label-color">First name</label>
+      <input id="firstName" name="first_name" type="text" class="form-background" [(ngModel)]="firstName" />
+      <div *ngIf="errors.first_name" class="text-danger mt-2">{{ errors.first_name[0] }}</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="lastName" class="form-label label-color">Last name</label>
+      <input id="lastName" name="last_name" type="text" class="form-background" [(ngModel)]="lastName" />
+      <div *ngIf="errors.last_name" class="text-danger mt-2">{{ errors.last_name[0] }}</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label label-color">Email address*</label>
+      <input id="email" name="email" type="text" class="form-background" [(ngModel)]="email" required />
+      <div *ngIf="errors.email" class="text-danger mt-2">{{ errors.email[0] }}</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label label-color">Password*</label>
+      <input id="password" name="password" type="password" class="form-background" [(ngModel)]="password" required />
+      <div *ngIf="errors.password" class="text-danger mt-2">{{ errors.password[0] }}</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="passwordConfirm" class="form-label label-color">Confirm password*</label>
+      <input id="passwordConfirm" name="password_confirm" type="password" class="form-background" [(ngModel)]="confirmPassword" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary my-1"><span class="fa-solid fa-id-badge me-2"></span>Register</button>
+  </form>
+
+  <p class="label-color mt-2">Already have an account? <a routerLink="/login" class="link-color">Login</a></p>
 </div>
-
-<div *ngIf="error" class="text-danger mt-2">
-  <p>{{ error }}</p>
-</div>
-
-<form method="POST" (submit)="register()">
-  <div>
-    <label for="username">Username*:</label>
-    <input id="username" name="username" type="text" [(ngModel)]="username" required />
-    <div *ngIf="errors.username" class="text-danger mt-2">{{ errors.username[0] }}</div>
-  </div>
-
-  <div>
-    <label for="firstName">First name:</label>
-    <input id="firstName" name="first_name" type="text" [(ngModel)]="firstName" />
-    <div *ngIf="errors.first_name" class="text-danger mt-2">{{ errors.first_name[0] }}</div>
-  </div>
-
-  <div>
-    <label for="lastName">Last name:</label>
-    <input id="lastName" name="last_name" type="text" [(ngModel)]="lastName" />
-    <div *ngIf="errors.last_name" class="text-danger mt-2">{{ errors.last_name[0] }}</div>
-  </div>
-
-  <div>
-    <label for="email">Email address*:</label>
-    <input id="email" name="email" type="text" [(ngModel)]="email" required />
-    <div *ngIf="errors.email" class="text-danger mt-2">{{ errors.email[0] }}</div>
-  </div>
-
-  <div>
-    <label for="password">Password*:</label>
-    <input id="password" name="password" type="password" [(ngModel)]="password" required />
-    <div *ngIf="errors.password" class="text-danger mt-2">{{ errors.password[0] }}</div>
-  </div>
-
-  <div>
-    <label for="passwordConfirm">Confirm password*:</label>
-    <input id="passwordConfirm" name="password_confirm" type="password" [(ngModel)]="confirmPassword" required />
-  </div>
-
-  <div>
-    <button type="submit">Register</button>
-  </div>
-</form>
-
-<p>Already have an account? <a routerLink="/login">Login</a></p>

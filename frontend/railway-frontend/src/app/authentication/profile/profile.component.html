@@ -1,18 +1,19 @@
 <div class="container mt-5">
-  <h2>Profile Details</h2>
+  <h2 class="title-color"><span class="fa-solid fa-user me-3"></span>Profile Details</h2>
 
-  <input
-    type="button"
+  <button
     (click)="toggleForm()"
-    [value]="showForm ? 'Cancel' : '~ Edit'"
-    class="btn"
-    [class]="showForm ? 'btn-danger' : 'btn-primary'"
-  />
-  <div *ngIf="showForm" class="col-12 col-md-3 mt-3 mt-lg-0">
+    class="btn my-3"
+    [ngClass]="showForm ? 'btn-danger' : 'btn-primary'"
+  >
+    <span class="fa-solid me-1" [ngClass]="showForm ? 'fa-times' : 'fa-edit'"></span>
+    {{ showForm ? 'Cancel' : 'Edit' }}
+  </button>
+  <div *ngIf="showForm" class="col-12 col-md-3">
     <app-user-update [user]="user" (updatedUser)="user = $event"></app-user-update>
   </div>
 
-  <div *ngIf="user">
+  <div *ngIf="user" class="label-color">
     <p>Username: {{ user.username }}</p>
     <p *ngIf="user.first_name.length !== 0">First name: {{ user.first_name }}</p>
     <p *ngIf="user.last_name.length !== 0">Last name: {{ user.last_name }}</p>
@@ -24,5 +25,5 @@
     <p>Account created on {{ user.date_joined }}</p>
   </div>
 
-  <button class="btn btn-danger mt-3" (click)="deleteUser()">Delete account</button>
+  <button class="btn btn-danger mt-3" (click)="deleteUser()"><span class="fa-solid fa-trash me-2"></span>Delete account</button>
 </div>

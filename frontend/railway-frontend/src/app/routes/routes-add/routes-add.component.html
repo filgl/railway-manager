@@ -2,90 +2,88 @@
   <p *ngFor="let err of errors.non_field_errors">{{ err }}</p>
 </div>
 
-<form method="POST" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="startStation">Start station:</label>
-    <select id="startStation" name="start_station" required [(ngModel)]="route.start_station">
+<form method="POST" (ngSubmit)="onSubmit()" class="mt-2">
+  <div class="mb-3">
+    <label for="startStation" class="form-label label-color">Start station*</label>
+    <select id="startStation" name="start_station" class="form-background" required [(ngModel)]="route.start_station">
       <option *ngFor="let station of stations" [value]="station.id">{{ station.name }}</option>
     </select>
     <div *ngIf="errors.start_station" class="text-danger mt-2">{{ errors.start_station[0] }}</div>
   </div>
 
-  <div>
-    <label for="endStation">End station:</label>
-    <select id="endStation" name="end_station" required [(ngModel)]="route.end_station">
+  <div class="mb-3">
+    <label for="endStation" class="form-label label-color">End station*</label>
+    <select id="endStation" name="end_station" class="form-background" required [(ngModel)]="route.end_station">
       <option *ngFor="let station of stations" [value]="station.id">{{ station.name }}</option>
     </select>
     <div *ngIf="errors.end_station" class="text-danger mt-2">{{ errors.end_station[0] }}</div>
   </div>
 
-  <div>
-    <label for="nickname">Nickname:</label>
-    <input id="nickname" name="nickname" type="text" [(ngModel)]="route.nickname"/>
+  <div class="mb-3">
+    <label for="nickname" class="form-label label-color">Nickname</label>
+    <input id="nickname" name="nickname" type="text" class="form-background" [(ngModel)]="route.nickname"/>
     <div *ngIf="errors.nickname" class="text-danger mt-2">{{ errors.nickname[0] }}</div>
   </div>
 
-  <div>
-    <label for="length">Length (km):</label>
-    <input id="length" name="length" type="number" required min="1" [(ngModel)]="route.length"/>
+  <div class="mb-3">
+    <label for="length" class="form-label label-color">Length (km)*</label>
+    <input id="length" name="length" type="number" class="form-background" required min="1" [(ngModel)]="route.length"/>
     <div *ngIf="errors.length" class="text-danger mt-2">{{ errors.length[0] }}</div>
   </div>
 
-  <div>
-    <label for="maxSpeed">Maximum speed (km/h):</label>
-    <input id="maxSpeed" name="max_speed" type="number" required min="1" [(ngModel)]="route.max_speed"/>
+  <div class="mb-3">
+    <label for="maxSpeed" class="form-label label-color">Maximum speed (km/h)*</label>
+    <input id="maxSpeed" name="max_speed" type="number" class="form-background" required min="1" [(ngModel)]="route.max_speed"/>
     <div *ngIf="errors.max_speed" class="text-danger mt-2">{{ errors.max_speed[0] }}</div>
   </div>
 
-  <div>
-    <label for="routeType">Route type:</label>
-    <select id="routeType" name="route_type" required [(ngModel)]="route.type">
+  <div class="mb-3">
+    <label for="routeType" class="form-label label-color">Route type*</label>
+    <select id="routeType" name="route_type" class="form-background" required [(ngModel)]="route.type">
       <option *ngFor="let type of route_type" [value]="type[0]">{{ type[1] }}</option>
     </select>
     <div *ngIf="errors.type" class="text-danger mt-2">{{ errors.type[0] }}</div>
   </div>
 
-  <div>
-    <label for="actualState">Actual state:</label>
-    <select id="actualState" name="actual_state" required [(ngModel)]="route.actual_state">
+  <div class="mb-3">
+    <label for="actualState" class="form-label label-color">Actual state*</label>
+    <select id="actualState" name="actual_state" class="form-background" required [(ngModel)]="route.actual_state">
       <option *ngFor="let state of actual_state" [value]="state[0]">{{ state[1] }}</option>
     </select>
     <div *ngIf="errors.actual_state" class="text-danger mt-2">{{ errors.actual_state[0] }}</div>
   </div>
 
-  <div>
-    <label for="openingYear">Opening year:</label>
-    <input id="openingYear" name="opening_year" type="number" min="0" [(ngModel)]="route.opening_year"/>
+  <div class="mb-3">
+    <label for="openingYear" class="form-label label-color">Opening year</label>
+    <input id="openingYear" name="opening_year" type="number" class="form-background" min="0" [(ngModel)]="route.opening_year"/>
     <div *ngIf="errors.opening_year" class="text-danger mt-2">{{ errors.opening_year[0] }}</div>
   </div>
 
-  <div>
-    <label for="latestMaintenance">Latest maintenance:</label>
-    <input id="latestMaintenance" name="latest_maintenance" type="date" [(ngModel)]="route.latest_maintenance"/>
+  <div class="mb-3">
+    <label for="latestMaintenance" class="form-label label-color">Latest maintenance</label>
+    <input id="latestMaintenance" name="latest_maintenance" type="date" class="form-background" [(ngModel)]="route.latest_maintenance"/>
     <div *ngIf="errors.latest_maintenance" class="text-danger mt-2">{{ errors.latest_maintenance[0] }}</div>
   </div>
 
-  <div>
-    <label for="gauge">Gauge (mm):</label>
-    <input id="gauge" name="gauge" type="number" required min="1" [(ngModel)]="route.gauge"/>
+  <div class="mb-3">
+    <label for="gauge" class="form-label label-color">Gauge (mm)*</label>
+    <input id="gauge" name="gauge" type="number" required min="1" class="form-background" [(ngModel)]="route.gauge"/>
     <div *ngIf="errors.gauge" class="text-danger mt-2">{{ errors.gauge[0] }}</div>
   </div>
 
-  <div>
-    <label for="electrified">Electrification state:</label>
-    <select id="electrified" name="electrified" required [(ngModel)]="route.electrified">
+  <div class="mb-3">
+    <label for="electrified" class="form-label label-color">Electrification state*</label>
+    <select id="electrified" name="electrified" class="form-background" required [(ngModel)]="route.electrified">
       <option *ngFor="let state of electrification" [value]="state[0]">{{ state[1] }}</option>
     </select>
     <div *ngIf="errors.electrified" class="text-danger mt-2">{{ errors.electrified[0] }}</div>
   </div>
 
-  <div>
-    <label for="electrificationVoltage">Electrification voltage (V):</label>
-    <input id="electrificationVoltage" name="electrification_voltage" type="number" required min="1" [(ngModel)]="route.electrification_voltage"/>
+  <div class="mb-3">
+    <label for="electrificationVoltage" class="form-label label-color">Electrification voltage (V)</label>
+    <input id="electrificationVoltage" name="electrification_voltage" type="number" class="form-background" min="1" [(ngModel)]="route.electrification_voltage"/>
     <div *ngIf="errors.electrification_voltage" class="text-danger mt-2">{{ errors.electrification_voltage[0] }}</div>
   </div>
 
-  <div>
-    <button type="submit">Add route</button>
-  </div>
+  <button type="submit" class="btn my-2 btn-success"><span class="fa-solid fa-add me-2"></span>Add route</button>
 </form>

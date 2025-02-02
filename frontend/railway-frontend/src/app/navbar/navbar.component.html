@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark nav-dark">
   <div class="container-fluid">
-    <a class="navbar-brand fa-solid fa-train" routerLink="/"></a>
+    <a class="navbar-brand" routerLink="/">R <span class="fa-solid fa-train"></span> M</a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
             aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,16 +10,16 @@
     <div class="collapse navbar-collapse" id="navbarContent">
       <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item">
-          <a routerLink="/stations" routerLinkActive="active" class="nav-link active" aria-current="page">Stations</a>
+          <a routerLink="/stations" routerLinkActive="active" class="nav-link active" aria-current="page"><span class="fa-solid fa-house-flag me-1"></span>Stations</a>
         </li>
         <li class="nav-item">
-          <a routerLink="/routes" routerLinkActive="active" class="nav-link" aria-current="page">Routes</a>
+          <a routerLink="/routes" routerLinkActive="active" class="nav-link" aria-current="page"><span class="fa-solid fa-train-track me-1"></span>Routes</a>
         </li>
         <li class="nav-item">
-          <a routerLink="/train-models" routerLinkActive="active" class="nav-link" aria-current="page">Train Models</a>
+          <a routerLink="/train-models" routerLinkActive="active" class="nav-link" aria-current="page"><span class="fa-solid fa-train me-1"></span>Train Models</a>
         </li>
         <li class="nav-item">
-          <a routerLink="/trains" routerLinkActive="active" class="nav-link" aria-current="page">Trains</a>
+          <a routerLink="/trains" routerLinkActive="active" class="nav-link" aria-current="page"><span class="fa-solid fa-train-tunnel me-1"></span>Trains</a>
         </li>
       </ul>
 
@@ -28,11 +28,11 @@
 
         <div *ngIf="authService.isAuthenticated()" class="dropdown">
           <button class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-            {{ authService.getUsername() }}
+            Welcome, {{ authService.getUsername() }}
           </button>
           <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-            <li><a class="dropdown-item" href="#" routerLink="/profile">Profile</a></li>
-            <li><a class="dropdown-item" href="#" (click)="authService.logout()">Logout</a></li>
+            <li><a class="dropdown-item" href="#" routerLink="/profile"><span class="fa-solid fa-user me-2"></span>Profile</a></li>
+            <li><a class="dropdown-item" href="#" (click)="authService.logout()"><span class="fa-solid fa-arrow-right-from-bracket me-2"></span>Logout</a></li>
           </ul>
         </div>
       </div>

@@ -1,22 +1,22 @@
-<div class="container">
-  <h1>Routes</h1>
+<div class="container mt-5">
+  <h1 class="title-color"><span class="fa-solid fa-train-track me-3"></span>Routes</h1>
 
-  <input
-    *ngIf="authService.isAuthenticated()"
-    type="button"
+  <button
     (click)="toggleForm()"
-    [value]="showForm ? 'Cancel' : '+ New'"
-    class="btn"
-    [class]="showForm ? 'btn-danger' : 'btn-primary'"
-  />
-  <div *ngIf="showForm" class="col-12 col-md-3 mt-3 mt-lg-0">
+    class="btn mt-3 mb-1"
+    [ngClass]="showForm ? 'btn-danger' : 'btn-primary'"
+  >
+    <span class="fa-solid me-1" [ngClass]="showForm ? 'fa-times' : 'fa-plus'"></span>
+    {{ showForm ? 'Cancel' : 'New' }}
+  </button>
+  <div *ngIf="showForm" class="col-12 col-md-3">
     <app-routes-add (addRouteEvent)="addRoute($event)" [errors]="errors"></app-routes-add>
   </div>
 
-  <ul>
-    <li *ngFor="let route of routes">
-      <a [routerLink]="['/routes', route.id]">{{ route.start_station_name }} - {{ route.end_station_name }}</a>&nbsp;
-      <span *ngIf="route.trains.length === 0 && authService.isAuthenticated()" (click)="deleteRoute(route)" role="button" class="fa-solid fa-trash"></span>
+  <ul class="label-color">
+    <li *ngFor="let route of routes" class="my-3">
+      <a class="link-color" [routerLink]="['/routes', route.id]">{{ route.start_station_name }} - {{ route.end_station_name }}</a>&nbsp;
+      <span *ngIf="route.trains.length === 0 && authService.isAuthenticated()" (click)="deleteRoute(route)" role="button" class="fa-solid fa-trash ms-1 text-danger"></span>
     </li>
   </ul>
 </div>

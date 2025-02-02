@@ -2,13 +2,13 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { Route } from "../../Models/Route";
 import { RoutesDetailService } from "./routes-detail.service";
-import { NgForOf, NgIf } from "@angular/common";
+import { NgClass, NgForOf, NgIf } from "@angular/common";
 import { RoutesUpdateComponent } from "../routes-update/routes-update.component";
 import { AuthService } from "../../auth.service";
 
 @Component({
   selector: "app-routes-detail",
-  imports: [NgIf, RouterLink, NgForOf, RoutesUpdateComponent],
+  imports: [NgIf, RouterLink, NgForOf, RoutesUpdateComponent, NgClass],
   templateUrl: "./routes-detail.component.html",
   styleUrl: "./routes-detail.component.css",
 })

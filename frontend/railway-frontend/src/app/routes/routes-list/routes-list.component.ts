@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { RoutesListService } from "./routes-list.service";
 import { Route } from "../../Models/Route";
-import { NgForOf, NgIf } from "@angular/common";
+import { NgClass, NgForOf, NgIf } from "@angular/common";
 import { RouterLink } from "@angular/router";
 import { RoutesAddComponent } from "../routes-add/routes-add.component";
 import { AuthService } from "../../auth.service";
 
 @Component({
   selector: "app-routes-list",
-  imports: [NgForOf, RouterLink, NgIf, RoutesAddComponent],
+  imports: [NgForOf, RouterLink, NgIf, RoutesAddComponent, NgClass],
   templateUrl: "./routes-list.component.html",
   styleUrl: "./routes-list.component.css",
 })

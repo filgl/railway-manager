@@ -1,12 +1,12 @@
 import { Component } from "@angular/core";
 import { PasswordResetService } from "./password-reset.service";
-import { Router } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { NgIf } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-password-reset",
-  imports: [NgIf, FormsModule],
+  imports: [NgIf, FormsModule, RouterLink],
   templateUrl: "./password-reset.component.html",
   styleUrl: "./password-reset.component.css",
 })

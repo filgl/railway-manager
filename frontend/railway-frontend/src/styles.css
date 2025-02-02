@@ -28,3 +28,9 @@
 .label-color {
   color: #b4b4b4;
 }
+
+.link-color {
+  text-decoration: underline;
+  font-weight: 600;
+  color: #ececec;
+}

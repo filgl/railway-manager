@@ -1,14 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { User } from "../../Models/User";
 import { ProfileService } from "./profile.service";
-import { NgIf } from "@angular/common";
+import { NgClass, NgIf } from "@angular/common";
 import { AuthService } from "../../auth.service";
 import { Router } from "@angular/router";
 import { UserUpdateComponent } from "../user-update/user-update.component";
 
 @Component({
   selector: "app-profile",
-  imports: [NgIf, UserUpdateComponent],
+  imports: [NgIf, UserUpdateComponent, NgClass],
   templateUrl: "./profile.component.html",
   styleUrl: "./profile.component.css",
 })

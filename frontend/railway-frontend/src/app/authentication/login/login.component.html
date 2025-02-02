@@ -1,25 +1,25 @@
-<h2>Login</h2>
+<div class="container mt-5">
+  <h2 class="title-color"><span class="fa-solid fa-sign-in me-3"></span>Login</h2>
 
-<div *ngIf="error" class="text-danger mt-2">
-  {{ error }}
+  <div *ngIf="error" class="text-danger mt-2">
+    <p>{{ error }}</p>
+  </div>
+
+  <form method="POST" (ngSubmit)="login()">
+    <div class="mb-3">
+      <label for="username" class="form-label label-color">Username</label>
+      <input id="username" name="username" type="text" class="form-background" [(ngModel)]="username" required/>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label label-color">Password</label>
+      <input id="password" name="password" type="password" class="form-background" [(ngModel)]="password" required/>
+    </div>
+
+    <p class="label-color">Forgot your password? <a routerLink="/password-reset" class="link-color">Reset it</a></p>
+
+    <button type="submit" class="btn btn-primary my-1"><span class="fa-solid fa-sign-in me-2"></span>Login</button>
+  </form>
+
+  <p class="label-color mt-3">Don't have an account yet? <a routerLink="/register" class="link-color">Register</a></p>
 </div>
-
-<form method="POST" (ngSubmit)="login()">
-  <div>
-    <label for="username">Username:</label>
-    <input id="username" name="username" type="text" [(ngModel)]="username" required/>
-  </div>
-
-  <div>
-    <label for="password">Password:</label>
-    <input id="password" name="password" type="password" [(ngModel)]="password" required/>
-  </div>
-
-  <p>Forgot your password? <a routerLink="/password-reset">Reset it here</a></p>
-
-  <div>
-    <button type="submit">Login</button>
-  </div>
-</form>
-
-<p>Don't have an account? <a routerLink="/register">Register</a></p>
