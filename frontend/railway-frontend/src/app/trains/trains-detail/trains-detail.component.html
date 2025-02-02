@@ -1,23 +1,24 @@
-<div class="container" *ngIf="train">
-  <h1>Train details</h1>
+<div class="container mt-5" *ngIf="train">
+  <h1 class="title-color"><span class="fa-solid fa-train-tunnel me-3"></span>Train details</h1>
 
-  <input
+  <button
     *ngIf="authService.isAuthenticated()"
-    type="button"
     (click)="toggleForm()"
-    [value]="showForm ? 'Cancel' : '~ Edit'"
-    class="btn"
-    [class]="showForm ? 'btn-danger' : 'btn-primary'"
-  />
-  <div *ngIf="showForm" class="col-12 col-md-3 mt-3 mt-lg-0">
+    class="btn my-3"
+    [ngClass]="showForm ? 'btn-danger' : 'btn-primary'"
+  >
+    <span class="fa-solid me-1" [ngClass]="showForm ? 'fa-times' : 'fa-edit'"></span>
+    {{ showForm ? 'Cancel' : 'Edit' }}
+  </button>
+  <div *ngIf="showForm" class="col-12 col-md-3">
     <app-trains-update [train]="train" (updatedTrain)="train = $event"></app-trains-update>
   </div>
 
-  <p>
-    <a [routerLink]="['/train-models', train.model]">{{ train.model_name }}</a> {{ train.number }}
+  <p class="label-color">
+    <a class="link-color" [routerLink]="['/train-models', train.model]">{{ train.model_name }}</a> {{ train.number }}
   </p>
 
-  <ul>
+  <ul class="label-color">
     <li *ngIf="train.nickname != null">Aka {{ train.nickname }}</li>
 
     <li>Actual state: {{ train.actual_state }}</li>
@@ -30,11 +31,11 @@
     <li>Operated by {{ train.operator }}</li>
     <li>
       Runs on the route
-      <a [routerLink]="['/routes', train.associated_route]">
+      <a class="link-color" [routerLink]="['/routes', train.associated_route]">
         {{ train.associated_route_name }}
       </a>
     </li>
   </ul>
 
-  <a routerLink="/trains">Back to the list</a>
+  <a class="btn btn-secondary mt-3" routerLink="/trains"><span class="fa-solid fa-arrow-left me-2"></span>Back to the list</a>
 </div>

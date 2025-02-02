@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Train } from "../../Models/Train";
 import { TrainsListService } from "./trains-list.service";
-import { NgForOf, NgIf } from "@angular/common";
+import { NgClass, NgForOf, NgIf } from "@angular/common";
 import { RouterLink } from "@angular/router";
 import { TrainsAddComponent } from "../trains-add/trains-add.component";
 import { AuthService } from "../../auth.service";
 
 @Component({
   selector: "app-trains-list",
-  imports: [NgForOf, RouterLink, NgIf, TrainsAddComponent],
+  imports: [NgForOf, RouterLink, NgIf, TrainsAddComponent, NgClass],
   templateUrl: "./trains-list.component.html",
   styleUrl: "./trains-list.component.css",
 })

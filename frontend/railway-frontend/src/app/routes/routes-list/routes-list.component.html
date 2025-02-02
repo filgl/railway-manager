@@ -2,6 +2,7 @@
   <h1 class="title-color"><span class="fa-solid fa-train-track me-3"></span>Routes</h1>
 
   <button
+    *ngIf="authService.isAuthenticated()"
     (click)="toggleForm()"
     class="btn mt-3 mb-1"
     [ngClass]="showForm ? 'btn-danger' : 'btn-primary'"

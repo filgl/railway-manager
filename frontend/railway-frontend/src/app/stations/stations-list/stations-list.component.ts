@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Station } from "../../Models/Station";
 import { StationsListService } from "./stations-list.service";
-import { NgForOf, NgIf } from "@angular/common";
+import { NgClass, NgForOf, NgIf } from "@angular/common";
 import { RouterLink } from "@angular/router";
 import { StationsAddComponent } from "../stations-add/stations-add.component";
 import { AuthService } from "../../auth.service";
 
 @Component({
   selector: "app-stations-list",
-  imports: [NgForOf, RouterLink, StationsAddComponent, NgIf],
+  imports: [NgForOf, RouterLink, StationsAddComponent, NgIf, NgClass],
   templateUrl: "./stations-list.component.html",
   styleUrl: "./stations-list.component.css",
 })

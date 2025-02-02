@@ -2,14 +2,14 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Route, RouterLink } from "@angular/router";
 import { Train } from "../../Models/Train";
 import { TrainsDetailService } from "./trains-detail.service";
-import { NgIf } from "@angular/common";
+import { NgClass, NgIf } from "@angular/common";
 import { RoutesDetailService } from "../../routes/routes-detail/routes-detail.service";
 import { TrainsUpdateComponent } from "../trains-update/trains-update.component";
 import { AuthService } from "../../auth.service";
 
 @Component({
   selector: "app-trains-detail",
-  imports: [NgIf, RouterLink, TrainsUpdateComponent],
+  imports: [NgIf, RouterLink, TrainsUpdateComponent, NgClass],
   templateUrl: "./trains-detail.component.html",
   styleUrl: "./trains-detail.component.css",
 })

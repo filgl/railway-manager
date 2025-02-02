@@ -2,92 +2,90 @@
   {{ errors.non_field_errors[0] }}
 </div>
 
-<form method="POST" (ngSubmit)="updateTrainModel()">
-  <div>
-    <label for="name">Name:</label>
-    <input id="name" name="name" type="text" required [(ngModel)]="trainModel.name"/>
+<form method="POST" (ngSubmit)="updateTrainModel()" class="mt-1">
+  <div class="mb-3">
+    <label for="name" class="form-label label-color">Name:</label>
+    <input id="name" name="name" type="text" class="form-background" required [(ngModel)]="trainModel.name"/>
     <div *ngIf="errors.name" class="text-danger mt-2">{{ errors.name[0] }}</div>
   </div>
 
-  <div>
-    <label for="trainType">Train type:</label>
-    <select id="trainType" name="train_type" required [(ngModel)]="trainModel.type">
+  <div class="mb-3">
+    <label for="trainType" class="form-label label-color">Train type*</label>
+    <select id="trainType" name="train_type" class="form-background" required [(ngModel)]="trainModel.type">
       <option *ngFor="let type of train_type" [value]="type[1]">{{ type[1] }}</option>
     </select>
     <div *ngIf="errors.type" class="text-danger mt-2">{{ errors.type[0] }}</div>
   </div>
 
-  <div>
-    <label for="nickname">Nickname:</label>
-    <input id="nickname" name="nickname" type="text" [(ngModel)]="trainModel.nickname"/>
+  <div class="mb-3">
+    <label for="nickname" class="form-label label-color">Nickname</label>
+    <input id="nickname" name="nickname" type="text" class="form-background" [(ngModel)]="trainModel.nickname"/>
     <div *ngIf="errors.nickname" class="text-danger mt-2">{{ errors.nickname[0] }}</div>
   </div>
 
-  <div>
-    <label for="maxSpeed">Maximum speed (km/h):</label>
-    <input id="maxSpeed" name="max_speed" type="number" required min="1" [(ngModel)]="trainModel.max_speed"/>
+  <div class="mb-3">
+    <label for="maxSpeed" class="form-label label-color">Maximum speed (km/h)*</label>
+    <input id="maxSpeed" name="max_speed" type="number" class="form-background" required min="1" [(ngModel)]="trainModel.max_speed"/>
     <div *ngIf="errors.max_speed" class="text-danger mt-2">{{ errors.max_speed[0] }}</div>
   </div>
 
-  <div>
-    <label for="seats">Seats:</label>
-    <input id="seats" name="seats" type="number" min="0" [(ngModel)]="trainModel.seats"/>
+  <div class="mb-3">
+    <label for="seats" class="form-label label-color">Seats</label>
+    <input id="seats" name="seats" type="number" min="0" class="form-background" [(ngModel)]="trainModel.seats"/>
     <div *ngIf="errors.seats" class="text-danger mt-2">{{ errors.seats[0] }}</div>
   </div>
 
-  <div>
-    <label for="length">Length (m):</label>
-    <input id="length" name="length" type="number" required min="1" [(ngModel)]="trainModel.length"/>
+  <div class="mb-3">
+    <label for="length" class="form-label label-color">Length (m)*</label>
+    <input id="length" name="length" type="number" class="form-background" required min="1" [(ngModel)]="trainModel.length"/>
     <div *ngIf="errors.length" class="text-danger mt-2">{{ errors.length[0] }}</div>
   </div>
 
-  <div>
-    <label for="width">Width (m):</label>
-    <input id="width" name="width" type="number" required min="1" [(ngModel)]="trainModel.width"/>
+  <div class="mb-3">
+    <label for="width" class="form-label label-color">Width (m)*</label>
+    <input id="width" name="width" type="number" class="form-background" required min="1" [(ngModel)]="trainModel.width"/>
     <div *ngIf="errors.width" class="text-danger mt-2">{{ errors.width[0] }}</div>
   </div>
 
-  <div>
-    <label for="height">Height (m):</label>
-    <input id="height" name="height" type="number" required min="1" [(ngModel)]="trainModel.height"/>
+  <div class="mb-3">
+    <label for="height" class="form-label label-color">Height (m)*</label>
+    <input id="height" name="height" type="number" class="form-background" required min="1" [(ngModel)]="trainModel.height"/>
     <div *ngIf="errors.height" class="text-danger mt-2">{{ errors.height[0] }}</div>
   </div>
 
-  <div>
-    <label for="weight">Weight (t):</label>
-    <input id="weight" name="weight" type="number" required min="1" [(ngModel)]="trainModel.weight"/>
+  <div class="mb-3">
+    <label for="weight" class="form-label label-color">Weight (t)*</label>
+    <input id="weight" name="weight" type="number" class="form-background" required min="1" [(ngModel)]="trainModel.weight"/>
     <div *ngIf="errors.weight" class="text-danger mt-2">{{ errors.weight[0] }}</div>
   </div>
 
-  <div>
-    <label for="gauge">Gauge (mm):</label>
-    <input id="gauge" name="gauge" type="number" required min="1" [(ngModel)]="trainModel.gauge"/>
+  <div class="mb-3">
+    <label for="gauge" class="form-label label-color">Gauge (mm)*</label>
+    <input id="gauge" name="gauge" type="number" class="form-background" required min="1" [(ngModel)]="trainModel.gauge"/>
     <div *ngIf="errors.gauge" class="text-danger mt-2">{{ errors.gauge[0] }}</div>
   </div>
 
-  <div>
-    <label for="powerOutput">Power output (kW):</label>
-    <input id="powerOutput" name="power_output" type="number" required min="1" [(ngModel)]="trainModel.power_output"/>
+  <div class="mb-3">
+    <label for="powerOutput" class="form-label label-color">Power output (kW)*</label>
+    <input id="powerOutput" name="power_output" type="number" class="form-background" required min="1" [(ngModel)]="trainModel.power_output"/>
     <div *ngIf="errors.power_output" class="text-danger mt-2">{{ errors.power_output[0] }}</div>
   </div>
 
-  <div>
-    <label for="powerSystem">Power system:</label>
-    <select id="powerSystem" name="power_system" required [(ngModel)]="trainModel.power_system">
+  <div class="mb-3">
+    <label for="powerSystem" class="form-label label-color">Power system*</label>
+    <select id="powerSystem" name="power_system" class="form-background" required [(ngModel)]="trainModel.power_system">
       <option *ngFor="let system of power_system" [value]="system[1]">{{ system[1] }}</option>
     </select>
     <div *ngIf="errors.power_system" class="text-danger mt-2">{{ errors.power_system[0] }}</div>
   </div>
 
-  <div>
-    <label for="composition">Composition:</label>
-    <select id="composition" name="composition" required [(ngModel)]="trainModel.composition">
+  <div class="mb-3">
+    <label for="composition" class="form-label label-color">Composition*</label>
+    <select id="composition" name="composition" class="form-background" required [(ngModel)]="trainModel.composition">
       <option *ngFor="let comp of composition" [value]="comp[1]">{{ comp[1] }}</option>
     </select>
     <div *ngIf="errors.composition" class="text-danger mt-2">{{ errors.composition[0] }}</div>
   </div>
 
-  <div>
-    <button type="submit">Save changes</button>
-  </div>
+  <button type="submit" class="btn mt-2 mb-3 btn-success"><span class="fa-solid fa-up-to-line me-2"></span>Save changes</button>
 </form>

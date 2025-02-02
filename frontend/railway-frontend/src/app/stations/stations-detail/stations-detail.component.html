@@ -1,20 +1,21 @@
-<div class="container" *ngIf="station">
-  <h1>Station details</h1>
+<div class="container mt-5" *ngIf="station">
+  <h1 class="title-color"><span class="fa-solid fa-house-flag me-3"></span>Station details</h1>
 
-  <input
+  <button
     *ngIf="authService.isAuthenticated()"
-    type="button"
     (click)="toggleForm()"
-    [value]="showForm ? 'Cancel' : '~ Edit'"
-    class="btn"
-    [class]="showForm ? 'btn-danger' : 'btn-primary'"
-  />
-  <div *ngIf="showForm" class="col-12 col-md-3 mt-3 mt-lg-0">
+    class="btn my-3"
+    [ngClass]="showForm ? 'btn-danger' : 'btn-primary'"
+  >
+    <span class="fa-solid me-1" [ngClass]="showForm ? 'fa-times' : 'fa-edit'"></span>
+    {{ showForm ? 'Cancel' : 'Edit' }}
+  </button>
+  <div *ngIf="showForm" class="col-12 col-md-3">
     <app-stations-update [station]="station" (updatedStation)="station = $event"></app-stations-update>
   </div>
 
-  <p>{{ station.name }} ({{ station.city }})</p>
-  <ul>
+  <p class="label-color">{{ station.name }} ({{ station.city }})</p>
+  <ul class="label-color">
         <li>{{ station.platforms }} platforms</li>
         <li *ngIf="station.opening_year != null">Opened in {{ station.opening_year }}</li>
 
@@ -24,23 +25,23 @@
         <li>Actual state: {{ station.actual_state }}</li>
   </ul>
 
-  <h4>Routes starting here</h4>
-  <ul>
+  <h4 class="title-color"><span class="fa-solid fa-train-track me-2"></span>Routes starting here</h4>
+  <ul class="label-color">
     <li *ngFor="let route of station.start_routes">
-      <a [routerLink]="['/routes', route.id]">
+      <a class="link-color" [routerLink]="['/routes', route.id]">
         {{ route.start_station.name }} - {{ route.end_station.name }}
       </a>
     </li>
   </ul>
 
-  <h4>Routes ending here</h4>
-  <ul>
+  <h4 class="title-color"><span class="fa-solid fa-train-track me-2"></span>Routes ending here</h4>
+  <ul class="label-color">
     <li *ngFor="let route of station.end_routes">
-      <a [routerLink]="['/routes', route.id]">
+      <a class="link-color" [routerLink]="['/routes', route.id]">
         {{ route.start_station.name }} - {{ route.end_station.name }}
       </a>
     </li>
   </ul>
 
-  <a routerLink="/stations">Back to the list</a>
+  <a routerLink="/stations" class="btn btn-secondary mt-3"><span class="fa-solid fa-arrow-left me-2"></span>Back to the list</a>
 </div>

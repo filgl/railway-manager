@@ -1,22 +1,23 @@
-<div class="container">
-  <h1>Train models</h1>
+<div class="container mt-5">
+  <h1 class="title-color"><span class="fa-solid fa-train me-3"></span>Train models</h1>
 
-  <input
+  <button
     *ngIf="authService.isAuthenticated()"
-    type="button"
     (click)="toggleForm()"
-    [value]="showForm ? 'Cancel' : '+ New'"
-    class="btn"
-    [class]="showForm ? 'btn-danger' : 'btn-primary'"
-  />
-  <div *ngIf="showForm" class="col-12 col-md-3 mt-3 mt-lg-0">
+    class="btn mt-3 mb-1"
+    [ngClass]="showForm ? 'btn-danger' : 'btn-primary'"
+  >
+    <span class="fa-solid me-1" [ngClass]="showForm ? 'fa-times' : 'fa-plus'"></span>
+    {{ showForm ? 'Cancel' : 'New' }}
+  </button>
+  <div *ngIf="showForm" class="col-12 col-md-3">
     <app-train-models-add (addTrainModelEvent)="addTrainModel($event)" [errors]="errors"></app-train-models-add>
   </div>
 
-  <ul>
-    <li *ngFor="let trainModel of trainModels">
-      <a [routerLink]="['/train-models', trainModel.id]">{{ trainModel.name }}</a>&nbsp;
-      <span *ngIf="trainModel.trains.length === 0 && authService.isAuthenticated()" (click)="deleteTrainModel(trainModel)" role="button" class="fa-solid fa-trash"></span>
+  <ul class="label-color">
+    <li *ngFor="let trainModel of trainModels" class="my-3">
+      <a class="link-color" [routerLink]="['/train-models', trainModel.id]">{{ trainModel.name }}</a>&nbsp;
+      <span *ngIf="trainModel.trains.length === 0 && authService.isAuthenticated()" (click)="deleteTrainModel(trainModel)" role="button" class="fa-solid fa-trash text-danger ms-1"></span>
     </li>
   </ul>
 </div>
