@@ -1,4 +1,4 @@
-<div class="container mt-5" *ngIf="trainModel">
+<div class="container mt-5 site-box p-4 shadow col-lg-6" *ngIf="trainModel">
   <h1 class="title-color"><span class="fa-solid fa-train me-3"></span>Train model details</h1>
 
   <button
@@ -10,35 +10,101 @@
     <span class="fa-solid me-1" [ngClass]="showForm ? 'fa-times' : 'fa-edit'"></span>
     {{ showForm ? 'Cancel' : 'Edit' }}
   </button>
-  <div *ngIf="showForm" class="col-12 col-md-3">
+  <div *ngIf="showForm">
     <app-train-models-update [trainModel]="trainModel" (updatedTrainModel)="trainModel = $event"></app-train-models-update>
   </div>
 
-  <p class="label-color">{{ trainModel.name }} ({{ trainModel.type }})</p>
-
-  <ul class="label-color">
-    <li *ngIf="trainModel.nickname != null">Aka {{ trainModel.nickname }}</li>
-
-    <li>Maximum speed of {{ trainModel.max_speed }} km/h</li>
-
-    <li *ngIf="trainModel.seats != null">{{ trainModel.seats }} seats</li>
-
-    <li>Dimensions: {{ trainModel.length }} m (L) x {{ trainModel.height }} m (H) x {{ trainModel.width }} m (W)</li>
-    <li>Weight of {{ trainModel.weight }} t</li>
-    <li>Gauge: {{ trainModel.gauge }} mm</li>
-    <li>Power output of {{ trainModel.power_output }} kW</li>
-    <li>Power system: {{ trainModel.power_system }}</li>
-    <li>Composition: {{ trainModel.composition }}</li>
-  </ul>
-
-  <h4 class="title-color"><span class="fa-solid fa-train-tunnel me-2"></span>Trains of this model</h4>
-  <ul class="label-color">
-    <li *ngFor="let train of trains">
-      <a class="link-color" [routerLink]="['/trains', train.id]">
-        {{ train.model.name }} {{ train.number }}
-      </a>
-    </li>
-  </ul>
+  <div>
+    <div class="row">
+      <div class="mb-3">
+        <div class="card card-color shadow">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <div class="my-3">
+                <h4 class="fw-bold mb-3 title-color d-inline fs-2">{{ trainModel.name }}</h4>
+                <p class="mb-1 mt-2 label-color fs-5">Type:</p>
+                <p class="font-size-sm text-white mb-0 fs-5">{{ trainModel.type }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap card-color">
+              <h6 class="mb-0">
+                <span class="fa-regular fa-bolt-lightning me-2 text-white"></span>&nbsp;
+                <span class="label-color"> Power system</span>
+              </h6>
+              <span class="text-white">{{ trainModel.power_system }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap card-color">
+              <h6 class="mb-0">
+                <span class="fa-regular fa-trailer me-2 text-white"></span>&ensp;
+                <span class="label-color"> Composition</span>
+              </h6>
+              <span class="text-white">{{ trainModel.composition }}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="card mt-3 card-color">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+              <h6 class="mb-0 label-color">
+                Maximum speed
+              </h6>
+              <span class="text-white">{{ trainModel.max_speed }} km/h</span>
+            </li>
+            <hr class="label-color m-0">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+              <h6 class="mb-0 label-color">
+                Seats
+              </h6>
+              <span class="text-white">{{ trainModel.seats }}</span>
+            </li>
+            <hr class="label-color m-0">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+              <h6 class="mb-0 label-color">
+                Dimensions
+              </h6>
+              <span class="text-white">{{ trainModel.length }} m (L) x {{ trainModel.height }} m (H) x {{ trainModel.width }} m (W)</span>
+            </li>
+            <hr class="label-color m-0">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+              <h6 class="mb-0 label-color">
+                Weight
+              </h6>
+              <span class="text-white">{{ trainModel.weight }} t</span>
+            </li>
+            <hr class="label-color m-0">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+              <h6 class="mb-0 label-color">
+                Gauge
+              </h6>
+              <span class="text-white">{{ trainModel.gauge }} mm</span>
+            </li>
+            <hr class="label-color m-0">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+              <h6 class="mb-0 label-color">
+                Power output
+              </h6>
+              <span class="text-white">{{ trainModel.power_output }} kW</span>
+            </li>
+          </ul>
+        </div>
+        <div class="card mt-3 card-color">
+          <h4 class="title-color my-3 ms-3"><span class="fa-solid fa-train-tunnel me-3"></span>Trains of this model</h4>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let train of trainModel.trains" class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-1">
+              <a class="link-color" [routerLink]="['/trains', train.id]">
+                {{ trainModel.name }} {{ train.number }}
+              </a>
+            </li>
+            <p *ngIf="trainModel.trains.length == 0" class="label-color ms-3 my-3">No trains of this model are currently present</p>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <a class="btn btn-secondary mt-3" routerLink="/train-models"><span class="fa-solid fa-arrow-left me-2"></span>Back to the list</a>
 </div>

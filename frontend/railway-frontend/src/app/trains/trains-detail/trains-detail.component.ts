@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Route, RouterLink } from "@angular/router";
 import { Train } from "../../Models/Train";
 import { TrainsDetailService } from "./trains-detail.service";
-import { NgClass, NgIf } from "@angular/common";
+import { NgClass, NgForOf, NgIf } from "@angular/common";
 import { RoutesDetailService } from "../../routes/routes-detail/routes-detail.service";
 import { TrainsUpdateComponent } from "../trains-update/trains-update.component";
 import { AuthService } from "../../auth.service";

@@ -49,3 +49,14 @@
   background-color: #212121;
   border: 0 none !important;
 }
+
+.border-table {
+  border: 1px solid #b4b4b4;
+  background-color: #212121;
+}
+
+th,
+td,
+tr {
+  border: 1px solid #b4b4b4;
+}

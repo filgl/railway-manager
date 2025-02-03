@@ -1,4 +1,4 @@
-<div class="container mt-5" *ngIf="route">
+<div class="container mt-5 site-box p-4 shadow col-lg-6" *ngIf="route">
   <h1 class="title-color"><span class="fa-solid fa-train-track me-3"></span>Route details</h1>
 
   <button
@@ -10,37 +10,110 @@
     <span class="fa-solid me-1" [ngClass]="showForm ? 'fa-times' : 'fa-edit'"></span>
     {{ showForm ? 'Cancel' : 'Edit' }}
   </button>
-  <div *ngIf="showForm" class="col-12 col-md-3">
+  <div *ngIf="showForm">
     <app-routes-update [route]="route" (updatedRoute)="route = $event"></app-routes-update>
   </div>
 
-  <p class="label-color">
-    <a class="link-color" [routerLink]="['/stations', route.start_station]">{{ route.start_station_name }}</a>
-    to
-    <a class="link-color" [routerLink]="['/stations', route.end_station]">{{ route.end_station_name }}</a>
-  </p>
-
-  <ul class="label-color">
-    <li *ngIf="route.nickname != null">Aka {{ route.nickname }}</li>
-    <li>Length: {{ route.length }} km</li>
-    <li>Maximum permitted speed of {{ route.max_speed }} km/h</li>
-    <li>Traffic: {{ route.type }}</li>
-    <li>Actual state: {{ route.actual_state }}</li>
-    <li *ngIf="route.opening_year != null">Opened in {{ route.opening_year }}</li>
-    <li *ngIf="route.latest_maintenance != null">Latest maintenance in {{ route.latest_maintenance }}</li>
-    <li>Gauge: {{ route.gauge }} mm</li>
-    <li>Electrification status: {{ route.electrified }}</li>
-    <li *ngIf="route.electrification_voltage != null">Electrification voltage: {{ route.electrification_voltage }} V</li>
-  </ul>
-
-  <h4 class="title-color"><span class="fa-solid fa-train-tunnel me-3"></span>Trains on this route</h4>
-  <ul class="label-color">
-    <li *ngFor="let train of route.trains">
-      <a class="link-color" [routerLink]="['/trains', train.id]">
-        {{ train.model.name }} {{ train.number }}
-      </a>
-    </li>
-  </ul>
+  <div>
+    <div class="row">
+      <div class="mb-3">
+        <div class="card card-color shadow">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <div class="my-3">
+                <a class="fw-bold mb-3 fs-2 link-color d-inline" [routerLink]="['/stations', route.start_station]">{{ route.start_station_name }}</a>
+                <h4 class="label-color d-inline">&ensp;to&ensp;</h4>
+                <a class="fw-bold mb-3 fs-2 link-color d-inline" [routerLink]="['/stations', route.end_station]">{{ route.end_station_name }}</a>
+                <p *ngIf="route.nickname" class="mb-1 mt-2 label-color fs-5">Also known as:</p>
+                <p *ngIf="route.nickname" class="font-size-sm text-white mb-0 fs-5">{{ route.nickname }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap card-color">
+              <h6 class="mb-0">
+                <span class="fa-regular fa-traffic-light me-2 text-white"></span>&nbsp;
+                <span class="label-color"> Traffic</span>
+              </h6>
+              <span class="text-white">{{ route.type }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap card-color">
+              <h6 class="mb-0">
+                <span class="fa-regular fa-signal-bars me-2 text-white"></span>&ensp;
+                <span class="label-color"> Actual state</span>
+              </h6>
+              <span class="text-white">{{ route.actual_state }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap card-color">
+              <h6 class="mb-0">
+                <span class="fa-regular fa-bolt-lightning me-3 text-white"></span>&ensp;
+                <span class="label-color"> Electrification</span>
+              </h6>
+              <span class="text-white">{{ route.electrified }}</span>
+            </li>
+            <li *ngIf="route.electrification_voltage" class="list-group-item d-flex justify-content-between align-items-center flex-wrap card-color">
+              <h6 class="mb-0">
+                <span class="fa-regular fa-circle-bolt me-3 text-white"></span>&ensp;
+                <span class="label-color">Electrification voltage</span>
+              </h6>
+              <span class="text-white">{{ route.electrification_voltage }} V</span>
+            </li>
+          </ul>
+        </div>
+        <div class="card mt-3 card-color">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+              <h6 class="mb-0 label-color">
+                Length
+              </h6>
+              <span class="text-white">{{ route.length }} km</span>
+            </li>
+            <hr class="label-color m-0">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+              <h6 class="mb-0 label-color">
+                Maximum speed
+              </h6>
+              <span class="text-white">{{ route.max_speed }} km/h</span>
+            </li>
+            <hr class="label-color m-0">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+              <h6 class="mb-0 label-color">
+                Opened in
+              </h6>
+              <span class="text-white">{{ route.opening_year }}</span>
+            </li>
+            <hr class="label-color m-0">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+              <h6 class="mb-0 label-color">
+                Latest maintenance
+              </h6>
+              <span class="text-white">{{ route.latest_maintenance }}</span>
+            </li>
+            <hr class="label-color m-0">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+              <h6 class="mb-0 label-color">
+                Gauge
+              </h6>
+              <span class="text-white">{{ route.gauge }} mm</span>
+            </li>
+          </ul>
+        </div>
+        <div class="card mt-3 card-color">
+          <h4 class="title-color my-3 ms-3"><span class="fa-solid fa-train-tunnel me-3"></span>Trains on this route</h4>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let train of route.trains" class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-1">
+              <a class="link-color" [routerLink]="['/trains', train.id]">
+                {{ train.model.name }} {{ train.number }}
+              </a>
+            </li>
+            <p *ngIf="route.trains.length == 0" class="label-color ms-3 my-3">No trains currently run on this route</p>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <a routerLink="/routes" class="btn btn-secondary mt-3"><span class="fa-solid fa-arrow-left me-2"></span>Back to the list</a>
 </div>

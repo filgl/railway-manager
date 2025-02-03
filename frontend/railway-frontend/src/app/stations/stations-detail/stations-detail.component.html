@@ -1,4 +1,4 @@
-<div class="container mt-5" *ngIf="station">
+<div class="container mt-5 site-box p-4 shadow col-lg-6" *ngIf="station">
   <h1 class="title-color"><span class="fa-solid fa-house-flag me-3"></span>Station details</h1>
 
   <button
@@ -10,38 +10,83 @@
     <span class="fa-solid me-1" [ngClass]="showForm ? 'fa-times' : 'fa-edit'"></span>
     {{ showForm ? 'Cancel' : 'Edit' }}
   </button>
-  <div *ngIf="showForm" class="col-12 col-md-3">
+  <div *ngIf="showForm">
     <app-stations-update [station]="station" (updatedStation)="station = $event"></app-stations-update>
   </div>
 
-  <p class="label-color">{{ station.name }} ({{ station.city }})</p>
-  <ul class="label-color">
-        <li>{{ station.platforms }} platforms</li>
-        <li *ngIf="station.opening_year != null">Opened in {{ station.opening_year }}</li>
-
-        <li *ngIf="station.main_station">It's the main station</li>
-        <li *ngIf="!station.main_station">It's not the main station</li>
-
-        <li>Actual state: {{ station.actual_state }}</li>
-  </ul>
-
-  <h4 class="title-color"><span class="fa-solid fa-train-track me-2"></span>Routes starting here</h4>
-  <ul class="label-color">
-    <li *ngFor="let route of station.start_routes">
-      <a class="link-color" [routerLink]="['/routes', route.id]">
-        {{ route.start_station.name }} - {{ route.end_station.name }}
-      </a>
-    </li>
-  </ul>
-
-  <h4 class="title-color"><span class="fa-solid fa-train-track me-2"></span>Routes ending here</h4>
-  <ul class="label-color">
-    <li *ngFor="let route of station.end_routes">
-      <a class="link-color" [routerLink]="['/routes', route.id]">
-        {{ route.start_station.name }} - {{ route.end_station.name }}
-      </a>
-    </li>
-  </ul>
+  <div>
+    <div class="row">
+      <div class="mb-3">
+        <div class="card card-color shadow">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <div class="my-3">
+                <h4 class="fw-bold mb-3 fs-2 title-color d-inline">{{ station.name }}</h4>
+                <p class="mb-1 mt-2 label-color fs-5">City:</p>
+                <p class="font-size-sm text-white mb-0 fs-5">{{ station.city }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap card-color">
+              <h6 class="mb-0">
+                <span class="fa-regular fa-flag me-2 text-white"></span>&nbsp;
+                <span class="label-color">Main station in town</span>
+              </h6>
+              <span *ngIf="station.main_station" class="text-success fa-solid fa-check"></span>
+              <span *ngIf="!station.main_station" class="text-danger fa-solid fa-xmark"></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap card-color">
+              <h6 class="mb-0">
+                <span class="fa-regular fa-signal-bars me-2 text-white"></span>&ensp;
+                <span class="label-color"> Actual state</span>
+              </h6>
+              <span class="text-white">{{ station.actual_state }}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="card mt-3 card-color">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+              <h6 class="mb-0 label-color">
+                Platforms
+              </h6>
+              <span class="text-white">{{ station.platforms }}</span>
+            </li>
+            <hr class="label-color m-0">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+              <h6 class="mb-0 label-color">
+                Opened in
+              </h6>
+              <span class="text-white">{{ station.opening_year }}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="card mt-3 card-color">
+          <h4 class="title-color my-3 ms-3"><span class="fa-solid fa-train-track me-3"></span>Routes starting here</h4>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let route of station.start_routes" class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-1">
+              <a class="link-color" [routerLink]="['/routes', route.id]">
+                {{ route.start_station.name }} - {{ route.end_station.name }}
+              </a>
+            </li>
+            <p *ngIf="station.start_routes.length == 0" class="label-color ms-3 my-3">No routes currently start here</p>
+          </ul>
+          <h4 class="title-color my-3 ms-3"><span class="fa-solid fa-train-track me-3"></span>Routes ending here</h4>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let route of station.end_routes" class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-1">
+              <a class="link-color" [routerLink]="['/routes', route.id]">
+                {{ route.start_station.name }} - {{ route.end_station.name }}
+              </a>
+            </li>
+            <p *ngIf="station.end_routes.length == 0" class="label-color ms-3 my-3">No routes currently end here</p>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <a routerLink="/stations" class="btn btn-secondary mt-3"><span class="fa-solid fa-arrow-left me-2"></span>Back to the list</a>
 </div>

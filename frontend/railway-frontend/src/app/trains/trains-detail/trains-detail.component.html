@@ -1,4 +1,4 @@
-<div class="container mt-5" *ngIf="train">
+<div class="container mt-5 site-box p-4 shadow col-lg-6" *ngIf="train">
   <h1 class="title-color"><span class="fa-solid fa-train-tunnel me-3"></span>Train details</h1>
 
   <button
@@ -10,32 +10,86 @@
     <span class="fa-solid me-1" [ngClass]="showForm ? 'fa-times' : 'fa-edit'"></span>
     {{ showForm ? 'Cancel' : 'Edit' }}
   </button>
-  <div *ngIf="showForm" class="col-12 col-md-3">
+  <div *ngIf="showForm">
     <app-trains-update [train]="train" (updatedTrain)="train = $event"></app-trains-update>
   </div>
 
-  <p class="label-color">
-    <a class="link-color" [routerLink]="['/train-models', train.model]">{{ train.model_name }}</a> {{ train.number }}
-  </p>
-
-  <ul class="label-color">
-    <li *ngIf="train.nickname != null">Aka {{ train.nickname }}</li>
-
-    <li>Actual state: {{ train.actual_state }}</li>
-    <li>Constructed in {{ train.construction_year }}</li>
-    <li>Entered service in {{ train.year_entered_service }}</li>
-    <li>Run {{ train.kilometers_run }} km until now</li>
-
-    <li *ngIf="train.latest_inspection != null">Latest inspection in {{ train.latest_inspection }}</li>
-
-    <li>Operated by {{ train.operator }}</li>
-    <li>
-      Runs on the route
-      <a class="link-color" [routerLink]="['/routes', train.associated_route]">
-        {{ train.associated_route_name }}
-      </a>
-    </li>
-  </ul>
+  <div>
+    <div class="row">
+      <div class="mb-3">
+        <div class="card card-color shadow">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <div class="my-3">
+                <a class="fw-bold mb-3 fs-2 link-color d-inline" [routerLink]="['/train-models', train.model]">{{ train.model_name }}</a>
+                <h4 class="label-color d-inline">&ensp;number&ensp;</h4>
+                <h4 class="fw-bold mb-3 fs-2 title-color d-inline">{{ train.number }}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap card-color">
+              <h6 class="mb-0">
+                <span class="fa-regular fa-signal-bars me-2 text-white"></span>&ensp;
+                <span class="label-color"> Actual state</span>
+              </h6>
+              <span class="text-white">{{ train.actual_state }}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="card mt-3 card-color">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+              <h6 class="mb-0 label-color">
+                Construction year
+              </h6>
+              <span class="text-white">{{ train.construction_year }}</span>
+            </li>
+            <hr class="label-color m-0">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+              <h6 class="mb-0 label-color">
+                Year entered service
+              </h6>
+              <span class="text-white">{{ train.year_entered_service }}</span>
+            </li>
+            <hr class="label-color m-0">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+              <h6 class="mb-0 label-color">
+                Kilometers run
+              </h6>
+              <span class="text-white">{{ train.kilometers_run }} km</span>
+            </li>
+            <hr class="label-color m-0">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+              <h6 class="mb-0 label-color">
+                Latest inspection
+              </h6>
+              <span class="text-white">{{ train.latest_inspection }}</span>
+            </li>
+            <hr class="label-color m-0">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+              <h6 class="mb-0 label-color">
+                Operator
+              </h6>
+              <span class="text-white">{{ train.operator }}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="card mt-3 card-color">
+          <h4 class="title-color my-3 ms-3"><span class="fa-solid fa-train-track me-3"></span>Runs on this route</h4>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-1">
+              <a class="link-color" [routerLink]="['/routes', train.associated_route]">
+                {{ train.associated_route_name }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <a class="btn btn-secondary mt-3" routerLink="/trains"><span class="fa-solid fa-arrow-left me-2"></span>Back to the list</a>
 </div>
