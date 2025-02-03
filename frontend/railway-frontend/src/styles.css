@@ -12,7 +12,7 @@
   appearance: none;
   background-color: #303030;
   background-clip: padding-box;
-  border: 1px solid #ececec;
+  border: 1px solid #b4b4b4;
   border-radius: 4px;
   color: #ececec;
 }
@@ -33,4 +33,19 @@
   text-decoration: underline;
   font-weight: 600;
   color: #ececec;
+}
+
+.site-box {
+  border-radius: 15px;
+  background-color: #303030;
+}
+
+.card-color {
+  background-color: #212121;
+  border: 1px solid #b4b4b4;
+}
+
+.li-background {
+  background-color: #212121;
+  border: 0 none !important;
 }

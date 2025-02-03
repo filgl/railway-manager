@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-5 site-box p-4 shadow col-lg-6">
   <h2 class="title-color"><span class="fa-solid fa-user me-3"></span>Profile Details</h2>
 
   <button
@@ -9,20 +9,76 @@
     <span class="fa-solid me-1" [ngClass]="showForm ? 'fa-times' : 'fa-edit'"></span>
     {{ showForm ? 'Cancel' : 'Edit' }}
   </button>
-  <div *ngIf="showForm" class="col-12 col-md-3">
+  <div *ngIf="showForm">
     <app-user-update [user]="user" (updatedUser)="user = $event"></app-user-update>
   </div>
 
-  <div *ngIf="user" class="label-color">
-    <p>Username: {{ user.username }}</p>
-    <p *ngIf="user.first_name.length !== 0">First name: {{ user.first_name }}</p>
-    <p *ngIf="user.last_name.length !== 0">Last name: {{ user.last_name }}</p>
-    <p>Email address: {{ user.email }}</p>
-    <p *ngIf="user.is_staff">You are a staff user</p>
-    <p *ngIf="user.is_superuser">You are a superuser</p>
-    <p *ngIf="user.is_active">Your account is active</p>
-    <p *ngIf="!user.is_active">Your account is not active</p>
-    <p>Account created on {{ user.date_joined }}</p>
+  <div *ngIf="user">
+    <div class="row">
+      <div class="mb-3">
+        <div class="card card-color shadow">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <div class="mt-3">
+                <h3 class="fw-bold mb-3 text-white">{{ user.username }}</h3>
+                <p class="mb-1 label-color">Member since:</p>
+                <p class="font-size-sm text-white">{{ user.date_joined }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap card-color">
+              <h6 class="mb-0">
+                <span class="fa-regular fa-wave-pulse me-2 text-white"></span>&ensp;
+                <span class="label-color">Active</span>
+              </h6>
+              <span *ngIf="user.is_active" class="text-success fa-regular fa-check"></span>
+              <span *ngIf="!user.is_active" class="text-danger fa-regular fa-xmark"></span>
+            </li>
+            <li *ngIf="user.is_staff" class="list-group-item d-flex justify-content-between align-items-center flex-wrap card-color">
+              <h6 class="mb-0">
+                <span class="fa-regular fa-user-tie me-1 text-white"></span>&nbsp;
+                <span class="label-color">Staff</span>
+              </h6>
+              <span class="text-success fa-regular fa-check"></span>
+            </li>
+            <li *ngIf="user.is_superuser" class="list-group-item d-flex justify-content-between align-items-center flex-wrap card-color">
+              <h6 class="mb-0">
+                <span class="fa-regular fa-user-crown me-1 text-white"></span>&nbsp;
+                <span class="label-color">Superuser</span>
+              </h6>
+              <span class="text-success fa-regular fa-check"></span>
+            </li>
+          </ul>
+        </div>
+        <div class="card mt-3 card-color">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+              <h6 class="mb-0 label-color">
+                First name
+              </h6>
+              <span class="text-white">{{ user.first_name }}</span>
+            </li>
+            <hr class="label-color m-0">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+              <h6 class="mb-0 label-color">
+                Last name
+              </h6>
+              <span class="text-white">{{ user.last_name }}</span>
+            </li>
+            <hr class="label-color m-0">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+              <h6 class="mb-0 label-color">
+                Email
+              </h6>
+              <span class="text-white">{{ user.email }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 
   <button class="btn btn-danger mt-3" (click)="deleteUser()"><span class="fa-solid fa-trash me-2"></span>Delete account</button>

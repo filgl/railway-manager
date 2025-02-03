@@ -93,7 +93,7 @@ class UserProfileView(APIView):
             "is_staff": user.is_staff,
             "is_superuser": user.is_superuser,
             "is_active": user.is_active,
-            "date_joined": user.date_joined,
+            "date_joined": user.date_joined.strftime("%B %d, %Y, %I:%M %p"),
         }
 
         return Response(data, status=status.HTTP_200_OK)
