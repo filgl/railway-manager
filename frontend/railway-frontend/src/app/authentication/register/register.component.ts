@@ -1,9 +1,10 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { RegisterService } from "./register.service";
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../../auth.service";
 import { NgIf } from "@angular/common";
 import { FormsModule } from "@angular/forms";
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-register",
@@ -11,7 +12,7 @@ import { FormsModule } from "@angular/forms";
   templateUrl: "./register.component.html",
   styleUrl: "./register.component.css",
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   username!: string;
   firstName!: string;
   lastName!: string;
@@ -25,7 +26,12 @@ export class RegisterComponent {
     private registerService: RegisterService,
     private authService: AuthService,
     private router: Router,
+    private titleService: Title,
   ) {}
+
+  ngOnInit(): void {
+    this.titleService.setTitle("Registration - Railway Manager");
+  }
 
   register(): void {
     if (this.password !== this.confirmPassword) {

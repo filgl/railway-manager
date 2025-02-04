@@ -32,4 +32,5 @@ export const routes: Routes = [
     component: PasswordResetComponent,
     canActivate: [AuthGuard],
   },
+  { path: "**", component: HomepageComponent },
 ];

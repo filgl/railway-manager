@@ -1,9 +1,10 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { LoginService } from "./login.service";
 import { AuthService } from "../../auth.service";
 import { Router, RouterLink } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { NgIf } from "@angular/common";
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-login",
@@ -11,7 +12,7 @@ import { NgIf } from "@angular/common";
   templateUrl: "./login.component.html",
   styleUrl: "./login.component.css",
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   username!: string;
   password!: string;
   error!: string;
@@ -20,7 +21,12 @@ export class LoginComponent {
     private loginService: LoginService,
     private authService: AuthService,
     private router: Router,
+    private titleService: Title,
   ) {}
+
+  ngOnInit(): void {
+    this.titleService.setTitle("Login - Railway Manager");
+  }
 
   login(): void {
     this.loginService.login(this.username, this.password).subscribe({

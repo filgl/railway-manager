@@ -6,6 +6,7 @@ import { NgClass, NgForOf, NgIf } from "@angular/common";
 import { RoutesDetailService } from "../../routes/routes-detail/routes-detail.service";
 import { TrainsUpdateComponent } from "../trains-update/trains-update.component";
 import { AuthService } from "../../auth.service";
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-trains-detail",
@@ -22,6 +23,7 @@ export class TrainsDetailComponent implements OnInit {
     private trainsDetailService: TrainsDetailService,
     private routesDetailService: RoutesDetailService,
     protected authService: AuthService,
+    private titleService: Title,
   ) {}
 
   ngOnInit(): void {
@@ -42,6 +44,10 @@ export class TrainsDetailComponent implements OnInit {
         .subscribe((associatedRoute): void => {
           train.associated_route = associatedRoute.id;
         });
+
+      this.titleService.setTitle(
+        `'${this.train.model_name} ${this.train.number}' details - Railway Manager`,
+      );
     });
   }
 }

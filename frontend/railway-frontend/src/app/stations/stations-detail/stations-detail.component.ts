@@ -5,6 +5,7 @@ import { ActivatedRoute, RouterLink } from "@angular/router";
 import { NgClass, NgForOf, NgIf } from "@angular/common";
 import { StationsUpdateComponent } from "../stations-update/stations-update.component";
 import { AuthService } from "../../auth.service";
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-stations-detail",
@@ -20,6 +21,7 @@ export class StationsDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private stationsDetailService: StationsDetailService,
     protected authService: AuthService,
+    private titleService: Title,
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +38,9 @@ export class StationsDetailComponent implements OnInit {
       .getStation(id)
       .subscribe((station: Station): void => {
         this.station = station;
+        this.titleService.setTitle(
+          `'${this.station.name}' details - Railway Manager`,
+        );
       });
   }
 }

@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { RouterLink } from "@angular/router";
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-homepage",
@@ -7,4 +8,10 @@ import { RouterLink } from "@angular/router";
   templateUrl: "./homepage.component.html",
   styleUrl: "./homepage.component.css",
 })
-export class HomepageComponent {}
+export class HomepageComponent implements OnInit {
+  constructor(private titleService: Title) {}
+
+  ngOnInit(): void {
+    this.titleService.setTitle("Homepage - Railway Manager");
+  }
+}

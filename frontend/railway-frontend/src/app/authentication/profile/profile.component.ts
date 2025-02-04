@@ -5,6 +5,7 @@ import { NgClass, NgIf } from "@angular/common";
 import { AuthService } from "../../auth.service";
 import { Router } from "@angular/router";
 import { UserUpdateComponent } from "../user-update/user-update.component";
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-profile",
@@ -20,9 +21,11 @@ export class ProfileComponent implements OnInit {
     private profileService: ProfileService,
     private authService: AuthService,
     private route: Router,
+    private titleService: Title,
   ) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle("Profile - Railway Manager");
     this.loadUser();
   }
 

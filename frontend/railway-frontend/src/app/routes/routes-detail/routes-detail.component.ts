@@ -5,6 +5,7 @@ import { RoutesDetailService } from "./routes-detail.service";
 import { NgClass, NgForOf, NgIf } from "@angular/common";
 import { RoutesUpdateComponent } from "../routes-update/routes-update.component";
 import { AuthService } from "../../auth.service";
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-routes-detail",
@@ -20,6 +21,7 @@ export class RoutesDetailComponent implements OnInit {
     private pageRoute: ActivatedRoute,
     private routesDetailService: RoutesDetailService,
     protected authService: AuthService,
+    private titleService: Title,
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +38,9 @@ export class RoutesDetailComponent implements OnInit {
   loadRoute(id: number | null): void {
     this.routesDetailService.getRoute(id).subscribe((route: Route): void => {
       this.route = route;
+      this.titleService.setTitle(
+        `'${this.route.start_station_name} - ${this.route.end_station_name}' details - Railway Manager`,
+      );
     });
   }
 }

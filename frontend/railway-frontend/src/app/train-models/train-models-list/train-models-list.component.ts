@@ -6,6 +6,7 @@ import { RouterLink } from "@angular/router";
 import { TrainModelsAddComponent } from "../train-models-add/train-models-add.component";
 import { AuthService } from "../../auth.service";
 import { Train } from "../../Models/Train";
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-train-models-list",
@@ -24,9 +25,11 @@ export class TrainModelsListComponent implements OnInit {
   constructor(
     private trainModelsListService: TrainModelsListService,
     protected authService: AuthService,
+    private titleService: Title,
   ) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle("Train models list - Railway Manager");
     this.loadTrainModels();
   }
 

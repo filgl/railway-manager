@@ -5,6 +5,7 @@ import { NgClass, NgForOf, NgIf } from "@angular/common";
 import { RouterLink } from "@angular/router";
 import { StationsAddComponent } from "../stations-add/stations-add.component";
 import { AuthService } from "../../auth.service";
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-stations-list",
@@ -22,9 +23,11 @@ export class StationsListComponent implements OnInit {
   constructor(
     private stationsListService: StationsListService,
     protected authService: AuthService,
+    private titleService: Title,
   ) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle("Stations list - Railway Manager");
     this.loadStations();
   }
 

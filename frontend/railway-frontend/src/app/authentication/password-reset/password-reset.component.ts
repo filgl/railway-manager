@@ -1,8 +1,9 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { PasswordResetService } from "./password-reset.service";
 import { Router, RouterLink } from "@angular/router";
 import { NgIf } from "@angular/common";
 import { FormsModule } from "@angular/forms";
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-password-reset",
@@ -10,7 +11,7 @@ import { FormsModule } from "@angular/forms";
   templateUrl: "./password-reset.component.html",
   styleUrl: "./password-reset.component.css",
 })
-export class PasswordResetComponent {
+export class PasswordResetComponent implements OnInit {
   username!: string;
   oldPassword!: string;
   newPassword!: string;
@@ -21,7 +22,12 @@ export class PasswordResetComponent {
   constructor(
     private passwordResetService: PasswordResetService,
     private router: Router,
+    private titleService: Title,
   ) {}
+
+  ngOnInit(): void {
+    this.titleService.setTitle("Password Reset - Railway Manager");
+  }
 
   resetPassword(): void {
     if (this.newPassword !== this.newPasswordConfirm) {
