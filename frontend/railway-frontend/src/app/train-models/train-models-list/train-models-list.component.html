@@ -1,15 +1,26 @@
 <div class="container mt-5 site-box p-4 shadow col-lg-6">
   <h1 class="title-color"><span class="fa-solid fa-train me-3"></span>Train models</h1>
 
-  <button
-    *ngIf="authService.isAuthenticated()"
-    (click)="toggleForm()"
-    class="btn mt-3 mb-1"
-    [ngClass]="showForm ? 'btn-danger' : 'btn-primary'"
-  >
-    <span class="fa-solid me-1" [ngClass]="showForm ? 'fa-times' : 'fa-plus'"></span>
-    {{ showForm ? 'Cancel' : 'New' }}
-  </button>
+  <div class="d-flex align-content-center justify-content-between">
+    <button
+      *ngIf="authService.isAuthenticated()"
+      (click)="toggleForm()"
+      class="btn mt-3 mb-1"
+      [ngClass]="showForm ? 'btn-danger' : 'btn-primary'"
+    >
+      <span class="fa-solid me-1" [ngClass]="showForm ? 'fa-times' : 'fa-plus'"></span>
+      {{ showForm ? 'Cancel' : 'New' }}
+    </button>
+    <div class="dropdown">
+      <button class="dropdown-toggle btn btn-secondary mt-3 mb-1" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="text-white fa-solid fa-arrow-up-wide-short"></span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+        <li><a class="dropdown-item cursor-pointer" [ngClass]="{'active': currentSorting === 'lower_name'}" (click)="loadTrainModels('lower_name')"><span class="fa-solid fa-input-text me-2"></span>Name (A-Z)</a></li>
+        <li><a class="dropdown-item cursor-pointer" [ngClass]="{'active': currentSorting === '-id'}" (click)="loadTrainModels('-id')"><span class="fa-solid fa-id-card-clip me-1"></span> ID (Newest First)</a></li>
+      </ul>
+    </div>
+  </div>
   <div *ngIf="showForm">
     <app-train-models-add (addTrainModelEvent)="addTrainModel($event)" [errors]="errors"></app-train-models-add>
   </div>

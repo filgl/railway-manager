@@ -16,6 +16,7 @@ export class StationsListComponent implements OnInit {
   stations!: Station[];
   showForm: boolean = false;
   errors: any = {};
+  currentSorting: string = "lower_name";
   @ViewChild(StationsAddComponent) stationsAddComponent!: StationsAddComponent;
 
   constructor(
@@ -31,11 +32,12 @@ export class StationsListComponent implements OnInit {
     this.showForm = !this.showForm;
   }
 
-  loadStations(): void {
+  loadStations(ordering: string = "lower_name"): void {
     this.stationsListService
-      .getStations()
+      .getStations(ordering)
       .subscribe((stations: Station[]): void => {
         this.stations = stations;
+        this.currentSorting = ordering;
       });
   }
 

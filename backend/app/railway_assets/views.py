@@ -1,3 +1,4 @@
+from django.db.models import F, Func
 from railway_assets.models import (COMPOSITION_CHOICES,
                                    ELECTRIFICATION_CHOICES,
                                    POWER_SYSTEM_CHOICES, ROUTE_TYPE_CHOICES,
@@ -6,6 +7,7 @@ from railway_assets.models import (COMPOSITION_CHOICES,
 from railway_assets.serializers import (RouteSerializer, StationSerializer,
                                         TrainModelSerializer, TrainSerializer)
 from rest_framework import status, viewsets
+from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -16,9 +18,14 @@ class StationViewSet(viewsets.ModelViewSet):
     This class represents the Station model viewset.
     """
 
-    queryset = Station.objects.prefetch_related("start_routes", "end_routes")
+    queryset = Station.objects.prefetch_related("start_routes", "end_routes").annotate(
+        lower_name=Func(F("name"), function="LOWER")
+    )
     serializer_class = StationSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    filter_backends = [OrderingFilter]
+    ordering_fields = ["lower_name", "id"]
+    ordering = ["lower_name"]
 
     def destroy(self, request, *args, **kwargs):
         """
@@ -49,9 +56,14 @@ class RouteViewSet(viewsets.ModelViewSet):
     This class represents the Route model viewset.
     """
 
-    queryset = Route.objects.prefetch_related("trains")
+    queryset = Route.objects.prefetch_related("trains").annotate(
+        lower_start_station_name=Func(F("start_station__name"), function="LOWER")
+    )
     serializer_class = RouteSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    filter_backends = [OrderingFilter]
+    ordering_fields = ["lower_start_station_name", "id"]
+    ordering = ["lower_start_station_name"]
 
     def destroy(self, request, *args, **kwargs):
         """
@@ -79,9 +91,14 @@ class TrainModelViewSet(viewsets.ModelViewSet):
     This class represents the TrainModel model viewset.
     """
 
-    queryset = TrainModel.objects.prefetch_related("trains")
+    queryset = TrainModel.objects.prefetch_related("trains").annotate(
+        lower_name=Func(F("name"), function="LOWER")
+    )
     serializer_class = TrainModelSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    filter_backends = [OrderingFilter]
+    ordering_fields = ["lower_name", "id"]
+    ordering = ["lower_name"]
 
     def destroy(self, request, *args, **kwargs):
         """
@@ -109,9 +126,14 @@ class TrainViewSet(viewsets.ModelViewSet):
     This class represents the Train model viewset.
     """
 
-    queryset = Train.objects.all()
+    queryset = Train.objects.all().annotate(
+        lower_model=Func(F("model__name"), function="LOWER")
+    )
     serializer_class = TrainSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    filter_backends = [OrderingFilter]
+    ordering_fields = ["lower_model", "id"]
+    ordering = ["lower_model"]
 
 
 class StateChoicesView(APIView):

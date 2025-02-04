@@ -16,6 +16,7 @@ export class RoutesListComponent implements OnInit {
   routes!: Route[];
   showForm: boolean = false;
   errors: any = {};
+  currentSorting: string = "start_station__name";
   @ViewChild(RoutesAddComponent) routesAddComponent!: RoutesAddComponent;
 
   constructor(
@@ -31,9 +32,10 @@ export class RoutesListComponent implements OnInit {
     this.showForm = !this.showForm;
   }
 
-  loadRoutes(): void {
-    this.routesListService.getRoutes().subscribe((routes) => {
+  loadRoutes(ordering: string = "start_station__name"): void {
+    this.routesListService.getRoutes(ordering).subscribe((routes) => {
       this.routes = routes;
+      this.currentSorting = ordering;
     });
   }
 

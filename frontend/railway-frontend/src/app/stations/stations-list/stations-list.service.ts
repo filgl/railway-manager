@@ -21,8 +21,11 @@ export class StationsListService {
 
   constructor(private http: HttpClient) {}
 
-  getStations(): Observable<Station[]> {
-    return this.http.get<Station[]>(this.stationsUrl, httpOptions);
+  getStations(ordering: string = "lower_name"): Observable<Station[]> {
+    return this.http.get<Station[]>(
+      `${this.stationsUrl}?ordering=${ordering}`,
+      httpOptions,
+    );
   }
 
   addStation(station: Station): Observable<Station> {

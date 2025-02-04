@@ -21,8 +21,11 @@ export class TrainsListService {
 
   constructor(private http: HttpClient) {}
 
-  getTrains(): Observable<Train[]> {
-    return this.http.get<Train[]>(this.trainsUrl, httpOptions);
+  getTrains(ordering: string = "lower_model"): Observable<Train[]> {
+    return this.http.get<Train[]>(
+      `${this.trainsUrl}?ordering=${ordering}`,
+      httpOptions,
+    );
   }
 
   addTrain(train: Train): Observable<Train> {

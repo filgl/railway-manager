@@ -60,3 +60,7 @@ td,
 tr {
   border: 1px solid #b4b4b4;
 }
+
+.cursor-pointer {
+  cursor: pointer !important;
+}

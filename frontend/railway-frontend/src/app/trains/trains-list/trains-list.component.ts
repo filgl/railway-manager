@@ -16,6 +16,7 @@ export class TrainsListComponent implements OnInit {
   trains!: Train[];
   showForm: boolean = false;
   errors: any = {};
+  currentSorting: string = "lower_model";
   @ViewChild(TrainsAddComponent) trainsAddComponent!: TrainsAddComponent;
 
   constructor(
@@ -31,10 +32,13 @@ export class TrainsListComponent implements OnInit {
     this.showForm = !this.showForm;
   }
 
-  loadTrains(): void {
-    this.trainsListService.getTrains().subscribe((trains: Train[]): void => {
-      this.trains = trains;
-    });
+  loadTrains(ordering: string = "lower_model"): void {
+    this.trainsListService
+      .getTrains(ordering)
+      .subscribe((trains: Train[]): void => {
+        this.trains = trains;
+        this.currentSorting = ordering;
+      });
   }
 
   addTrain(train: Train): void {

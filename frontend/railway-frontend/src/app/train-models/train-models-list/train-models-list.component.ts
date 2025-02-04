@@ -5,6 +5,7 @@ import { NgClass, NgForOf, NgIf } from "@angular/common";
 import { RouterLink } from "@angular/router";
 import { TrainModelsAddComponent } from "../train-models-add/train-models-add.component";
 import { AuthService } from "../../auth.service";
+import { Train } from "../../Models/Train";
 
 @Component({
   selector: "app-train-models-list",
@@ -18,6 +19,7 @@ export class TrainModelsListComponent implements OnInit {
   errors: any = {};
   @ViewChild(TrainModelsAddComponent)
   trainModelsAddComponent!: TrainModelsAddComponent;
+  currentSorting: string = "lower_name";
 
   constructor(
     private trainModelsListService: TrainModelsListService,
@@ -32,11 +34,12 @@ export class TrainModelsListComponent implements OnInit {
     this.showForm = !this.showForm;
   }
 
-  loadTrainModels(): void {
+  loadTrainModels(ordering: string = "lower_name"): void {
     this.trainModelsListService
-      .getTrainModels()
+      .getTrainModels(ordering)
       .subscribe((trainModels: TrainModel[]): void => {
         this.trainModels = trainModels;
+        this.currentSorting = ordering;
       });
   }
 

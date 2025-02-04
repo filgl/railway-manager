@@ -21,8 +21,11 @@ export class RoutesListService {
 
   constructor(private http: HttpClient) {}
 
-  getRoutes(): Observable<Route[]> {
-    return this.http.get<Route[]>(this.routesUrl, httpOptions);
+  getRoutes(ordering: string = "start_station__name"): Observable<Route[]> {
+    return this.http.get<Route[]>(
+      `${this.routesUrl}?ordering=${ordering}`,
+      httpOptions,
+    );
   }
 
   addRoute(route: Route): Observable<Route> {
