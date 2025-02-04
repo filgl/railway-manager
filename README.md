@@ -2,7 +2,10 @@
 
 ## 📌 Overview
 
-Railway Manager is a web app designed to help users explore and manage railway information efficiently. Whether you're a train enthusiast, a traveler, or a system administrator, you can access key data about stations, routes, train models, and active trains. Additionally, users can contribute to the platform by adding, updating, or managing railway-related information.
+Railway Manager is a web app designed to help users explore and manage railway information efficiently. Whether you're
+a train enthusiast, a traveler, or a system administrator, you can access key data about stations, routes, train models,
+and active trains. Additionally, users can contribute to the platform by adding, updating, or managing railway-related
+information.
 
 ## ✨ Features
 
@@ -26,7 +29,8 @@ Navigate to the `frontend/railway-frontend` folder and follow the setup instruct
 
 ### 3️⃣ Run the Application
 
-Once both backend and frontend are set up and running, open your browser and go to [http://localhost:4200](http://localhost:4200).
+Once both backend and frontend are set up and running, open your browser and go to
+[http://localhost:4200](http://localhost:4200).
 
 ## 🛠️ Technologies Used
 
