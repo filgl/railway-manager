@@ -1,7 +1,7 @@
 <div class="container mt-5 site-box p-4 shadow col-lg-6">
   <h1 class="title-color"><span class="fa-solid fa-train-track me-3"></span>Routes</h1>
 
-  <div class="d-flex align-content-center justify-content-between">
+  <div class="d-flex align-content-center" [ngClass]="authService.isAuthenticated() ? 'justify-content-between' : 'justify-content-end'">
     <button
       *ngIf="authService.isAuthenticated()"
       (click)="toggleForm()"
@@ -25,7 +25,9 @@
     <app-routes-add (addRouteEvent)="addRoute($event)" [errors]="errors"></app-routes-add>
   </div>
 
-  <table *ngIf="routes" class="w-100 mt-3 border-table">
+  <div class="label-color mt-3" *ngIf="!routes || routes.length === 0">There are currently no routes</div>
+
+  <table *ngIf="routes && routes.length > 0" class="w-100 mt-3 border-table">
     <thead class="title-color text-center">
       <th class="py-2">Name</th>
       <th class="py-2">Nickname</th>
@@ -48,6 +50,4 @@
       </tr>
     </tbody>
   </table>
-
-  <p class="text-white" *ngIf="routes.length === 0">There are currently no routes</p>
 </div>

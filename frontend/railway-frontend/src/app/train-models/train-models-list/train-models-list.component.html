@@ -1,7 +1,7 @@
 <div class="container mt-5 site-box p-4 shadow col-lg-6">
   <h1 class="title-color"><span class="fa-solid fa-train me-3"></span>Train models</h1>
 
-  <div class="d-flex align-content-center justify-content-between">
+  <div class="d-flex align-content-center" [ngClass]="authService.isAuthenticated() ? 'justify-content-between' : 'justify-content-end'">
     <button
       *ngIf="authService.isAuthenticated()"
       (click)="toggleForm()"
@@ -25,7 +25,9 @@
     <app-train-models-add (addTrainModelEvent)="addTrainModel($event)" [errors]="errors"></app-train-models-add>
   </div>
 
-  <table *ngIf="trainModels" class="w-100 mt-3 border-table">
+  <div class="label-color mt-3" *ngIf="!trainModels || trainModels.length === 0">There are currently no train models</div>
+
+  <table *ngIf="trainModels && trainModels.length > 0" class="w-100 mt-3 border-table">
     <thead class="title-color text-center">
     <th class="py-2">Name</th>
     <th class="py-2">Type</th>
@@ -48,6 +50,4 @@
     </tr>
     </tbody>
   </table>
-
-  <p class="text-white" *ngIf="trainModels.length === 0">There are currently no train models</p>
 </div>
