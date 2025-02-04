@@ -26,7 +26,7 @@ Follow these steps to get the backend running:
 ### 1️⃣ Clone the Repository
 ```sh
 git clone https://github.com/filgl/railway-manager.git
-cd railway-management/backend
+cd railway-manager/backend
 ```
 
 ### 2️⃣ Set Up Environment Variables
