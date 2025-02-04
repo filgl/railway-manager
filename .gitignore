@@ -106,8 +106,6 @@ db.sqlite3
 
 # Node
 /node_modules
-package.json
-package-lock.json
 
 # Visual Studio Code
 .vscode/*
