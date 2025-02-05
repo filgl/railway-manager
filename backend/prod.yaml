@@ -1,0 +1,26 @@
+services:
+  traefik:
+    image: traefik:v3.0
+    restart: unless-stopped
+    command:
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.le.acme.email=example@example.com"
+      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./letsencrypt:/letsencrypt
+
+  railwaymanager-backend:
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.railwaymanager.rule: Host(`example.com`)
+      traefik.http.routers.railwaymanager.entrypoints: "websecure"
+      traefik.http.routers.railwaymanager-backend.tls.certresolver: "le"
+      traefik.http.services.railwaymanager.loadbalancer.server.port: "8000"
