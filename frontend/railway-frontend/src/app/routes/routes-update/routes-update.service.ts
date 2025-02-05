@@ -6,6 +6,7 @@ import {
 } from "@angular/common/http";
 import { catchError, Observable, throwError } from "rxjs";
 import { Route } from "../../Models/Route";
+import { environment } from "../../environment";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,11 +18,10 @@ const httpOptions = {
   providedIn: "root",
 })
 export class RoutesUpdateService {
-  routesUrl = "http://localhost:8000/api/routes/";
-  typeChoicesUrl = "http://localhost:8000/api/route-type-choices/";
-  stateChoicesUrl = "http://localhost:8000/api/state-choices/";
-  electrificationChoicesUrl =
-    "http://localhost:8000/api/electrification-choices/";
+  routesUrl = `${environment.apiBaseUrl}/api/routes/`;
+  typeChoicesUrl = `${environment.apiBaseUrl}/api/route-type-choices/`;
+  stateChoicesUrl = `${environment.apiBaseUrl}/api/state-choices/`;
+  electrificationChoicesUrl = `${environment.apiBaseUrl}/api/electrification-choices/`;
 
   constructor(private http: HttpClient) {}
 

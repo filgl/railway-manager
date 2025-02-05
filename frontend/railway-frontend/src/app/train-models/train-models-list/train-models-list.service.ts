@@ -6,6 +6,7 @@ import {
 } from "@angular/common/http";
 import { TrainModel } from "../../Models/TrainModel";
 import { catchError, Observable, throwError } from "rxjs";
+import { environment } from "../../environment";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,7 +18,7 @@ const httpOptions = {
   providedIn: "root",
 })
 export class TrainModelsListService {
-  trainModelsUrl: string = "http://localhost:8000/api/train-models/";
+  trainModelsUrl: string = `${environment.apiBaseUrl}/api/train-models/`;
 
   constructor(private http: HttpClient) {}
 

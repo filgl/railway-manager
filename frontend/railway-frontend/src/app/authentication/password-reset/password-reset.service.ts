@@ -6,6 +6,7 @@ import {
 } from "@angular/common/http";
 import { catchError, Observable, throwError } from "rxjs";
 import { User } from "../../Models/User";
+import { environment } from "../../environment";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,7 +18,7 @@ const httpOptions = {
   providedIn: "root",
 })
 export class PasswordResetService {
-  resetUrl: string = "http://localhost:8000/auth/password-reset/";
+  resetUrl: string = `${environment.apiBaseUrl}/auth/password-reset/`;
 
   constructor(private http: HttpClient) {}
 

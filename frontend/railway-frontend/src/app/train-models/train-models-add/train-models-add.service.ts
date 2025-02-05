@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { environment } from "../../environment";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -12,12 +13,9 @@ const httpOptions = {
   providedIn: "root",
 })
 export class TrainModelsAddService {
-  trainModelChoicesUrl: string =
-    "http://localhost:8000/api/train-model-choices/";
-  powerSystemChoicesUrl: string =
-    "http://localhost:8000/api/power-system-choices/";
-  compositionChoicesUrl: string =
-    "http://localhost:8000/api/composition-choices/";
+  trainModelChoicesUrl: string = `${environment.apiBaseUrl}/api/train-model-choices/`;
+  powerSystemChoicesUrl: string = `${environment.apiBaseUrl}/api/power-system-choices/`;
+  compositionChoicesUrl: string = `${environment.apiBaseUrl}/api/composition-choices/`;
 
   constructor(private http: HttpClient) {}
 

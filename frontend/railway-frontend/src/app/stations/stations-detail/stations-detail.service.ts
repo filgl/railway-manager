@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Station } from "../../Models/Station";
 import { Observable } from "rxjs";
+import { environment } from "../../environment";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,7 +14,7 @@ const httpOptions = {
   providedIn: "root",
 })
 export class StationsDetailService {
-  stationDetailUrl: string = `http://localhost:8000/api/stations/`;
+  stationDetailUrl: string = `${environment.apiBaseUrl}/api/stations/`;
 
   constructor(private http: HttpClient) {}
 

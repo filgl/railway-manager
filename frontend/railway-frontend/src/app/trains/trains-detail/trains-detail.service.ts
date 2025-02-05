@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Train } from "../../Models/Train";
 import { Observable } from "rxjs";
+import { environment } from "../../environment";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,7 +14,7 @@ const httpOptions = {
   providedIn: "root",
 })
 export class TrainsDetailService {
-  trainDetailUrl: string = `http://localhost:8000/api/trains/`;
+  trainDetailUrl: string = `${environment.apiBaseUrl}/api/trains/`;
 
   constructor(private http: HttpClient) {}
 

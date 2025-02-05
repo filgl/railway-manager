@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { environment } from "../../environment";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -12,10 +13,9 @@ const httpOptions = {
   providedIn: "root",
 })
 export class RoutesAddService {
-  routeTypeChoicesUrl: string = "http://localhost:8000/api/route-type-choices/";
-  actualStateChoicesUrl: string = "http://localhost:8000/api/state-choices/";
-  electrificationChoicesUrl: string =
-    "http://localhost:8000/api/electrification-choices/";
+  routeTypeChoicesUrl: string = `${environment.apiBaseUrl}/api/route-type-choices/`;
+  actualStateChoicesUrl: string = `${environment.apiBaseUrl}/api/state-choices/`;
+  electrificationChoicesUrl: string = `${environment.apiBaseUrl}/api/electrification-choices/`;
 
   constructor(private http: HttpClient) {}
 

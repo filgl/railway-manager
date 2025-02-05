@@ -6,6 +6,7 @@ import {
   HttpErrorResponse,
   HttpHeaders,
 } from "@angular/common/http";
+import { environment } from "../../environment";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,8 +18,8 @@ const httpOptions = {
   providedIn: "root",
 })
 export class StationsUpdateService {
-  stationsUrl: string = "http://localhost:8000/api/stations/";
-  stateChoicesUrl: string = "http://localhost:8000/api/state-choices/";
+  stationsUrl: string = `${environment.apiBaseUrl}/api/stations/`;
+  stateChoicesUrl: string = `${environment.apiBaseUrl}/api/state-choices/`;
 
   constructor(private http: HttpClient) {}
 

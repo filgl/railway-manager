@@ -6,12 +6,13 @@ import {
 } from "@angular/common/http";
 import { catchError, Observable, throwError } from "rxjs";
 import { User } from "../../Models/User";
+import { environment } from "../../environment";
 
 @Injectable({
   providedIn: "root",
 })
 export class UserUpdateService {
-  updateUrl: string = "http://localhost:8000/auth/profile/";
+  updateUrl: string = `${environment.apiBaseUrl}/auth/profile/`;
 
   constructor(private http: HttpClient) {}
 

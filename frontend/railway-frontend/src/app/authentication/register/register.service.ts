@@ -5,6 +5,7 @@ import {
   HttpHeaders,
 } from "@angular/common/http";
 import { catchError, Observable, throwError } from "rxjs";
+import { environment } from "../../environment";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,7 +17,7 @@ const httpOptions = {
   providedIn: "root",
 })
 export class RegisterService {
-  registerUrl: string = "http://localhost:8000/auth/register/";
+  registerUrl: string = `${environment.apiBaseUrl}/auth/register/`;
 
   constructor(private http: HttpClient) {}
 
