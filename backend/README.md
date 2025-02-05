@@ -54,10 +54,17 @@ Inside `superuser_conf.env` set the values for the username, email and password 
 have any preferences, you can leave everything as is. Otherwise, you can set custom values for each field.
 
 ### 3️⃣ Create the necessary Docker files
-Open the terminal (Command Prompt on Windows, not PowerShell, as an administrator) and run the following command inside the `backend` folder:
+Open the terminal (Command Prompt, as an administrator, on Windows) and run the following commands inside the `backend`
+folder.\
+On Windows run:
 ```sh
 mklink compose.yaml common.yaml
 mklink compose.override.yaml devel.yaml
+```
+On Linux run:
+```sh
+ln common.yaml compose.yaml
+ln devel.yaml compose.override.yaml
 ```
 
 ### 4️⃣ Decide if you want to Import Existing Data
