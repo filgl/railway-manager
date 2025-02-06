@@ -14,4 +14,5 @@ RUN pip install --upgrade pip && \
 COPY . .
 
 CMD ./manage.py migrate && \
+    ./manage.py collectstatic --noinput && \
     gunicorn core.wsgi:application --bind 0.0.0.0:8000
