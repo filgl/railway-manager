@@ -20,7 +20,7 @@ export class TrainModelsDetailService {
 
   getTrainModel(id: number | null): Observable<TrainModel> {
     return this.http.get<TrainModel>(
-      `${this.trainModelDetailUrl}${id}`,
+      `${this.trainModelDetailUrl}${id}/`,
       httpOptions,
     );
   }

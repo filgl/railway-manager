@@ -19,6 +19,6 @@ export class RoutesDetailService {
   constructor(private http: HttpClient) {}
 
   getRoute(id: number | null): Observable<Route> {
-    return this.http.get<Route>(`${this.routeDetailUrl}${id}`, httpOptions);
+    return this.http.get<Route>(`${this.routeDetailUrl}${id}/`, httpOptions);
   }
 }

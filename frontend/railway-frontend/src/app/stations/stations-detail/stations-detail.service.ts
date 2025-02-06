@@ -19,6 +19,9 @@ export class StationsDetailService {
   constructor(private http: HttpClient) {}
 
   getStation(id: number | null): Observable<Station> {
-    return this.http.get<Station>(`${this.stationDetailUrl}${id}`, httpOptions);
+    return this.http.get<Station>(
+      `${this.stationDetailUrl}${id}/`,
+      httpOptions,
+    );
   }
 }

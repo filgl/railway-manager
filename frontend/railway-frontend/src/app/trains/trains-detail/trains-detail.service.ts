@@ -19,6 +19,6 @@ export class TrainsDetailService {
   constructor(private http: HttpClient) {}
 
   getTrain(id: number | null): Observable<Train> {
-    return this.http.get<Train>(`${this.trainDetailUrl}${id}`, httpOptions);
+    return this.http.get<Train>(`${this.trainDetailUrl}${id}/`, httpOptions);
   }
 }
