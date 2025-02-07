@@ -22,6 +22,7 @@
             <div class="d-flex flex-column align-items-center text-center">
               <div class="my-3">
                 <h4 class="fw-bold mb-3 title-color d-inline fs-2">{{ trainModel.name }}</h4>
+                <span *ngIf="trainModel.nickname" class="label-color fs-5"> known as <span class="fw-bold mb-3 title-color fs-4">{{ trainModel.nickname }}</span></span>
                 <p class="mb-1 mt-2 label-color fs-5">Type:</p>
                 <p class="font-size-sm text-white mb-0 fs-5">{{ trainModel.type }}</p>
               </div>
@@ -55,39 +56,39 @@
               <span class="text-white">{{ trainModel.max_speed }} km/h</span>
             </li>
             <hr class="label-color m-0">
-            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+            <li *ngIf="trainModel.seats" class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
               <h6 class="mb-0 label-color">
                 Seats
               </h6>
-              <span class="text-white">{{ trainModel.seats }}</span>
+              <span class="text-white">{{ trainModel.seats | number }}</span>
             </li>
             <hr class="label-color m-0">
             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
               <h6 class="mb-0 label-color">
                 Dimensions
               </h6>
-              <span class="text-white">{{ trainModel.length }} m (L) x {{ trainModel.height }} m (H) x {{ trainModel.width }} m (W)</span>
+              <span class="text-white">{{ trainModel.length | number }} m (L) x {{ trainModel.height | number }} m (H) x {{ trainModel.width | number }} m (W)</span>
             </li>
             <hr class="label-color m-0">
             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
               <h6 class="mb-0 label-color">
                 Weight
               </h6>
-              <span class="text-white">{{ trainModel.weight }} t</span>
+              <span class="text-white">{{ trainModel.weight | number }} t</span>
             </li>
             <hr class="label-color m-0">
             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
               <h6 class="mb-0 label-color">
                 Gauge
               </h6>
-              <span class="text-white">{{ trainModel.gauge }} mm</span>
+              <span class="text-white">{{ trainModel.gauge | number }} mm</span>
             </li>
             <hr class="label-color m-0">
             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
               <h6 class="mb-0 label-color">
                 Power output
               </h6>
-              <span class="text-white">{{ trainModel.power_output }} kW</span>
+              <span class="text-white">{{ trainModel.power_output | number }} kW</span>
             </li>
           </ul>
         </div>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Route, RouterLink } from "@angular/router";
+import { ActivatedRoute, RouterLink } from "@angular/router";
 import { Train } from "../../Models/Train";
 import { TrainsDetailService } from "./trains-detail.service";
-import { NgClass, NgForOf, NgIf } from "@angular/common";
+import { DecimalPipe, NgClass, NgIf } from "@angular/common";
 import { RoutesDetailService } from "../../routes/routes-detail/routes-detail.service";
 import { TrainsUpdateComponent } from "../trains-update/trains-update.component";
 import { AuthService } from "../../auth.service";
@@ -10,7 +10,7 @@ import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-trains-detail",
-  imports: [NgIf, RouterLink, TrainsUpdateComponent, NgClass],
+  imports: [NgIf, RouterLink, TrainsUpdateComponent, NgClass, DecimalPipe],
   templateUrl: "./trains-detail.component.html",
   styleUrl: "./trains-detail.component.css",
 })

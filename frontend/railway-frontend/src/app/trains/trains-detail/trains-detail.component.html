@@ -23,7 +23,9 @@
               <div class="my-3">
                 <a class="fw-bold mb-3 fs-2 link-color d-inline" [routerLink]="['/train-models', train.model]">{{ train.model_name }}</a>
                 <h4 class="label-color d-inline">&ensp;number&ensp;</h4>
-                <h4 class="fw-bold mb-3 fs-2 title-color d-inline">{{ train.number }}</h4>
+                <h4 class="fw-bold mb-3 fs-2 title-color d-inline">{{ train.number | number }}</h4>
+                <p *ngIf="train.nickname" class="mb-1 mt-2 label-color fs-5">Also known as:</p>
+                <p *ngIf="train.nickname" class="font-size-sm text-white mb-0 fs-5">{{ train.nickname }}</p>
               </div>
             </div>
           </div>
@@ -59,10 +61,10 @@
               <h6 class="mb-0 label-color">
                 Kilometers run
               </h6>
-              <span class="text-white">{{ train.kilometers_run }} km</span>
+              <span class="text-white">{{ train.kilometers_run | number }} km</span>
             </li>
             <hr class="label-color m-0">
-            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+            <li *ngIf="train.latest_inspection" class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
               <h6 class="mb-0 label-color">
                 Latest inspection
               </h6>

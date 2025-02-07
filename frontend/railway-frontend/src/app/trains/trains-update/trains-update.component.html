@@ -4,7 +4,7 @@
 
 <form method="POST" (ngSubmit)="updateTrain()">
   <div class="mb-3">
-    <label for="trainModel" class="form-label label-color">Train model:</label>
+    <label for="trainModel" class="form-label label-color">Train model*</label>
     <select id="trainModel" name="train_model" class="form-background" required [(ngModel)]="train.model">
       <option *ngFor="let model of trainModels" [value]="model.id">{{ model.name }}</option>
     </select>
@@ -12,19 +12,19 @@
   </div>
 
   <div class="mb-3">
-    <label for="nickname" class="form-label label-color">Nickname:</label>
+    <label for="nickname" class="form-label label-color">Nickname</label>
     <input id="nickname" name="nickname" type="text" class="form-background" [(ngModel)]="train.nickname"/>
     <div *ngIf="errors.nickname" class="text-danger mt-2">{{ errors.nickname[0] }}</div>
   </div>
 
   <div class="mb-3">
-    <label for="number" class="form-label label-color">Train number:</label>
+    <label for="number" class="form-label label-color">Train number*</label>
     <input id="number" name="number" type="number" class="form-background" required min="1" [(ngModel)]="train.number"/>
     <div *ngIf="errors.number" class="text-danger mt-2">{{ errors.number[0] }}</div>
   </div>
 
   <div class="mb-3">
-    <label for="actualState" class="form-label label-color">Actual state:</label>
+    <label for="actualState" class="form-label label-color">Actual state*</label>
     <select id="actualState" name="actual_state" class="form-background" required [(ngModel)]="train.actual_state">
       <option *ngFor="let state of trainStates" [value]="state[1]">{{ state[1] }}</option>
     </select>
@@ -32,37 +32,37 @@
   </div>
 
   <div class="mb-3">
-    <label for="constructionYear" class="form-label label-color">Construction year:</label>
+    <label for="constructionYear" class="form-label label-color">Construction year*</label>
     <input id="constructionYear" name="construction_year" type="number" class="form-background" required min="0" [(ngModel)]="train.construction_year"/>
     <div *ngIf="errors.construction_year" class="text-danger mt-2">{{ errors.construction_year[0] }}</div>
   </div>
 
   <div class="mb-3">
-    <label for="yearEnteredService" class="form-label label-color">Year entered service:</label>
+    <label for="yearEnteredService" class="form-label label-color">Year entered service*</label>
     <input id="yearEnteredService" name="year_entered_service" type="number" class="form-background" required min="0" [(ngModel)]="train.year_entered_service"/>
     <div *ngIf="errors.year_entered_service" class="text-danger mt-2">{{ errors.year_entered_service[0] }}</div>
   </div>
 
   <div class="mb-3">
-    <label for="kilometersRun" class="form-label label-color">Kilometers run (km):</label>
+    <label for="kilometersRun" class="form-label label-color">Kilometers run (km)*</label>
     <input id="kilometersRun" name="kilometers_run" type="number" class="form-background" required min="0" [(ngModel)]="train.kilometers_run"/>
     <div *ngIf="errors.kilometers_run" class="text-danger mt-2">{{ errors.kilometers_run[0] }}</div>
   </div>
 
   <div class="mb-3">
-    <label for="latestInspection" class="form-label label-color">Latest inspection:</label>
+    <label for="latestInspection" class="form-label label-color">Latest inspection</label>
     <input id="latestInspection" name="latest_inspection" type="date" class="form-background" [(ngModel)]="train.latest_inspection"/>
     <div *ngIf="errors.latest_inspection" class="text-danger mt-2">{{ errors.latest_inspection[0] }}</div>
   </div>
 
   <div class="mb-3">
-    <label for="operator" class="form-label label-color">Operator:</label>
+    <label for="operator" class="form-label label-color">Operator*</label>
     <input id="operator" name="operator" type="text" class="form-background" required [(ngModel)]="train.operator"/>
     <div *ngIf="errors.operator" class="text-danger mt-2">{{ errors.operator[0] }}</div>
   </div>
 
   <div class="mb-3">
-    <label for="associatedRoute" class="form-label label-color">Associated route:</label>
+    <label for="associatedRoute" class="form-label label-color">Associated route*</label>
     <select id="associatedRoute" name="associated_route" class="form-background" required [(ngModel)]="train.associated_route">
       <option *ngFor="let route of associatedRoutes" [value]="route.id">{{ route.start_station_name }} - {{ route.end_station_name }}</option>
     </select>

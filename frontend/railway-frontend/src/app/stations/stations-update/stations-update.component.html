@@ -28,8 +28,11 @@
   </div>
 
   <div class="mb-2">
-    <label for="mainStation" class="form-label label-color">Is it the main station in town?</label>
-    <input id="mainStation" name="main_station" type="checkbox" class="ms-2" required [(ngModel)]="station.main_station"/>
+    <label for="mainStation" class="form-label label-color">Main station in town*</label>
+    <select id="mainStation" name="main_station" class="form-background" required [(ngModel)]="station.main_station">
+      <option [value]="true">Yes</option>
+      <option [value]="false">No</option>
+    </select>
     <div *ngIf="errors.main_station" class="text-danger mt-2">{{ errors.main_station[0] }}</div>
   </div>
 

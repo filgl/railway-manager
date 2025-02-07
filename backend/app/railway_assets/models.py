@@ -59,7 +59,7 @@ class Station(models.Model):
     opening_year: PositiveSmallIntegerField = models.PositiveSmallIntegerField(
         blank=True, null=True
     )
-    main_station: BooleanField = models.BooleanField(default=True)
+    main_station: BooleanField = models.BooleanField()
     actual_state: CharField = models.CharField(
         choices=STATE_CHOICES, default=STATE_CHOICES[0][0]
     )

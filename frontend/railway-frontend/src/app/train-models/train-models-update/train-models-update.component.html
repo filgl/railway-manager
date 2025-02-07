@@ -4,7 +4,7 @@
 
 <form method="POST" (ngSubmit)="updateTrainModel()" class="mt-1">
   <div class="mb-3">
-    <label for="name" class="form-label label-color">Name:</label>
+    <label for="name" class="form-label label-color">Name*</label>
     <input id="name" name="name" type="text" class="form-background" required [(ngModel)]="trainModel.name"/>
     <div *ngIf="errors.name" class="text-danger mt-2">{{ errors.name[0] }}</div>
   </div>

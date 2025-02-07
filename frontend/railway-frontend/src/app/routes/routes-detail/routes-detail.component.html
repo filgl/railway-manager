@@ -58,7 +58,7 @@
                 <span class="fa-regular fa-circle-bolt me-3 text-white"></span>&ensp;
                 <span class="label-color">Electrification voltage</span>
               </h6>
-              <span class="text-white">{{ route.electrification_voltage }} V</span>
+              <span class="text-white">{{ route.electrification_voltage | number }} V</span>
             </li>
           </ul>
         </div>
@@ -68,7 +68,7 @@
               <h6 class="mb-0 label-color">
                 Length
               </h6>
-              <span class="text-white">{{ route.length }} km</span>
+              <span class="text-white">{{ route.length | number }} km</span>
             </li>
             <hr class="label-color m-0">
             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
@@ -78,14 +78,14 @@
               <span class="text-white">{{ route.max_speed }} km/h</span>
             </li>
             <hr class="label-color m-0">
-            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+            <li *ngIf="route.opening_year" class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
               <h6 class="mb-0 label-color">
                 Opened in
               </h6>
               <span class="text-white">{{ route.opening_year }}</span>
             </li>
             <hr class="label-color m-0">
-            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
+            <li *ngIf="route.latest_maintenance" class="list-group-item d-flex justify-content-between align-items-center flex-wrap li-background my-2">
               <h6 class="mb-0 label-color">
                 Latest maintenance
               </h6>
@@ -96,7 +96,7 @@
               <h6 class="mb-0 label-color">
                 Gauge
               </h6>
-              <span class="text-white">{{ route.gauge }} mm</span>
+              <span class="text-white">{{ route.gauge | number }} mm</span>
             </li>
           </ul>
         </div>
