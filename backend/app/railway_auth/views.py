@@ -28,9 +28,9 @@ class RegisterView(CreateAPIView):
 
         super().create(request, *args, **kwargs)
 
-        user = authenticate(
-            username=request.data.get("username"), password=request.data.get("password")
-        )
+        username = request.data.get("username").strip()
+
+        user = authenticate(username=username, password=request.data.get("password"))
         token, created = Token.objects.get_or_create(user=user)
 
         return Response(

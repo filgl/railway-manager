@@ -31,6 +31,8 @@ DEPLOY_SCHEMA = os.environ.get("DEPLOY_SCHEMA", "http")
 
 ALLOWED_HOSTS = [VIRTUAL_HOST]
 
+CSRF_TRUSTED_ORIGINS = [f"{DEPLOY_SCHEMA}://{host}" for host in ALLOWED_HOSTS]
+
 # Application definition
 
 INSTALLED_APPS = [
