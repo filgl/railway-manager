@@ -24,7 +24,7 @@ export class PasswordResetService {
 
   resetPassword(
     username: string,
-    oldPassword: string,
+    email: string,
     newPassword: string,
   ): Observable<User> {
     return this.http
@@ -32,7 +32,7 @@ export class PasswordResetService {
         this.resetUrl,
         {
           username,
-          old_password: oldPassword,
+          email: email,
           new_password: newPassword,
         },
         httpOptions,

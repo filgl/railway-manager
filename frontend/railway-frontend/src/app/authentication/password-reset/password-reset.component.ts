@@ -13,7 +13,7 @@ import { Title } from "@angular/platform-browser";
 })
 export class PasswordResetComponent implements OnInit {
   username!: string;
-  oldPassword!: string;
+  email!: string;
   newPassword!: string;
   newPasswordConfirm!: string;
   errors: any = {};
@@ -39,7 +39,7 @@ export class PasswordResetComponent implements OnInit {
     }
 
     this.passwordResetService
-      .resetPassword(this.username, this.oldPassword, this.newPassword)
+      .resetPassword(this.username, this.email, this.newPassword)
       .subscribe({
         next: (): void => {
           this.router.navigate(["/login"]);
