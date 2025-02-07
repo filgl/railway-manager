@@ -24,7 +24,7 @@ export class TrainModelsListService {
 
   getTrainModels(ordering: string = "lower_name"): Observable<TrainModel[]> {
     return this.http.get<TrainModel[]>(
-      `${this.trainModelsUrl}?ordering=${ordering}/`,
+      `${this.trainModelsUrl}?ordering=${ordering}`,
       httpOptions,
     );
   }

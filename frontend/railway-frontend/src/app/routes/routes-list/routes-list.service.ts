@@ -24,7 +24,7 @@ export class RoutesListService {
 
   getRoutes(ordering: string = "start_station__name"): Observable<Route[]> {
     return this.http.get<Route[]>(
-      `${this.routesUrl}?ordering=${ordering}/`,
+      `${this.routesUrl}?ordering=${ordering}`,
       httpOptions,
     );
   }
