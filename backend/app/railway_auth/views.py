@@ -55,7 +55,8 @@ class LoginView(APIView):
         """
 
         user = authenticate(
-            username=request.data.get("username").strip(), password=request.data.get("password")
+            username=request.data.get("username").strip(),
+            password=request.data.get("password"),
         )
 
         if user is None:
